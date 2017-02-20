@@ -1,5 +1,7 @@
 
 public class testing {
-	//YOLO from PizzaPat1
+	public static void main(String[] args){
+		System.out.println("Still Yolo");
+	}
 
 }
