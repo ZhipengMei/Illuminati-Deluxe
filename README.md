@@ -16,9 +16,9 @@ The following **required** functionality is complete:
 
 The following **optional** features are implemented:
 
-- [x] In game chat feature
-- [x] Launch screen
-- [x] Loading aniamtion
+- [ ] In game chat feature
+- [ ] Launch screen
+- [ ] Loading aniamtion
 
 The following **additional** features are implemented:
 
