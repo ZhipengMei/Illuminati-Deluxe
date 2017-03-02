@@ -7,19 +7,16 @@ import com.google.firebase.database.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.TreeMap;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class AccessFirebase{
@@ -28,7 +25,8 @@ public class AccessFirebase{
 	public static final String BASE_URL = "https://illuminatideluxe-95801.firebaseio.com/";
 	
 	//**Firebase-Project-Auth, make connnect between project and firebase. Have to run this method at least once
-	public static void firebaseProjecAuth() {
+	public static void firebaseConfig() {
+		
 		//create an empty FileInputStream
 		FileInputStream serviceAccount = null;
 		//try and catch method to read the json file
@@ -51,15 +49,67 @@ public class AccessFirebase{
 
 	//*****************************************************************************************************
 
-	
 	// **** create instance user to firebase-databse
+	public static void validateUsername(String name, String password) {	
+		// create a java.util.concurrent.Semaphore with 0 initial permits
+		Semaphore semaphore = new Semaphore(0);
+		
+		// Get a reference to the database
+		final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+		final DatabaseReference ref = rootRef.child("profile");
+
+		// Attach a listener to read the data at our posts reference
+		//specifically query this user's name
+		ref.orderByChild("name").equalTo(name.toLowerCase()).addValueEventListener(new ValueEventListener() {
+		    @Override
+		    public void onDataChange(DataSnapshot dataSnapshot) {
+		    	//System.out.println(name);
+		    	//System.out.println(dataSnapshot.getValue());
+		    	//if object return is null then username is available to register
+		    	if(dataSnapshot.exists()) { 
+		    		System.out.println("Username is taken.");
+		    	} else {
+			    	System.out.println("Username is available.");
+			    	//create a new user account
+			    	createUser(name, password);
+		    	}
+		        // tell the caller that we're done
+		    	semaphore.release();
+		    }
+
+		    @Override
+		    public void onCancelled(DatabaseError databaseError) {
+		        System.out.println("The read failed: " + databaseError.getCode());
+		        semaphore.release();
+		    }
+		});
+        try {
+			semaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//end validateUsername()
+	
+	//*****************************************************************************************************
+
+	
+	// **** create instance user to firebase-databse. Do not use this method, ***use validateUsername instead***
 	public static void createUser(String name, String password) {
 		Semaphore semaphore = new Semaphore(0);
 		
+		//create date
+		//DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+		DateFormat accountCreateDate = new SimpleDateFormat("MM/dd/yy");
+		Date dateobj = new Date();
+		
+
+		name = name.toLowerCase(); //convert name to lowercase
 		TreeMap<String,String> profileMap = new TreeMap<String,String>();  
 		profileMap.put("name", name);
 		profileMap.put("password", password);
-		// date sign up
+		profileMap.put("account_created", accountCreateDate.format(dateobj));
+		// date sign up maybe
 		
 		
 		//create a unique uuid the user
@@ -77,7 +127,7 @@ public class AccessFirebase{
 		            System.out.println("Data could not be saved " + databaseError.getMessage());
 		            semaphore.release();
 		        } else {
-		            System.out.println("Data saved successfully.");
+		            System.out.println("User account created successfully.");
 		            semaphore.release();
 		        }
 		    }
@@ -88,33 +138,40 @@ public class AccessFirebase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}//end insertFirebase()
+	}//end createUser()
 
 	
 	
 	//*****************************************************************************************************
 	
 	
-	// **** retrive all instance users from firebase-databse
-	public static void fectchUsers() {
+	// **** Check user's data existence
+	public static void userAuth(String name, String password) {
+		// create a java.util.concurrent.Semaphore with 0 initial permits
 		Semaphore semaphore = new Semaphore(0);
-        User user = null;	//create an empty user for later parse json data
-        ObjectMapper mapper = new ObjectMapper(); //for parsing json file
-
-
 
 		// Get a reference to the database
 		final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 		final DatabaseReference ref = rootRef.child("profile");
 
 		// Attach a listener to read the data at our posts reference
-		ref.addValueEventListener(new ValueEventListener() {
+		//specifically query this user's name
+		ref.orderByChild("name").equalTo(name.toLowerCase()).addValueEventListener(new ValueEventListener() {
+
 		    @Override
 		    public void onDataChange(DataSnapshot dataSnapshot) {
-
-//		    	User user = dataSnapshot.getValue();
-		    	System.out.println(dataSnapshot.getValue());
-
+		    	//iterate each node to get the children value
+		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){
+		    		//parse DataSnapshot to String
+		    		String dataPassword = (String)messageSnapshot.child("password").getValue();
+		    		//validate password 
+		    		if (dataPassword.equals(password)){
+		    			System.out.println("User found.");
+		    		} else {
+		    			System.out.println("User Not Found");
+		    		}
+		    	}
+		        // tell the caller that we're done
 		    	semaphore.release();
 		    }
 
@@ -131,6 +188,9 @@ public class AccessFirebase{
 			e.printStackTrace();
 		}
 	}// end fectchUsers()
+	
+	
+
 	
 
 	

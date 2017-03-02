@@ -18,8 +18,5 @@
 	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jackson-core-2.1.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/firebase/json-20160212.jar"/>
 	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jsr305-1.3.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/jackson_json/jackson-annotations-2.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/jackson_json/jackson-core-2.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/azpm9/Documents/Eclipse_Workspace/IlluminatiDeluxe_Prototype/support/jar_files/jackson_json/jackson-databind-2.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
