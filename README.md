@@ -37,6 +37,11 @@ Describe any challenges encountered while building the app.
 - Lack of knowledge to install Firebase Server Java SDk
 - Unfamiliar with graphics and animation creation in Java
 
+## Rulebook
+[Illuminati game rule](http://www.sjgames.com/illuminati/img/illuminati_rules.pdf)
+<a href="http://www.sjgames.com/illuminati/img/illuminati_rules.pdf" target="_blank">Illuminati game rule</a>
+
+
 ## License
 
     Copyright [2017] [Team Deluxe]
