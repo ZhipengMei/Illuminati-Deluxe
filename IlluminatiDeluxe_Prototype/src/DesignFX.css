@@ -1,0 +1,21 @@
+/*
+.root {
+	-fx-background-color: #333333;
+	-fx-background-image: url("../support/images/loginbg.gif"); 
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center top;
+}
+
+ */
+ 
+ #signinrightpane {
+ 	-fx-background-color: #333333;
+ }
+ 
+  #signinleftpane {
+ 	-fx-background-color: #333333;
+	-fx-background-image: url("../support/images/loading.gif"); 
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center top;
+ }
+ 
