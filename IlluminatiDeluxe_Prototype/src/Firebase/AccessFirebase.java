@@ -39,7 +39,7 @@ public class AccessFirebase{
 					  .setDatabaseUrl(BASE_URL)
 					  .build();
 			FirebaseApp.initializeApp(options);
-			System.out.println("Firebase Project Auth Complete");
+			System.out.println("Firebase Project Configuration Complete");
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -160,6 +160,9 @@ public class AccessFirebase{
 
 		    @Override
 		    public void onDataChange(DataSnapshot dataSnapshot) {
+		    	
+		    	System.out.println(dataSnapshot);
+		    	
 		    	//iterate each node to get the children value
 		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){
 		    		//parse DataSnapshot to String
@@ -167,8 +170,10 @@ public class AccessFirebase{
 		    		//validate password 
 		    		if (dataPassword.equals(password)){
 		    			System.out.println("User found.");
+//		    			ref.removeEventListener(this);
 		    		} else {
 		    			System.out.println("User Not Found");
+//		    			ref.removeEventListener(this);
 		    		}
 		    	}
 		        // tell the caller that we're done
