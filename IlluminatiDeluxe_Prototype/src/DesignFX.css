@@ -6,11 +6,18 @@
 	-fx-background-position: center top;
 }
 
- */
- 
+ #settingBtn {
+ 	-fx-background-image: url("../support/images/setting.png"); 
+ }
+  
+*/
+
  #signinrightpane {
  	-fx-background-color: #333333;
  }
+ 
+ 
+
  
   #signinleftpane {
  	-fx-background-color: #333333;
@@ -18,4 +25,13 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center top;
  }
+ 
+ #hboxbar {
+  	-fx-background-color: #323232;
+ }
+
+
+
+
+ 
  

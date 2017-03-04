@@ -1,4 +1,6 @@
 
+import java.io.File;
+
 import Firebase.AccessFirebase; //using method from another package
 
 import javafx.application.Application;
@@ -9,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,10 +24,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("splashFX.fxml"));
+
+		stage.getIcons().add(new Image("file:appicon.png"));
 		
 		stage.initStyle(StageStyle.UNDECORATED);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setTitle("Illuminati Deluxe");
+//		stage.setMaximized(true);
+//		stage.setFullScreen(true);
+//		stage.setResizable(false);
 		stage.show();
 	    stage.toFront();
 

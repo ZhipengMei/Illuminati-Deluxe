@@ -1,6 +1,9 @@
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.nio.file.Paths;
 
 import com.sun.istack.internal.logging.Logger;
 
@@ -11,17 +14,25 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class splashController implements Initializable {
 
 	@FXML
 	private StackPane rootPane;
 	
+	MediaPlayer mediaplayer;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		System.out.println("Splash screen");
 		new SplashScreen().start();
 	}
 	
@@ -42,23 +53,27 @@ public class splashController implements Initializable {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						Stage stage = new Stage();
+						
+						String path = new File("support/sounds/Illuminati_Soundtrack.mp3").getAbsolutePath();
+						Media sound = new Media(new File(path).toURI().toString());
 
+						mediaplayer = new MediaPlayer(sound);
+				    	mediaplayer.setAutoPlay(true);
+				    	mediaplayer.setVolume(0.1);
+				    	mediaplayer.setOnEndOfMedia(new Runnable() {
+				    		public void run(){
+				    			mediaplayer.seek(Duration.ZERO);
+				    		}
+				    	});
+						Stage stage = new Stage();
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add("DesignFX.css");
 						stage.setScene(scene);
-						
-//						stage.setMaximized(true);
-//						stage.setFullScreen(true);
-//						stage.setResizable(false);
-						
-//						Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-//						stage.setX(bounds.getWidth() - bounds.getWidth()/2);
-//						stage.setY(bounds.getHeight() - bounds.getHeight()/2);
-						
+						stage.getIcons().add(new Image("file:appicon.png"));
+						stage.setTitle("Illuminati Deluxe");
 						stage.show();
 						
-						rootPane.getScene().getWindow().hide();
+						rootPane.getScene().getWindow().hide(); //dismiss the previous pane
 					}
 					
 				});

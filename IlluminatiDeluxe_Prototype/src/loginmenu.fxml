@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginmenuController">
+<AnchorPane fx:id="rootloginpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginmenuController">
    <children>
       <AnchorPane fx:id="signinleftpane" layoutX="-1.0" layoutY="1.0" prefHeight="400.0" prefWidth="304.0" />
       <AnchorPane fx:id="signinrightpane" layoutX="296.0" prefHeight="400.0" prefWidth="304.0">
@@ -46,7 +45,7 @@
             </TextField>
             <Separator layoutX="30.0" layoutY="161.0" prefHeight="2.0" prefWidth="224.0" />
             <Separator layoutX="30.0" layoutY="231.0" prefHeight="2.0" prefWidth="224.0" />
-            <Button layoutX="175.0" layoutY="329.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="106.0" text="PLAY">
+            <Button fx:id="playBtn" layoutX="175.0" layoutY="329.0" mnemonicParsing="false" onAction="#playBtn_action" prefHeight="57.0" prefWidth="106.0" text="PLAY">
                <font>
                   <Font size="29.0" />
                </font>
