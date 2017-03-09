@@ -1,17 +1,33 @@
 package Firebase;
 
+// *Note* important class for user data persistent with Singleton design pattern
 public class User {
 	
+	private String uid;
 	private String name;
 	private String password;
-	private String uuid;
+	private String createdDate;
+	private String win;
+	private String imageName;
 	
-	public String getUUID(){
-		return uuid;
+	private static User instance = null;
+	
+	public User(){}
+	
+	public String getUID(){
+		return uid;
 	}
 	
-	public void setUUID(String uuid){
-		this.uuid = uuid;
+	//important singleton function
+	public static User getInstance(){
+		if(instance == null){
+			instance = new User();
+		}
+		return instance;
+	}
+	
+	public void setUID(String uid){
+		this.uid = uid;
 	}
 	
 	public String getName(){
@@ -30,6 +46,28 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(){}
+	public String getCreatedDate(){
+		return createdDate;
+	}
+	
+	public void setCreatedDate(String date){
+		this.createdDate = date;
+	}
+	
+	public String getWin(){
+		return win;
+	}
+	
+	public void setWin(String winCount){
+		this.win = winCount;
+	}
+	
+	public String getimageName(){
+		return imageName;
+	}
+	
+	public void setimageName(String imageurl){
+		this.imageName = imageurl;
+	}
 
 }

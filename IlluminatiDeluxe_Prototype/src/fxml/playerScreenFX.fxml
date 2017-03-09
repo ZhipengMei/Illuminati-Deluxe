@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.playerScreenController">
+   <top>
+      <VBox prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="hboxbar" prefHeight="52.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="ruletheworld" alignment="CENTER" prefHeight="50.0" prefWidth="144.0" text="Join a channel" textFill="WHITE" wrapText="true" />
+                  <Pane prefHeight="50.0" prefWidth="214.0">
+                     <children>
+                        <ImageView fitHeight="63.0" fitWidth="112.0" layoutX="105.0" layoutY="-13.0">
+                           <image>
+                              <Image url="@../../support/images/loginbg.gif" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="48.0" prefWidth="63.0" />
+                  <ImageView fx:id="profileimageview" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadnewprofileimage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../support/images/profileimage.png" />
+                     </image>
+                  </ImageView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="usernameLabel" alignment="TOP_CENTER" contentDisplay="CENTER" lineSpacing="2.0" prefHeight="17.0" prefWidth="107.0" text="Kool John" textAlignment="CENTER" textFill="WHITE" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="Win:" textFill="WHITE" />
+                              <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <right>
+      <StackPane fx:id="profilechooseStackpane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane fx:id="profilechoosepane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView onMouseClicked="#alienClicked">
+                     <image>
+                        <Image url="@../../support/images/Alien.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView onMouseClicked="#AnonymousClicked" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@../../support/images/Anonymous.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView onMouseClicked="#CoinClicked" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../support/images/Coins.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView onMouseClicked="#FortuneTellerClicked" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../support/images/FortuneTeller.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView onMouseClicked="#GhostClicked" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../support/images/Ghost.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView onMouseClicked="#WitchClicked" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../support/images/Witch.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
+   </right>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane fx:id="channelGridpane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Button fx:id="channel1" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 1" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="channel2" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 2" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="channel3" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 3" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="channel4" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 4" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="channel5" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 5" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="channel6" mnemonicParsing="false" prefHeight="80.0" prefWidth="125.0" text="Channel 6" />
+                     </children>
+                  </StackPane>
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

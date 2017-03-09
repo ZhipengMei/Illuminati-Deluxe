@@ -1,8 +1,7 @@
 
 import java.io.File;
 
-import Firebase.AccessFirebase; //using method from another package
-
+import Firebase.AccessFirebase;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +22,8 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("splashFX.fxml"));
+	
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/splashFX.fxml"));
 
 		stage.getIcons().add(new Image("file:appicon.png"));
 		
@@ -40,9 +40,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {		
-//		AccessFirebase.firebaseConfig();	//establish secure connection between this project and firebase
-//	//    AccessFirebase.validateUsername("Darrian","12sddsf34567");		//register user with a username
-//	    AccessFirebase.userAuth("Darrian","12sddsf34567");
+		AccessFirebase.firebaseConfig();	//establish secure connection between this project and firebase
 		launch(args);
 	}
 

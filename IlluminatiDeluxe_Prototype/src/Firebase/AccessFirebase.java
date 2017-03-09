@@ -5,21 +5,23 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.*;
 import com.google.firebase.database.*;
 
+import fxml.loginmenuController;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
-
-
 import java.util.TreeMap;
-
 import java.util.UUID;
 
-
-
 public class AccessFirebase{
+	
+	// *NOTE* semaphore disable UI elements' thread temporary until firebase thread is done. Not good practice.
+	
+	static boolean isAvailable;
+	static boolean isRegistered;
 	
 	//url to firebase database acount
 	public static final String BASE_URL = "https://illuminatideluxe-95801.firebaseio.com/";
@@ -50,7 +52,9 @@ public class AccessFirebase{
 	//*****************************************************************************************************
 
 	// **** create instance user to firebase-databse
-	public static void validateUsername(String name, String password) {	
+	public static boolean validateUsername(String name, String password) {	
+		
+		
 		// create a java.util.concurrent.Semaphore with 0 initial permits
 		Semaphore semaphore = new Semaphore(0);
 		
@@ -68,10 +72,14 @@ public class AccessFirebase{
 		    	//if object return is null then username is available to register
 		    	if(dataSnapshot.exists()) { 
 		    		System.out.println("Username is taken.");
+		    		isAvailable = false;
+		    		ref.removeEventListener(this);
 		    	} else {
 			    	System.out.println("Username is available.");
 			    	//create a new user account
 			    	createUser(name, password);
+		    		isAvailable = true;
+		    		ref.removeEventListener(this);
 		    	}
 		        // tell the caller that we're done
 		    	semaphore.release();
@@ -84,11 +92,14 @@ public class AccessFirebase{
 		    }
 		});
         try {
+        	// wait until the onDataChange callback has released the semaphore
 			semaphore.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        return isAvailable;
 	}//end validateUsername()
 	
 	//*****************************************************************************************************
@@ -96,7 +107,7 @@ public class AccessFirebase{
 	
 	// **** create instance user to firebase-databse. Do not use this method, ***use validateUsername instead***
 	public static void createUser(String name, String password) {
-		Semaphore semaphore = new Semaphore(0);
+//		Semaphore semaphore = new Semaphore(0);
 		
 		//create date
 		//DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
@@ -108,7 +119,12 @@ public class AccessFirebase{
 		TreeMap<String,String> profileMap = new TreeMap<String,String>();  
 		profileMap.put("name", name);
 		profileMap.put("password", password);
-		profileMap.put("account_created", accountCreateDate.format(dateobj));
+		profileMap.put("createdDate", accountCreateDate.format(dateobj));
+		profileMap.put("win", "0");
+		profileMap.put("imageName", "null");
+//		profileMap.put("lose", "0");
+//		profileMap.put("left", "0");
+
 		// date sign up maybe
 		
 		
@@ -125,19 +141,19 @@ public class AccessFirebase{
 		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 		        if (databaseError != null) {
 		            System.out.println("Data could not be saved " + databaseError.getMessage());
-		            semaphore.release();
+//		            semaphore.release();
 		        } else {
 		            System.out.println("User account created successfully.");
-		            semaphore.release();
+//		            semaphore.release();
 		        }
 		    }
 		});
-        try {
-			semaphore.acquire();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//        try {
+//			semaphore.acquire();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}//end createUser()
 
 	
@@ -146,7 +162,7 @@ public class AccessFirebase{
 	
 	
 	// **** Check user's data existence
-	public static void userAuth(String name, String password) {
+	public static boolean userAuth(String name, String password) {
 		// create a java.util.concurrent.Semaphore with 0 initial permits
 		Semaphore semaphore = new Semaphore(0);
 
@@ -170,10 +186,12 @@ public class AccessFirebase{
 		    		//validate password 
 		    		if (dataPassword.equals(password)){
 		    			System.out.println("User found.");
-//		    			ref.removeEventListener(this);
+		    			isRegistered = true;
+		    			ref.removeEventListener(this);
 		    		} else {
 		    			System.out.println("User Not Found");
-//		    			ref.removeEventListener(this);
+		    			isRegistered = false;
+		    			ref.removeEventListener(this);
 		    		}
 		    	}
 		        // tell the caller that we're done
@@ -192,16 +210,12 @@ public class AccessFirebase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        return isRegistered;
 	}// end fectchUsers()
 	
-	
 
 	
-
-	
-
-
-
 }//end class
 
 
