@@ -34,9 +34,9 @@
                         <Image url="@../../support/images/profileimage.png" />
                      </image>
                   </ImageView>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="50.0" prefWidth="128.0">
                      <children>
-                        <Label fx:id="usernameLabel" alignment="TOP_CENTER" contentDisplay="CENTER" lineSpacing="2.0" prefHeight="17.0" prefWidth="107.0" text="Kool John" textAlignment="CENTER" textFill="WHITE" />
+                        <Label fx:id="usernameLabel" alignment="TOP_CENTER" contentDisplay="CENTER" lineSpacing="2.0" prefHeight="17.0" prefWidth="116.0" text="Kool John" textAlignment="CENTER" textFill="WHITE" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="Win:" textFill="WHITE" />
