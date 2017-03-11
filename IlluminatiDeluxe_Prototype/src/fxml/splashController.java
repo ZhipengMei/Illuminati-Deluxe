@@ -29,9 +29,7 @@ public class splashController implements Initializable {
 
 	@FXML
 	private StackPane rootPane;
-	
-	MediaPlayer mediaplayer;
-	
+		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Splash screen");
@@ -56,17 +54,6 @@ public class splashController implements Initializable {
 							e.printStackTrace();
 						}
 						
-						String path = new File("support/sounds/Illuminati_Soundtrack.mp3").getAbsolutePath();
-						Media sound = new Media(new File(path).toURI().toString());
-
-						mediaplayer = new MediaPlayer(sound);
-				    	mediaplayer.setAutoPlay(true);
-				    	mediaplayer.setVolume(0.1);
-				    	mediaplayer.setOnEndOfMedia(new Runnable() {
-				    		public void run(){
-				    			mediaplayer.seek(Duration.ZERO);
-				    		}
-				    	});
 						Stage stage = new Stage();
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add("DesignFX.css");

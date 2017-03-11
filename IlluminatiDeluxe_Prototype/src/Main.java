@@ -13,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class Main extends Application {
 	
@@ -41,6 +44,20 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {		
 		AccessFirebase.firebaseConfig();	//establish secure connection between this project and firebase
+		
+		MediaPlayer mediaplayer;
+		String path = new File("support/sounds/Illuminati_Soundtrack.mp3").getAbsolutePath();
+		Media sound = new Media(new File(path).toURI().toString());
+
+		mediaplayer = new MediaPlayer(sound);
+    	mediaplayer.setAutoPlay(true);
+    	mediaplayer.setVolume(0.1);
+    	mediaplayer.setOnEndOfMedia(new Runnable() {
+    		public void run(){
+    			mediaplayer.seek(Duration.ZERO);
+    		}
+    	});
+    	
 		launch(args);
 	}
 
