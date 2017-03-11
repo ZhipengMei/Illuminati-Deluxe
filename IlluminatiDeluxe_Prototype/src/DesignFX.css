@@ -1,25 +1,8 @@
-
-/*
-.root {
-	-fx-background-color: #333333;
-	-fx-background-image: url("../support/images/loginbg.gif"); 
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center top;
-}
-
- #settingBtn {
- 	-fx-background-image: url("../support/images/setting.png"); 
- }
-  
-*/
-
+/*** SIGN IN ***/
  #signinrightpane {
  	-fx-background-color: #333333;
  }
- 
- 
 
- 
   #signinleftpane {
  	-fx-background-color: #333333;
 	-fx-background-image: url("../support/images/loading.gif"); 
@@ -27,39 +10,7 @@
 	-fx-background-position: center top;
  }
  
- #hboxbar {
-  	-fx-background-color: #323232;
- }
-
-#channelGridpane {
-    -fx-background-color: #2f4f4f;
-    -fx-padding: 15;
-    -fx-spacing: 10;
-}
-
-#profilechooseStackpane {
-    -fx-background-color: #2f4f4f;
-    -fx-padding: 15;
-    -fx-spacing: 10;
-}
-
-#profilechoosepane {
-	-fx-background-color: rgba(0, 100, 100, 0.5); 
-	-fx-background-radius: 10;
-}
-
-#usernameLabel{
-   /*-fx-background-color: #3c7fb1;*/
-   	-fx-background-color: rgba(0, 100, 100, 0.5); 
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 30 3 30;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
-    -fx-text-fill: white;
-}
-
-.button {
+ .button {
     -fx-background-color : #29B6F6;
     -fx-text-fill        : #E1F5FE;
     -fx-font-weight      : 900;
@@ -68,16 +19,7 @@
 .button:hover {
     -fx-background-color : #01579B;
     }
-    
-    /*
-#ruletheworld {
-	-fx-font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
-	-fx-text-align: center;
-	-fx-text-fill: #222;
-	-fx-text-shadow: 0px 2px 3px #555;
-	  -fx-background: black;
-	
-}  */
+
 
 
 .text-field {
@@ -110,12 +52,53 @@
     -fx-effect: null;
 }
  
+ /**** SIGN IN END ****/
  
  
-#ruletheworld {
+ 
+ 
+ 
+ 
+ /******* PLAYER SCREEN *******/
+
+/* TOP */ 
+ #hboxbar {
+  	-fx-background-color: #323232;
+ }
+ 
+ #ruletheworld {
   -fx-font-size: 15px;
   -fx-text-fill: white;
   -fx-position: relative;
 }
 
- 
+ #profilechooseStackpane {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+#profilechoosepane {
+	-fx-background-color: rgba(0, 100, 100, 0.5); 
+	-fx-background-radius: 10;
+}
+
+#usernameLabel{
+   	-fx-background-color: #3c7fb1;
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+/* CENTER */
+#channelGridpane {
+   	-fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+
+ /******* PLAYER SCREEN END *******/

@@ -1,8 +1,5 @@
 package fxml;
 
-
-
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +22,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -41,7 +39,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class playerScreenController implements Initializable {
 
@@ -80,7 +80,7 @@ public class playerScreenController implements Initializable {
     private Label ruletheworld;
     
     @FXML
-    private BorderPane rootpane;
+    private BorderPane root_playerscreen_borderpane;
     
     @FXML
     private HBox hboxbar;
@@ -182,6 +182,7 @@ public class playerScreenController implements Initializable {
 	public void playerScreen() {
 		profilechoosepane.setVisible(false);
 		getUserdata();
+		
 	}
 	
 

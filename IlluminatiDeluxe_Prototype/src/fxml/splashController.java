@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -60,7 +61,7 @@ public class splashController implements Initializable {
 						scene.getStylesheets().add("DesignFX.css");
 						stage.setScene(scene);
 						stage.getIcons().add(new Image("file:appicon.png"));
-						stage.setTitle("Illuminati Deluxe");
+						stage.setTitle("Illuminati Deluxe");				    
 						stage.show();
 
 						rootPane.getScene().getWindow().hide(); //dismiss the previous pane
