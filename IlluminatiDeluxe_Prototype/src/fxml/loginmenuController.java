@@ -1,5 +1,26 @@
 package fxml;
 
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +52,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -49,6 +71,8 @@ import Firebase.User;
 public class loginmenuController{// extends User {
 	
 //    static User currentUser = new User();
+
+    Stage popupStage = new Stage(StageStyle.TRANSPARENT);
 
     @FXML
     private TextField usernameField;
@@ -80,8 +104,7 @@ public class loginmenuController{// extends User {
 
     @FXML
     void playBtn_action(ActionEvent event) {
-    	//System.out.println(usernameField.getText() + " " + passwordField.getText());
-
+    	loading();
     	// Get a reference to the database
 		final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 		final DatabaseReference ref = rootRef.child("profile");
@@ -106,10 +129,11 @@ public class loginmenuController{// extends User {
 						Platform.runLater(new Runnable() {
 							@Override
 							public void run() {
-//								System.out.println(messageSnapshot.getValue());
+
 								User currentUser = User.getInstance();
 								currentUser.setUID(messageSnapshot.getKey());
-//					    		System.out.println(currentUser.getUID());
+								rootloginpane.setEffect(null);
+								popupStage.hide();
 								login();	//switch to another playersreen
 							}	
 						});
@@ -152,7 +176,47 @@ public class loginmenuController{// extends User {
 			e.printStackTrace();
 		}
     	//override the previouse scene content with current border pane's content
-    	rootloginpane.getChildren().setAll(apane); 
+    	rootloginpane.getChildren().setAll(apane);     	
+    }
+    
+    private RotateTransition createAnimation(ImageView imageView) {
+    	RotateTransition animation = new RotateTransition(Duration.seconds(0.5), imageView);
+        animation.setByAngle(90);
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.setAutoReverse(true);
+        animation.play();
+        return animation;
+    }
+    
+    private void loading(){
+//      Rectangle rect = new Rectangle(50, 50, 50, 50);
+//      rect.setFill(Color.CORAL);
+//      RotateTransition animation = createAnimation(rect);
+      
+  	String path = new File("appicon.png").getAbsolutePath();
+		Image image = new Image(new File(path).toURI().toString());
+      
+		ImageView imageView = new ImageView(image);
+      RotateTransition animation = createAnimation(imageView);
+
+      Pane pane = new Pane(imageView);
+//      pane.setMinSize(100, 100);
+
+      rootloginpane.setEffect(new GaussianBlur());
+
+      VBox pauseRoot = new VBox(5);
+      pauseRoot.getChildren().add(new Label("Loading"));
+      pauseRoot.getChildren().add(pane);
+
+      pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+      pauseRoot.setAlignment(Pos.CENTER);
+      pauseRoot.setPadding(new Insets(20));
+
+      Stage primaryStage = (Stage) rootloginpane.getScene().getWindow();
+      popupStage.initOwner(primaryStage);
+      popupStage.initModality(Modality.APPLICATION_MODAL);
+      popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+      popupStage.show();
     }
    
     
