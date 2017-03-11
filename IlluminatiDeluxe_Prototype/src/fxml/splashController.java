@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 
 import com.sun.istack.internal.logging.Logger;
 
+import Animation.Animattion;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +62,7 @@ public class splashController implements Initializable {
 						stage.getIcons().add(new Image("file:appicon.png"));
 						stage.setTitle("Illuminati Deluxe");
 						stage.show();
-						
+
 						rootPane.getScene().getWindow().hide(); //dismiss the previous pane
 					}
 					

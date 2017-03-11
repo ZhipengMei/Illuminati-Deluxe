@@ -1,6 +1,8 @@
 package fxml;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -44,6 +46,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -65,6 +68,7 @@ import Firebase.AccessFirebase; //using method from another package
 import fxml.splashController.SplashScreen;
 
 import Firebase.User;
+import Animation.Animattion;
 
 
 //public class loginmenuController implements Runnable  {
@@ -166,6 +170,8 @@ public class loginmenuController{// extends User {
 		}
     	//override the previouse scene content with current border pane's content
     	rootloginpane.getChildren().setAll(pane); 
+        Animattion.fadeTransition(pane);
+
     }
     
     public void toCreateAcctMenu(){
@@ -176,17 +182,12 @@ public class loginmenuController{// extends User {
 			e.printStackTrace();
 		}
     	//override the previouse scene content with current border pane's content
-    	rootloginpane.getChildren().setAll(apane);     	
+    	rootloginpane.getChildren().setAll(apane); 
+        Animattion.fadeTransition(apane);
+
     }
     
-    private RotateTransition createAnimation(ImageView imageView) {
-    	RotateTransition animation = new RotateTransition(Duration.seconds(0.5), imageView);
-        animation.setByAngle(90);
-        animation.setCycleCount(Animation.INDEFINITE);
-        animation.setAutoReverse(true);
-        animation.play();
-        return animation;
-    }
+
     
     private void loading(){
 //      Rectangle rect = new Rectangle(50, 50, 50, 50);
@@ -197,7 +198,7 @@ public class loginmenuController{// extends User {
 		Image image = new Image(new File(path).toURI().toString());
       
 		ImageView imageView = new ImageView(image);
-      RotateTransition animation = createAnimation(imageView);
+      RotateTransition animation = Animattion.createAnimation(imageView);
 
       Pane pane = new Pane(imageView);
 //      pane.setMinSize(100, 100);
