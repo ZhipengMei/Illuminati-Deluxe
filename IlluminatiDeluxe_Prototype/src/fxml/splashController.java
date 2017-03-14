@@ -44,7 +44,7 @@ public class splashController implements Initializable {
 		public void run() {
 			try {
 				Thread.sleep(1500);
-				
+				//DO NOT DELETE, ORIGINAL CODE
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -69,6 +69,41 @@ public class splashController implements Initializable {
 					
 				});
 
+//			// skip login, faster to game table screen	
+//				Platform.runLater(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						Parent root = null;
+//						try {
+//							root = FXMLLoader.load(getClass().getResource("gameTableFX.fxml"));
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//						
+//						Stage stage = new Stage();
+//						Scene scene = new Scene(root);
+//						stage.setMaximized(true);
+//						stage.setResizable(false);
+//						
+//				        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+//
+//				        //set Stage boundaries to visible bounds of the main screen
+//				        stage.setX(primaryScreenBounds.getMinX());
+//				        stage.setY(primaryScreenBounds.getMinY());
+//				        stage.setWidth(primaryScreenBounds.getWidth());
+//				        stage.setHeight(primaryScreenBounds.getHeight());
+//						
+//						scene.getStylesheets().add("DesignFX.css");
+//						stage.setScene(scene);
+//						stage.getIcons().add(new Image("file:appicon.png"));
+//						stage.setTitle("Illuminati Deluxe");
+//						stage.show();		
+//						
+//						rootPane.getScene().getWindow().hide(); //dismiss the previous pane
+//					}
+//					
+//				});
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();

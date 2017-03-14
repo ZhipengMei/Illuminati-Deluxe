@@ -21,7 +21,10 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,8 +42,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class playerScreenController implements Initializable {
@@ -80,7 +83,7 @@ public class playerScreenController implements Initializable {
     private Label ruletheworld;
     
     @FXML
-    private BorderPane root_playerscreen_borderpane;
+    private BorderPane rootpane;
     
     @FXML
     private HBox hboxbar;
@@ -98,24 +101,6 @@ public class playerScreenController implements Initializable {
     void uploadnewprofileimage(MouseEvent event) { 
     	profilechoosepane.setVisible(true);
     	
-    	//allow user to change profile image choose from folder
-//    	 FileChooser fileChooser = new FileChooser();
-//         
-//         //Set extension filter
-//         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-//         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-//         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-//           
-//         //Show open file dialog
-//         File file = fileChooser.showOpenDialog(null);
-//                    
-//         try {
-//             BufferedImage bufferedImage = ImageIO.read(file);
-//             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-//             profileimageview.setImage(image);
-//         } catch (IOException ex) {
-//             Logger.getLogger(playerScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//         }
     }
 
     @FXML
@@ -182,7 +167,6 @@ public class playerScreenController implements Initializable {
 	public void playerScreen() {
 		profilechoosepane.setVisible(false);
 		getUserdata();
-		
 	}
 	
 
@@ -240,5 +224,58 @@ public class playerScreenController implements Initializable {
 		});
 	} //end storeImage
 	
+	
+	@FXML
+    void channel1_Action(MouseEvent event) {
+		System.out.println("im in action 1 ");
+		Platform.runLater(new Runnable() {
 
-}
+			@Override
+			public void run() {
+				Parent root = null;
+				try {
+					root = FXMLLoader.load(getClass().getResource("gameTableFX.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				Stage stage = new Stage();
+				Scene scene = new Scene(root);
+				stage.setMaximized(true);
+				stage.setResizable(false);
+				
+		        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
+		        //set Stage boundaries to visible bounds of the main screen
+		        stage.setX(primaryScreenBounds.getMinX());
+		        stage.setY(primaryScreenBounds.getMinY());
+		        stage.setWidth(primaryScreenBounds.getWidth());
+		        stage.setHeight(primaryScreenBounds.getHeight());
+				
+				scene.getStylesheets().add("DesignFX.css");
+				stage.setScene(scene);
+				stage.getIcons().add(new Image("file:appicon.png"));
+				stage.setTitle("Illuminati Deluxe");
+				stage.show();				
+			}
+			
+		});
+		
+    }
+
+}  
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    

@@ -1,6 +1,8 @@
 
 import java.io.File;
 
+import Extension.ConfirmBox;
+
 import Firebase.AccessFirebase;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,26 +24,41 @@ import javafx.util.Duration;
 public class Main extends Application {
 	
 	public static Boolean isSplashLoaded = false;
-
-	@Override
-	public void start(Stage stage) throws Exception {
+	Stage window;
 	
-		Parent root = FXMLLoader.load(getClass().getResource("fxml/splashFX.fxml"));
-
-		stage.getIcons().add(new Image("file:appicon.png"));
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		window = primaryStage;
+		window.setOnCloseRequest(e -> {
+			e.consume();
+			closeProgram();
+		});
 		
-		stage.initStyle(StageStyle.UNDECORATED);
+		
+		
+		
+		
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/splashFX.fxml"));
+		window.getIcons().add(new Image("file:appicon.png"));
+		window.initStyle(StageStyle.UNDECORATED);
 		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Illuminati Deluxe");
+		window.setScene(scene);
+		window.setTitle("Illuminati Deluxe");
 //		stage.setMaximized(true);
 //		stage.setFullScreen(true);
 //		stage.setResizable(false);
-		stage.show();
-	    stage.toFront();
+		window.show();
+		window.toFront();
 
 	}
 	
+	private void closeProgram() {
+		// TODO Auto-generated method stub
+		Boolean answer = ConfirmBox.display("Title", "Sure you want to exist?");
+		if(answer)
+			window.close();
+	}
+
 	public static void main(String[] args) {		
 		AccessFirebase.firebaseConfig();	//establish secure connection between this project and firebase
 		

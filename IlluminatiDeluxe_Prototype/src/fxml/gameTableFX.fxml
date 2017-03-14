@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane fx:id="rootSplitPanel" dividerPositions="0.8327759197324415" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="433.0" />
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="131.0">
+         <children>
+            <SplitPane dividerPositions="0.20100502512562815" layoutX="3.0" layoutY="4.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="89.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ScrollPane layoutX="-4.0" layoutY="-5.0" prefHeight="77.0" prefWidth="87.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" />
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" />
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
