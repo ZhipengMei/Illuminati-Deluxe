@@ -144,19 +144,16 @@ public class loginmenuController{// extends User {
 							Platform.runLater(new Runnable() {
 								@Override
 								public void run() {
-
 									User currentUser = User.getInstance();
 									currentUser.setUID(messageSnapshot.getKey());
 									rootloginpane.setEffect(null);
 									popupStage.hide();
 									login();	//switch to another playersreen
 								}	
-							});
-							
+							});							
 			    		} 
 			    	}
 			    }
-
 		    }
 
 		    @Override
@@ -167,6 +164,7 @@ public class loginmenuController{// extends User {
 
     }
     
+    // bypass login screen to player lobby screen
     public void login(){
     	BorderPane pane = null;
     	try {
@@ -180,6 +178,7 @@ public class loginmenuController{// extends User {
 
     }
     
+    // bypass login screen to create account screen
     public void toCreateAcctMenu(){
     	AnchorPane apane = null;
     	try {
@@ -194,7 +193,7 @@ public class loginmenuController{// extends User {
     }
     
 
-    
+    //loading animation
     private void loading(){
     	
   	String path = new File("appicon.png").getAbsolutePath();
@@ -228,6 +227,7 @@ public class loginmenuController{// extends User {
     }
    
     
+    // alert message popup 
     public void takenAlert(){
     	Alert alert = new Alert(AlertType.INFORMATION);
     	alert.setTitle("Alert");

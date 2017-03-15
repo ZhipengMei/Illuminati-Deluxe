@@ -9,15 +9,12 @@ public class User {
 	private String createdDate;
 	private String win;
 	private String imageName;
+	private String currentChannel;
 	
 	private static User instance = null;
 	
 	public User(){}
-	
-	public String getUID(){
-		return uid;
-	}
-	
+
 	//important singleton function
 	public static User getInstance(){
 		if(instance == null){
@@ -28,6 +25,10 @@ public class User {
 	
 	public void setUID(String uid){
 		this.uid = uid;
+	}
+	
+	public String getUID(){
+		return uid;
 	}
 	
 	public String getName(){
@@ -68,6 +69,14 @@ public class User {
 	
 	public void setimageName(String imageurl){
 		this.imageName = imageurl;
+	}
+	
+	public String getCurrentChannel(){
+		return currentChannel;
+	}
+	
+	public void setCurrentChannel(String channelName){
+		this.currentChannel = channelName;
 	}
 
 }

@@ -207,7 +207,6 @@ public class AccessFirebase{
         try {
 			semaphore.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         

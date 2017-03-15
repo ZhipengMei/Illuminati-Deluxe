@@ -2,10 +2,20 @@ package fxml;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+import java.util.UUID;
+
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import Firebase.User;
 import javafx.animation.Animation;
@@ -47,6 +57,17 @@ import javafx.util.Duration;
 
 public class gameTableController implements Initializable {
 
+	 // User singleton contains data from login menu
+	User currentUser = User.getInstance(); //getting user singleton
+	// Get a reference to the database
+	final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
+	
+	// online Chat is using "Fan Out" design pattern
+	//current channel
+//	private String channelName = currentUser.getCurrentChannel();
+
+	
     @FXML
     private BorderPane rootBorderPane;
     
@@ -65,46 +86,12 @@ public class gameTableController implements Initializable {
     // chat send button can be click or press enter
     @FXML
     void onEnter(ActionEvent event) {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-
-				if (inGameChatTextField.getText().equals("")){
-					//do nothing if textfield is empty
-				} else{
-			    	Label textLabel = new Label(inGameChatTextField.getText());
-			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setWrapText(true);	//multi line text
-			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
-			    	inGameChatTextField.setText("");	
-			    	
-			    	slowScrollToBottom(chatScrollPane);
-				}
-			
-			}	
-		});
+    	displayMessage();
     }
 
     @FXML
     void inGameChatSend_ACTION(MouseEvent event) {	
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				if (inGameChatTextField.getText().equals("")){
-					//do nothing if textfield is empty
-				} else{
-			    	Label textLabel = new Label(inGameChatTextField.getText());
-			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setWrapText(true);	//multi line text
-			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
-			    	inGameChatTextField.setText("");
-			    	slowScrollToBottom(chatScrollPane);
-
-				}	
-			}	
-		});
+    	displayMessage();
     }
 
 
@@ -130,5 +117,64 @@ public class gameTableController implements Initializable {
 	    animation.play();
 	}
 	
+  //generate a chat channel
+  public static void chatChannel(String channelName, String textMessage) {
+		User currentUser = User.getInstance();
+	  	String name = currentUser.getName(); //get current username
+		name = name.toLowerCase(); //convert name to lowercase
+
+		//create date
+		DateFormat textTimeStamp = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+		Date dateobj = new Date();
+
+		//create map to put data into a package
+		TreeMap<String,String> messageMap = new TreeMap<String,String>();  
+		messageMap.put("name", name);
+		messageMap.put("message", textMessage);
+		messageMap.put("timeStamp", textTimeStamp.format(dateobj));
+
+		// generate a random message id
+		String messageID = UUID.randomUUID().toString();
+
+    	//create database reference for the user
+		final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+		final DatabaseReference ref = rootRef.child("Chat").child(channelName).child(messageID);
+		
+		ref.setValue(messageMap, new DatabaseReference.CompletionListener() {
+		    @Override
+		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+		        if (databaseError != null) {
+		            System.out.println("Message could not be send. " + databaseError.getMessage());
+		        } else {
+		            System.out.println("Message Sent Successfully.");
+		        }
+		    }
+		});
+	}//end chatChannel()
+  
+  //show message onto chat box
+  public void displayMessage(){
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inGameChatTextField.getText().equals("")){
+					//do nothing if textfield is empty
+				} else{
+			    	Label textLabel = new Label(inGameChatTextField.getText());
+			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
+			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
+			    	textLabel.setWrapText(true);	//multi line text
+			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
+			    	inGameChatTextField.setText("");
+			    	slowScrollToBottom(chatScrollPane);
+
+			    	// upload new message to database
+					chatChannel(currentUser.getCurrentChannel(), textLabel.getText());
+				}	
+			}	
+		});
+  }
+  //TO DO send and retirve message should be in different design pattern
+ 
 	
 }

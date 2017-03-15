@@ -62,11 +62,14 @@ import javafx.stage.StageStyle;
 
 public class playerScreenController implements Initializable {
 
+	// User singleton contains data from login menu
 	User currentUser = User.getInstance(); //getting user singleton
 	// Get a reference to the database
 	final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
 	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
+	
+    private gameTableController gameTableController; //global privae variable
 
 	//pop up "game in progress" pane
     Stage popupStage = new Stage(StageStyle.TRANSPARENT);
@@ -175,7 +178,7 @@ public class playerScreenController implements Initializable {
     	profilechoosepane.setVisible(false); //dismiss profilechoosepane
     }
     
-	
+	// current screen's main method
 	public void initialize(URL location, ResourceBundle rb) {
 		System.out.println("player screen");
 		playerScreen();
@@ -184,9 +187,10 @@ public class playerScreenController implements Initializable {
 	public void playerScreen() {
 		profilechoosepane.setVisible(false);
 		getUserdata();
-	}
-	
 
+	}
+
+	//obtain current user data from database
 	public void getUserdata(){
 
 		// Attach a listener to read the data at our posts reference
@@ -195,7 +199,15 @@ public class playerScreenController implements Initializable {
 
 		    @Override
 		    public void onDataChange(DataSnapshot dataSnapshot) {	
-		    	currentUser = dataSnapshot.getValue(User.class);     
+		    	//deserialize data from JSON straight back into a Message object.
+		    	//currentUser = dataSnapshot.getValue(User.class); // it works but messed up with setter later on
+		    	System.out.println(dataSnapshot.getValue());
+		    	currentUser.setName((String) dataSnapshot.child("name").getValue());
+		    	currentUser.setWin((String) dataSnapshot.child("win").getValue());
+		    	currentUser.setimageName((String) dataSnapshot.child("imageName").getValue());
+		    	currentUser.setCreatedDate((String) dataSnapshot.child("createdDate").getValue());
+
+		    	
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
@@ -244,7 +256,20 @@ public class playerScreenController implements Initializable {
 	
 	@FXML
     void channel1_Action(MouseEvent event) {
-		inGame();
+		contentForChannelAction("Channel1");
+    }
+
+	
+	
+	
+	// all channel button action share same content
+	private void contentForChannelAction(String channelName){
+		currentUser.setCurrentChannel(channelName);
+		System.out.println(currentUser.getCurrentChannel());
+		System.out.println(currentUser.getimageName());
+		
+		inGame(); //loading animation
+		
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -302,10 +327,9 @@ public class playerScreenController implements Initializable {
 			    });
 			}
 		});
-		
-    }
+	}
 	
-	// in game progress
+	// in game progress loading animation
     private void inGame(){
     	
     	String path = new File("appicon.png").getAbsolutePath();
@@ -335,6 +359,10 @@ public class playerScreenController implements Initializable {
 		popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
 		popupStage.show();
     }
+    
+    
+    
+
 
 }  
 
