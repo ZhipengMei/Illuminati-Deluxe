@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,19 +17,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import Animation.Animattion;
 import Firebase.User;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -40,11 +49,16 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class playerScreenController implements Initializable {
 
@@ -54,6 +68,9 @@ public class playerScreenController implements Initializable {
 	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
 	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
 
+	//pop up "game in progress" pane
+    Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+    Boolean popupStageSeen = false;
 	
     @FXML
     private StackPane profilechooseStackpane;
@@ -227,11 +244,11 @@ public class playerScreenController implements Initializable {
 	
 	@FXML
     void channel1_Action(MouseEvent event) {
-		System.out.println("im in action 1 ");
+		inGame();
 		Platform.runLater(new Runnable() {
-
 			@Override
 			public void run() {
+				
 				Parent root = null;
 				try {
 					root = FXMLLoader.load(getClass().getResource("gameTableFX.fxml"));
@@ -239,28 +256,84 @@ public class playerScreenController implements Initializable {
 					e.printStackTrace();
 				}
 				
-				Stage stage = new Stage();
+				Stage gameTableStage = new Stage();
 				Scene scene = new Scene(root);
-				stage.setMaximized(true);
-				stage.setResizable(false);
+				gameTableStage.setMaximized(true);
+				gameTableStage.setResizable(false);
 				
 		        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
 		        //set Stage boundaries to visible bounds of the main screen
-		        stage.setX(primaryScreenBounds.getMinX());
-		        stage.setY(primaryScreenBounds.getMinY());
-		        stage.setWidth(primaryScreenBounds.getWidth());
-		        stage.setHeight(primaryScreenBounds.getHeight());
+		        gameTableStage.setX(primaryScreenBounds.getMinX());
+		        gameTableStage.setY(primaryScreenBounds.getMinY());
+		        gameTableStage.setWidth(primaryScreenBounds.getWidth());
+		        gameTableStage.setHeight(primaryScreenBounds.getHeight());
 				
 				scene.getStylesheets().add("DesignFX.css");
-				stage.setScene(scene);
-				stage.getIcons().add(new Image("file:appicon.png"));
-				stage.setTitle("Illuminati Deluxe");
-				stage.show();				
+				gameTableStage.setScene(scene);
+				gameTableStage.getIcons().add(new Image("file:appicon.png"));
+				gameTableStage.setTitle("Illuminati Deluxe");
+				gameTableStage.show();
+				
+			    // register listener for window close event
+				gameTableStage.setOnCloseRequest(event -> {
+			        // consume event
+			        event.consume();
+			        
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+					        // show close dialog
+					        Alert alert = new Alert(AlertType.CONFIRMATION);
+					        alert.setTitle("Close Confirmation");
+					        alert.setHeaderText("Do you really want to quit?");
+					        alert.initOwner(gameTableStage);
+
+					        Optional<ButtonType> result = alert.showAndWait();
+					        if (result.get() == ButtonType.OK){
+//					            Platform.exit();
+//					        	System.exit(0);
+					        	gameTableStage.close(); //only close current window
+					        	popupStage.close();     //close the loading pane
+					        	rootpane.setEffect(null);
+					        }
+						}	
+					});
+			    });
 			}
-			
 		});
 		
+    }
+	
+	// in game progress
+    private void inGame(){
+    	
+    	String path = new File("appicon.png").getAbsolutePath();
+		Image image = new Image(new File(path).toURI().toString());
+      
+		ImageView imageView = new ImageView(image);
+		RotateTransition animation = Animattion.createAnimation(imageView);
+
+		rootpane.setEffect(new GaussianBlur());
+		
+		VBox pauseRoot = new VBox(5);
+		pauseRoot.getChildren().add(new Label("Game in progress"));
+		pauseRoot.getChildren().add(imageView);
+		
+		pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
+		pauseRoot.setAlignment(Pos.CENTER);
+		pauseRoot.setPadding(new Insets(20));
+		
+		Stage primaryStage = (Stage) rootpane.getScene().getWindow();
+		// only allow to initOwner once
+		if (popupStageSeen == false) {
+			popupStage.initOwner(primaryStage);
+			popupStage.initModality(Modality.APPLICATION_MODAL);
+			popupStageSeen = true;
+		}
+
+		popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+		popupStage.show();
     }
 
 }  

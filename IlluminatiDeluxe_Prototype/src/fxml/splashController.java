@@ -3,6 +3,7 @@ package fxml;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import java.nio.file.Paths;
@@ -17,6 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
@@ -63,6 +67,28 @@ public class splashController implements Initializable {
 						stage.getIcons().add(new Image("file:appicon.png"));
 						stage.setTitle("Illuminati Deluxe");				    
 						stage.show();
+						
+					    // register listener for window close event
+					    stage.setOnCloseRequest(event -> {
+					        // consume event
+					        event.consume();
+					        
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+							        // show close dialog
+							        Alert alert = new Alert(AlertType.CONFIRMATION);
+							        alert.setTitle("Close Confirmation");
+							        alert.setHeaderText("Do you really want to quit?");
+							        alert.initOwner( stage);
+
+							        Optional<ButtonType> result = alert.showAndWait();
+							        if (result.get() == ButtonType.OK){
+							            Platform.exit();
+							        }
+								}	
+							});
+					    });
 
 						rootPane.getScene().getWindow().hide(); //dismiss the previous pane
 					}

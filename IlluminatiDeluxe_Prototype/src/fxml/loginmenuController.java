@@ -74,9 +74,9 @@ import Animation.Animattion;
 //public class loginmenuController implements Runnable  {
 public class loginmenuController{// extends User {
 	
-//    static User currentUser = new User();
-
     Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+    Boolean popupStageSeen = false;	// initOwner only allow run once, boolean to keep track of it
+
 
     @FXML
     private TextField usernameField;
@@ -119,38 +119,44 @@ public class loginmenuController{// extends User {
 
 		    @Override
 		    public void onDataChange(DataSnapshot dataSnapshot) {	
-		    	//System.out.println(dataSnapshot);
-		    	//iterate each node to get the children value
-		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){		    		
-		    		//parse DataSnapshot to String
-		    		String dataPassword = (String)messageSnapshot.child("password").getValue();
-		    		//validate password 
-		    		if (dataPassword.equals(passwordField.getText())){
-		    			System.out.println("User found.");
-		    			ref.removeEventListener(this); //disconnect the network listener
-		    			
-		    			//using runlater because in javaFX only the FX thread can modify the ui elements 
-						Platform.runLater(new Runnable() {
-							@Override
-							public void run() {
+		    	//System.out.println(dataSnapshot.getValue());
+		    	if (dataSnapshot.getValue() == null ){
+	    			System.out.println("User Not found.");
+	    			Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							popupStage.close();
+							rootloginpane.setEffect(null);
+							takenAlert();
+						}	
+					});
+		    	}else{
+			    	//iterate each node to get the children value
+			    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){		    		
+			    		//parse DataSnapshot to String
+			    		String dataPassword = (String)messageSnapshot.child("password").getValue();
+			    		//validate password 
+			    		if (dataPassword.equals(passwordField.getText())){
+			    			System.out.println("User found.");
+			    			ref.removeEventListener(this); //disconnect the network listener
+			    			
+			    			//using runlater because in javaFX only the FX thread can modify the ui elements 
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
 
-								User currentUser = User.getInstance();
-								currentUser.setUID(messageSnapshot.getKey());
-								rootloginpane.setEffect(null);
-								popupStage.hide();
-								login();	//switch to another playersreen
-							}	
-						});
-						
-		    		} else {
-		    			Platform.runLater(new Runnable() {
-							@Override
-							public void run() {
-								takenAlert();
-							}	
-						});
-		    		}
-		    	}
+									User currentUser = User.getInstance();
+									currentUser.setUID(messageSnapshot.getKey());
+									rootloginpane.setEffect(null);
+									popupStage.hide();
+									login();	//switch to another playersreen
+								}	
+							});
+							
+			    		} 
+			    	}
+			    }
+
 		    }
 
 		    @Override
@@ -190,10 +196,7 @@ public class loginmenuController{// extends User {
 
     
     private void loading(){
-//      Rectangle rect = new Rectangle(50, 50, 50, 50);
-//      rect.setFill(Color.CORAL);
-//      RotateTransition animation = createAnimation(rect);
-      
+    	
   	String path = new File("appicon.png").getAbsolutePath();
 		Image image = new Image(new File(path).toURI().toString());
       
@@ -201,7 +204,7 @@ public class loginmenuController{// extends User {
       RotateTransition animation = Animattion.createAnimation(imageView);
 
       Pane pane = new Pane(imageView);
-//      pane.setMinSize(100, 100);
+      //pane.setMinSize(100, 100);
 
       rootloginpane.setEffect(new GaussianBlur());
 
@@ -214,8 +217,12 @@ public class loginmenuController{// extends User {
       pauseRoot.setPadding(new Insets(20));
 
       Stage primaryStage = (Stage) rootloginpane.getScene().getWindow();
-      popupStage.initOwner(primaryStage);
-      popupStage.initModality(Modality.APPLICATION_MODAL);
+      if (popupStageSeen == false){
+          popupStage.initOwner(primaryStage);
+          popupStage.initModality(Modality.APPLICATION_MODAL);
+          popupStageSeen = true;
+      }
+
       popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
       popupStage.show();
     }
