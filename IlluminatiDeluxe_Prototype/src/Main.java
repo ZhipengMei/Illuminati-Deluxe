@@ -23,42 +23,25 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	
-	public static Boolean isSplashLoaded = false;
-	Stage window;
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		window = primaryStage;
-		window.setOnCloseRequest(e -> {
-			e.consume();
-			closeProgram();
-		});
+
 		
-		
-		
-		
-		
+				
 		Parent root = FXMLLoader.load(getClass().getResource("fxml/splashFX.fxml"));
-		window.getIcons().add(new Image("file:appicon.png"));
-		window.initStyle(StageStyle.UNDECORATED);
+		primaryStage.getIcons().add(new Image("file:appicon.png"));
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Scene scene = new Scene(root);
-		window.setScene(scene);
-		window.setTitle("Illuminati Deluxe");
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Illuminati Deluxe");
 //		stage.setMaximized(true);
 //		stage.setFullScreen(true);
 //		stage.setResizable(false);
-		window.show();
-		window.toFront();
+		primaryStage.show();
+		primaryStage.toFront();
 
 	}
 	
-	private void closeProgram() {
-		// TODO Auto-generated method stub
-		Boolean answer = ConfirmBox.display("Title", "Sure you want to exist?");
-		if(answer)
-			window.close();
-	}
-
 	public static void main(String[] args) {		
 		AccessFirebase.firebaseConfig();	//establish secure connection between this project and firebase
 		

@@ -102,3 +102,30 @@
 
 
  /******* PLAYER SCREEN END *******/
+
+
+/******* GAME TABLE SCREEN BEGIN*******/
+
+#inGameChatTextField {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-min-height: 0;
+    -fx-max-height: 27;
+    -fx-text-fill: #fff;
+    -fx-prompt-text-fill: #fff;
+    -fx-border-width:0px;
+    -fx-alignment: center;
+    -fx-font-size: 1.2em;
+    -fx-effect: null;
+    -fx-text-fill: #000;
+    -fx-alignment: center-left;
+}
+
+
+
+ /******* GAME TABLE SCREEN END *******/
+
+
+
