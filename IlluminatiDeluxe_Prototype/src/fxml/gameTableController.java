@@ -13,9 +13,11 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import Firebase.User;
 import javafx.animation.Animation;
@@ -149,16 +151,10 @@ public class gameTableController implements Initializable {
 				if (inGameChatTextField.getText().equals("")){
 					//do nothing if textfield is empty
 				} else{
-			    	Label textLabel = new Label(inGameChatTextField.getText());
-			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setWrapText(true);	//multi line text
-			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
-			    	inGameChatTextField.setText("");
-			    	slowScrollToBottom(chatScrollPane);
-
 			    	// upload new message to database
-					chatChannel(currentUser.getCurrentChannel(), textLabel.getText());
+					chatChannel(currentUser.getCurrentChannel(), inGameChatTextField.getText());
+			    	inGameChatTextField.setText("");
+					receiveMessage();
 				}	
 			}	
 		});
@@ -168,16 +164,52 @@ public class gameTableController implements Initializable {
   public void receiveMessage(){
 	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
 	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+	  
+	  // Attach a listener to read the data at our posts reference
+	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
 
-	  
-	  
+		    @Override
+		    public void onDataChange(DataSnapshot dataSnapshot) {	
+		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
+		    		System.out.println(messageSnapshot);
+		    		
+		    		// TO DO create a message object and reaarange by date
+		    		
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+//					    	String name = (String) dataSnapshot.child("name").getValue();
+//					    	String message = (String) dataSnapshot.child("message").getValue();
+//					    	String timeStamp = (String) dataSnapshot.child("timeStamp").getValue();
+//					    	System.out.println(name + " "+message +" "+timeStamp);
+//							displayMessage(name, message, timeStamp);
+						}	
+					});
+		    		
+		    	}
+
+		    	
+
+	    		//ref.removeEventListener(this);
+		    }
+
+		    @Override
+		    public void onCancelled(DatabaseError databaseError) {
+		        System.out.println("Receive message failed: " + databaseError.getCode());
+		    }
+		});
+  }
+  
+  //show message onto chat box
+  public void displayMessage(String name, String text, String date){
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				if (inGameChatTextField.getText().equals("")){
+				if (text.equals("")){
 					//do nothing if textfield is empty
 				} else{
-			    	Label textLabel = new Label(inGameChatTextField.getText());
+					String message = name + ": " + text;
+			    	Label textLabel = new Label(message);
 			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
 			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
 			    	textLabel.setWrapText(true);	//multi line text
@@ -190,11 +222,6 @@ public class gameTableController implements Initializable {
 				}	
 			}	
 		});
-  }
-  
-  //show message onto chat box
-  public void displayMessage(){
-	  
   }
   
   
