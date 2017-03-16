@@ -9,16 +9,22 @@ Time spent: **20** hours spent in total
 
 The following **required** functionality is complete:
 
-- [ ] User can create account
+- [x] Card class
+- [ ] Gameplay interface
 - [ ] Match making system
-- [ ] Customize personal profile
 - [ ] Rule enforcement during game play
+
 
 The following **optional** features are implemented:
 
-- [ ] In game chat feature
-- [ ] Launch screen
-- [ ] Loading aniamtion
+- [x] User can create account
+- [x] Customize personal profile
+- [x] In game chat feature
+- [x] Launch screen
+- [x] Loading aniamtion
+- [ ] Log out user account
+- [x] In game music
+
 
 The following **additional** features are implemented:
 
