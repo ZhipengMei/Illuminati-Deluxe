@@ -2,9 +2,12 @@ package fxml;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +16,14 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import Firebase.Message;
 import Firebase.User;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -57,16 +62,16 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
-public class gameTableController implements Initializable {
+public class gameTableController extends Message implements Initializable  {
 
 	 // User singleton contains data from login menu
 	User currentUser = User.getInstance(); //getting user singleton
+	
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	
-	// online Chat is using "Fan Out" design pattern
-	//current channel
-//	private String channelName = currentUser.getCurrentChannel();
+	// messages arraylist to store individual message
+	ArrayList<Message> messages = new ArrayList<Message>();
 
 	
     @FXML
@@ -96,10 +101,17 @@ public class gameTableController implements Initializable {
     }
 
 
+    //javaFX's main for current scene
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				receiveMessage();	
+			}	
+		});
 	}
+	
 
 	//animation to scroll chat history to the bottom
 	static void slowScrollToBottom(ScrollPane scrollPane) {
@@ -108,6 +120,22 @@ public class gameTableController implements Initializable {
 	            new KeyValue(scrollPane.vvalueProperty(), 1)));
 	    animation.play();
 	}
+	
+  //send message to database
+  public void sendMessage(){
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inGameChatTextField.getText().equals("")){
+					//do nothing if textfield is empty
+				} else{
+			    	// upload new message to database
+					chatChannel(currentUser.getCurrentChannel(), inGameChatTextField.getText());
+			    	inGameChatTextField.setText("");
+				}	
+			}	
+		});
+  }
 	
   //generate a chat channel
   public static void chatChannel(String channelName, String textMessage) {
@@ -143,65 +171,139 @@ public class gameTableController implements Initializable {
 		});
 	}//end chatChannel()
   
-  //send message to database
-  public void sendMessage(){
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				if (inGameChatTextField.getText().equals("")){
-					//do nothing if textfield is empty
-				} else{
-			    	// upload new message to database
-					chatChannel(currentUser.getCurrentChannel(), inGameChatTextField.getText());
-			    	inGameChatTextField.setText("");
-					receiveMessage();
-				}	
-			}	
-		});
-  }
- 
-  //receive message 
+//  public void receiveMessage(){
+//	  messages.clear(); //reset messages arraylist to empty
+//	  
+//	  //database reference to specific "chat > channel name" node
+//	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+//	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+//	  
+//	  // Attach a listener to read the data at our posts reference
+//	  
+////	  receiveMessageRef.addListenerForSingleValueEvent(new ValueEventListener() { //only listen once
+//	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
+//
+//		    @Override
+//		    public void onDataChange(DataSnapshot dataSnapshot) {
+////		    	System.out.println(dataSnapshot);
+//
+//		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
+////		    		System.out.println(messageSnapshot);
+//
+//		    		// parse json data into local vars
+//			    	String name = (String) messageSnapshot.child("name").getValue();
+//			    	String textMessage = (String) messageSnapshot.child("message").getValue();
+//			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
+//			    	
+//			    	//convert string back to Date
+//			    	try{
+//			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+//			    	    Date parsedDate = dateFormat.parse(timeStamp);
+//			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+//				    	
+//				    	//create text object
+//			    		Message message = new Message();
+//			    		//feed setter data
+//			    		message.setDateTime(timestamp);
+//			    		message.setName(name);
+//			    		message.setMessage(textMessage);
+//			    		
+//			    		messages.add(message); // add individual message into messages arraylist
+//
+//			    	}catch(Exception e){//this generic but you can control another types of exception
+//			    		//look the origin of excption 
+//			    		e.printStackTrace();
+//			    	}
+//		    	}//end for
+//		    	
+//		    	//System.out.println(messages.size()); //display total message
+//		    	Collections.sort(messages); //sort by timeStamp
+//		    	
+//				Platform.runLater(new Runnable() {
+//					@Override
+//					public void run() {
+//						for (int i = 0; i < messages.size(); i++) {
+//							//System.out.println(messages.get(i));
+//							//display messages onto screen
+//							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
+//						}						
+//					}	
+//				});
+////	    		ref.removeEventListener(this);  //remove network listener
+//		    }
+//		    @Override
+//		    public void onCancelled(DatabaseError databaseError) {}
+//		});
+//  }// end receive message
+  
+  //receive message is officially working
   public void receiveMessage(){
+	
+	  //database reference to specific "chat > channel name" node
 	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
 	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
 	  
 	  // Attach a listener to read the data at our posts reference
+	  
+//	  receiveMessageRef.addListenerForSingleValueEvent(new ValueEventListener() { //only listen once
 	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
 
 		    @Override
-		    public void onDataChange(DataSnapshot dataSnapshot) {	
+		    public void onDataChange(DataSnapshot dataSnapshot) {
+//		    	System.out.println(dataSnapshot);
+				messages.clear(); //reset messages arraylist to empty
+
 		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
-		    		System.out.println(messageSnapshot);
-		    		
-		    		// TO DO create a message object and reaarange by date
-		    		
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-//					    	String name = (String) dataSnapshot.child("name").getValue();
-//					    	String message = (String) dataSnapshot.child("message").getValue();
-//					    	String timeStamp = (String) dataSnapshot.child("timeStamp").getValue();
-//					    	System.out.println(name + " "+message +" "+timeStamp);
-//							displayMessage(name, message, timeStamp);
-						}	
-					});
-		    		
-		    	}
+//		    		System.out.println(messageSnapshot);
 
+		    		// parse json data into local vars
+			    	String name = (String) messageSnapshot.child("name").getValue();
+			    	String textMessage = (String) messageSnapshot.child("message").getValue();
+			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
+			    	
+			    	//convert string back to Date
+			    	try{
+			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+			    	    Date parsedDate = dateFormat.parse(timeStamp);
+			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+				    	
+				    	//create text object
+			    		Message message = new Message();
+			    		//feed setter data
+			    		message.setDateTime(timestamp);
+			    		message.setName(name);
+			    		message.setMessage(textMessage);
+			    		
+			    		messages.add(message); // add individual message into messages arraylist
+
+			    	}catch(Exception e){//this generic but you can control another types of exception
+			    		//look the origin of excption 
+			    		e.printStackTrace();
+			    	}
+		    	}//end for
 		    	
-
-	    		//ref.removeEventListener(this);
+		    	//System.out.println(messages.size()); //display total message
+		    	Collections.sort(messages); //sort by timeStamp
+		    	
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						for (int i = 0; i < messages.size(); i++) {
+							//System.out.println(messages.get(i));
+							//display messages onto screen
+							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
+						}						
+					}	
+				});
 		    }
-
 		    @Override
-		    public void onCancelled(DatabaseError databaseError) {
-		        System.out.println("Receive message failed: " + databaseError.getCode());
-		    }
+		    public void onCancelled(DatabaseError databaseError) {}
 		});
-  }
+  }// end receive message
+  
   
   //show message onto chat box
-  public void displayMessage(String name, String text, String date){
+  public void displayMessage(String name, String text){
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -217,13 +319,9 @@ public class gameTableController implements Initializable {
 			    	inGameChatTextField.setText("");
 			    	slowScrollToBottom(chatScrollPane);
 	
-			    	// upload new message to database
-					chatChannel(currentUser.getCurrentChannel(), textLabel.getText());
 				}	
 			}	
 		});
   }
-  
-  
 	
 }

@@ -151,7 +151,22 @@ public class loginmenuController{// extends User {
 									login();	//switch to another playersreen
 								}	
 							});							
-			    		} 
+			    		} else{
+			    			System.out.println("User Not found.");
+			    			ref.removeEventListener(this); //disconnect the network listener
+			    			
+			    			//using runlater because in javaFX only the FX thread can modify the ui elements 
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+									User currentUser = User.getInstance();
+									currentUser.setUID(messageSnapshot.getKey());
+									rootloginpane.setEffect(null);
+									popupStage.hide();
+					    			takenAlert();
+								}	
+							});	
+			    		}
 			    	}
 			    }
 		    }
