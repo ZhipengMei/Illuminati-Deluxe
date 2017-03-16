@@ -3,7 +3,7 @@ Digital Illuminati Game by CECS 343 Group D
 
 **Illuminati Deluxe** is a desktop application developed using Java.
 
-Time spent: **10** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
