@@ -60,8 +60,7 @@ public class gameTableController implements Initializable {
 	 // User singleton contains data from login menu
 	User currentUser = User.getInstance(); //getting user singleton
 	// Get a reference to the database
-	final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
+	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	
 	// online Chat is using "Fan Out" design pattern
 	//current channel
@@ -86,26 +85,17 @@ public class gameTableController implements Initializable {
     // chat send button can be click or press enter
     @FXML
     void onEnter(ActionEvent event) {
-    	displayMessage();
+    	sendMessage();
     }
 
     @FXML
     void inGameChatSend_ACTION(MouseEvent event) {	
-    	displayMessage();
+    	sendMessage();
     }
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-	    
-		
-//		Platform.runLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				
-//			}	
-//		});
 
 	}
 
@@ -137,10 +127,9 @@ public class gameTableController implements Initializable {
 		String messageID = UUID.randomUUID().toString();
 
     	//create database reference for the user
-		final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-		final DatabaseReference ref = rootRef.child("Chat").child(channelName).child(messageID);
+		final DatabaseReference messageRef = rootRef.child("Chat").child(channelName).child(messageID);
 		
-		ref.setValue(messageMap, new DatabaseReference.CompletionListener() {
+		messageRef.setValue(messageMap, new DatabaseReference.CompletionListener() {
 		    @Override
 		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 		        if (databaseError != null) {
@@ -152,8 +141,8 @@ public class gameTableController implements Initializable {
 		});
 	}//end chatChannel()
   
-  //show message onto chat box
-  public void displayMessage(){
+  //send message to database
+  public void sendMessage(){
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -174,7 +163,40 @@ public class gameTableController implements Initializable {
 			}	
 		});
   }
-  //TO DO send and retirve message should be in different design pattern
  
+  //receive message 
+  public void receiveMessage(){
+	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+
+	  
+	  
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (inGameChatTextField.getText().equals("")){
+					//do nothing if textfield is empty
+				} else{
+			    	Label textLabel = new Label(inGameChatTextField.getText());
+			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
+			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
+			    	textLabel.setWrapText(true);	//multi line text
+			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
+			    	inGameChatTextField.setText("");
+			    	slowScrollToBottom(chatScrollPane);
+	
+			    	// upload new message to database
+					chatChannel(currentUser.getCurrentChannel(), textLabel.getText());
+				}	
+			}	
+		});
+  }
+  
+  //show message onto chat box
+  public void displayMessage(){
+	  
+  }
+  
+  
 	
 }
