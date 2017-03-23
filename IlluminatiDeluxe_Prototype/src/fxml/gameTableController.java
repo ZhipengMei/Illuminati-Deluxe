@@ -55,6 +55,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Screen;
@@ -73,7 +74,9 @@ public class gameTableController extends Message implements Initializable  {
 	// messages arraylist to store individual message
 	ArrayList<Message> messages = new ArrayList<Message>();
 
-	
+    @FXML
+    private AnchorPane anchorConsole;
+
     @FXML
     private BorderPane rootBorderPane;
     
@@ -89,18 +92,6 @@ public class gameTableController extends Message implements Initializable  {
     @FXML
     private ScrollPane chatScrollPane;
     
-    // chat send button can be click or press enter
-    @FXML
-    void onEnter(ActionEvent event) {
-    	sendMessage();
-    }
-
-    @FXML
-    void inGameChatSend_ACTION(MouseEvent event) {	
-    	sendMessage();
-    }
-
-
     //javaFX's main for current scene
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -111,7 +102,17 @@ public class gameTableController extends Message implements Initializable  {
 			}	
 		});
 	}
-	
+    
+    // chat send button can be click or press enter
+    @FXML
+    void onEnter(ActionEvent event) {
+    	sendMessage();
+    }
+    @FXML
+    void inGameChatSend_ACTION(MouseEvent event) {	
+    	sendMessage();
+    }
+
 
 	//animation to scroll chat history to the bottom
 	static void slowScrollToBottom(ScrollPane scrollPane) {

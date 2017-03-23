@@ -123,6 +123,10 @@
     -fx-alignment: center-left;
 }
 
+#anchorConsole {
+-fx-background-color: #333333;
+
+}
 
 
  /******* GAME TABLE SCREEN END *******/

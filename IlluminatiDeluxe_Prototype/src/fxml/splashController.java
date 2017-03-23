@@ -49,7 +49,7 @@ public class splashController implements Initializable {
 			try {
 //				Thread.sleep(1500); //1.5 second
 				Thread.sleep(100); //skip login 
-				//DO NOT DELETE, ORIGINAL CODE
+//				DO NOT DELETE, ORIGINAL CODE
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -96,7 +96,7 @@ public class splashController implements Initializable {
 					
 				});
 //----------------------------------------------------------------------------
-			// skip login, faster to game table screen	
+//			// skip login, faster to game table screen	
 //				Platform.runLater(new Runnable() {
 //
 //					@Override
