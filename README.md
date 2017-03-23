@@ -28,7 +28,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 - [x] data persistence
-- [] virtually sharing same deck of cards
+- [ ] virtually sharing same deck of cards
 
 
 
