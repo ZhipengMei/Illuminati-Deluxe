@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootBorderPane" prefHeight="563.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
+<BorderPane fx:id="rootBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
    <right>
-      <VBox prefHeight="695.0" prefWidth="262.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <ScrollPane fx:id="chatScrollPane" prefHeight="173.0" prefWidth="81.0">
                <content>
@@ -28,27 +27,28 @@
                   <Button fx:id="inGameChatSendBtn" mnemonicParsing="false" onMousePressed="#inGameChatSend_ACTION" prefHeight="25.0" prefWidth="51.0" text="Send" />
                </children>
             </HBox>
-            <AnchorPane fx:id="anchorConsole" prefHeight="171.0" prefWidth="278.0">
+            <AnchorPane fx:id="anchorConsole" prefHeight="168.0" prefWidth="246.0">
                <children>
                   <Label layoutX="57.0" layoutY="56.0" text="This is game console pane" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="102.0" layoutY="82.0" text="this is for special cards pane" />
+                  <Label layoutX="41.0" layoutY="177.0" text="this is for special cards pane" />
                </children>
             </AnchorPane>
          </children>
       </VBox>
    </right>
-   <left>
-      <Pane prefHeight="569.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
-      <ImageView fitHeight="761.0" fitWidth="1107.0" pickOnBounds="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../support/images/tableBackground.jpg" />
-         </image>
-      </ImageView>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="980.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="750.0" fitWidth="1100.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../support/images/tableBackground.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>
