@@ -1,6 +1,7 @@
 package fxml;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -37,11 +38,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -91,6 +94,9 @@ public class gameTableController extends Message implements Initializable  {
     
     @FXML
     private ScrollPane chatScrollPane;
+    
+    @FXML
+    private Button player1Grid;
     
     //javaFX's main for current scene
 	@Override
@@ -323,6 +329,51 @@ public class gameTableController extends Message implements Initializable  {
 				}	
 			}	
 		});
+  }
+  
+  //Select Player 1 to call the grid
+  @FXML
+  void gridViewPlayer1(MouseEvent event) {
+	selectPlayerGrid("Player1");  
+  }
+  
+  
+  
+  //Select the specific grid for that specific player
+  private void selectPlayerGrid(String playerNum){
+	  System.out.println("Grid of player "+playerNum);
+	  
+	  Platform.runLater(new Runnable() {
+		@Override
+		public void run() {
+			Parent root = null;
+			try{
+				root = FXMLLoader.load(getClass().getResource("gridStructureFX.fxml"));
+			} catch(IOException e){
+				e.printStackTrace();
+				System.out.println("Cannot get grid");
+			}
+			Stage gridStructure = new Stage();
+			Scene scene = new Scene(root);
+			gridStructure.setMaximized(false);
+			gridStructure.setResizable(false);
+			
+			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+			
+			gridStructure.setX(200);
+			gridStructure.setY(100);
+			gridStructure.setWidth(500);
+			gridStructure.setHeight(500);
+			
+			scene.getStylesheets().add("DesignFX.css");
+			gridStructure.setScene(scene);
+			gridStructure.getIcons().add(new Image("file:appicon.png"));
+			gridStructure.setTitle("Grid of "+playerNum);
+			gridStructure.show();
+			
+		}
+		
+	  });
   }
 	
 }

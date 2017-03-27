@@ -48,6 +48,10 @@
                   <Image url="@../../support/images/tableBackground.jpg" />
                </image>
             </ImageView>
+            <Button layoutX="488.0" layoutY="72.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" />
+            <Button layoutX="77.0" layoutY="335.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" />
+            <Button fx:id="player1Grid" layoutX="481.0" layoutY="615.0" mnemonicParsing="false" onMousePressed="#gridViewPlayer1" prefHeight="72.0" prefWidth="119.0" />
+            <Button layoutX="906.0" layoutY="321.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" />
          </children>
       </AnchorPane>
    </center>
