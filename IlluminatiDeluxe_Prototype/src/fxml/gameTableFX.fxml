@@ -4,15 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootBorderPane" prefHeight="563.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
-   <right>
-      <VBox prefHeight="504.0" prefWidth="278.0" BorderPane.alignment="CENTER">
+<AnchorPane prefHeight="563.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
+   <children>
+      <VBox layoutX="471.0" prefHeight="563.0" prefWidth="278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ScrollPane fx:id="chatScrollPane" prefHeight="173.0" prefWidth="81.0">
                <content>
@@ -21,13 +22,14 @@
             </ScrollPane>
             <HBox prefHeight="27.0" prefWidth="219.0">
                <children>
-                  <TextField fx:id="inGameChatTextField" onAction="#onEnter" />
+                  <TextField fx:id="inGameChatTextField" onAction="#onEnter" prefHeight="27.0" prefWidth="228.0" />
                   <Button fx:id="inGameChatSendBtn" mnemonicParsing="false" onMousePressed="#inGameChatSend_ACTION" prefHeight="25.0" prefWidth="51.0" text="Send" />
                </children>
             </HBox>
             <AnchorPane fx:id="anchorConsole" prefHeight="171.0" prefWidth="278.0">
                <children>
                   <Label layoutX="57.0" layoutY="56.0" text="This is game console pane" />
+                  <Button layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onMousePressed="#drawCard_action" text="Draw card" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -37,5 +39,35 @@
             </AnchorPane>
          </children>
       </VBox>
-   </right>
-</BorderPane>
+      <VBox prefHeight="170.0" prefWidth="69.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="52.0" fitWidth="62.0">
+                     <image>
+                        <Image url="@../../support/images/profileimage.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Player 1" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="52.0" fitWidth="62.0">
+                     <image>
+                        <Image url="@../../support/images/profileimage.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Player 2" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="drawCard_scrollpane" layoutX="117.0" layoutY="21.0" prefHeight="145.0" prefWidth="342.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="21.0">
+         <content>
+            <FlowPane fx:id="drawCard_flowPane" prefHeight="122.0" prefWidth="1016.0" />
+         </content>
+      </ScrollPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="117.0" layoutY="4.0" prefHeight="17.0" prefWidth="354.0" text="Free Group" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="4.0" />
+   </children>
+</AnchorPane>

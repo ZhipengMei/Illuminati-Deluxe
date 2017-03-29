@@ -46,12 +46,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -73,24 +75,25 @@ public class gameTableController extends Message implements Initializable  {
 	
 	// messages arraylist to store individual message
 	ArrayList<Message> messages = new ArrayList<Message>();
+	
 
     @FXML
-    private AnchorPane anchorConsole;
+    private ScrollPane drawCard_scrollpane;
 
     @FXML
-    private BorderPane rootBorderPane;
-    
+    private ScrollPane chatScrollPane;
+
+    @FXML
+    private FlowPane flowPaneInScroll;
+
     @FXML
     private TextField inGameChatTextField;
 
     @FXML
     private Button inGameChatSendBtn;
-    
+
     @FXML
-    private FlowPane flowPaneInScroll;
-    
-    @FXML
-    private ScrollPane chatScrollPane;
+    private AnchorPane anchorConsole;
     
     //javaFX's main for current scene
 	@Override
@@ -99,6 +102,12 @@ public class gameTableController extends Message implements Initializable  {
 			@Override
 			public void run() {
 				receiveMessage();	
+
+				//config draw new card scroll pane
+//				drawCard_scrollpane.setVbarPolicy(ScrollBarPolicy.NEVER);
+//				drawCard_scrollpane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+				drawCard_scrollpane.setPannable(true);
+				drawCard_scrollpane.setFitToHeight(true);
 			}	
 		});
 	}
@@ -321,6 +330,37 @@ public class gameTableController extends Message implements Initializable  {
 			    	slowScrollToBottom(chatScrollPane);
 	
 				}	
+			}	
+		});
+  }
+  
+  //-----------------------------------------------------------
+  @FXML
+  private FlowPane drawCard_flowPane;
+  @FXML
+  void drawCard_action(MouseEvent event) {
+	  //using the card's name as parameter
+	  displayDrawCard("airlines.jpg");
+  }
+  
+  //show new draw card onto screen
+  public void displayDrawCard(String cardName){
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("inside here run cards draw");
+				ImageView freecardImage = new ImageView();
+    			//set free card image here
+    	    	String path = new File("support/images/cards/"+cardName).getAbsolutePath();
+    	    	System.out.println(path);
+    			Image image = new Image(new File(path).toURI().toString());
+    			freecardImage.setImage(image);	//reassign image view with new image
+    			freecardImage.setFitHeight(100);
+    			freecardImage.setPreserveRatio(true);
+
+    			drawCard_flowPane.getChildren().addAll(freecardImage); //addAll allow to add multiple Nodes
+    			slowScrollToBottom(drawCard_scrollpane);
 			}	
 		});
   }

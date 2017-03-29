@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/commons-codec-1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/firebase-admin-4.1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-api-client-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-api-client-gson-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-gson-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-jackson2-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-oauth-client-1.21.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/gson-2.7.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/guava-jdk5-17.0.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/httpclient-4.0.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/httpcore-4.0.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jackson-core-2.1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/json-20160212.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jsr305-1.3.9.jar"/>
-	<classpathentry kind="lib" path="/Users/Adrian/Desktop/IlluminatiDeluxe_Prototype/support/jar_files/jfoenix/jfoenix.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/firebase-admin-4.1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-api-client-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-api-client-gson-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-gson-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-http-client-jackson2-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/google-oauth-client-1.21.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/guava-jdk5-17.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/httpcore-4.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jackson-core-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/json-20160212.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/firebase/jsr305-1.3.9.jar"/>
+	<classpathentry kind="lib" path="/Users/Adrian/Documents/MyApp/CECS-343-mw-GroupD/IlluminatiDeluxe_Prototype/support/jar_files/jfoenix/jfoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

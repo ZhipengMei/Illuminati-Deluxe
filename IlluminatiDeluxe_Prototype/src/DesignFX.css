@@ -138,7 +138,15 @@
 
 }
 
+#drawCard_scrollpane {
+-fx-background-color: #333333;
 
+}
+
+#drawCard_flowPane {
+-fx-background-color: #555555;
+
+}
  /******* GAME TABLE SCREEN END *******/
 
 
