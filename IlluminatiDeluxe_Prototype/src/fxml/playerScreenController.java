@@ -1,34 +1,17 @@
+
 package fxml;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 
-import Animation.Animattion;
-import Firebase.User;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -36,29 +19,37 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
+
+import Animation.Animattion;
+import Firebase.User;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.input.MouseEvent;
+
 
 public class playerScreenController implements Initializable {
 
@@ -69,26 +60,41 @@ public class playerScreenController implements Initializable {
 	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
 	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
 	
-    private gameTableController gameTableController; //global privae variable
-
 	//pop up "game in progress" pane
     Stage popupStage = new Stage(StageStyle.TRANSPARENT);
     Boolean popupStageSeen = false;
 	
     @FXML
-    private StackPane profilechooseStackpane;
+    private AnchorPane root_anchorpane;
+
+    @FXML
+    private JFXDrawer drawer;
+
+    @FXML
+    private HBox hboxbar;
+    @FXML
+    private Pane channelPane;
+
+    @FXML
+    private Label ruletheworld;
+
+    @FXML
+    private ImageView profileimageview;
+
+    @FXML
+    private Label usernameLabel;
+
+    @FXML
+    private JFXHamburger hamburger;
     
     @FXML
     private GridPane channelGridpane;
-    
+
     @FXML
     private Button channel1;
 
     @FXML
     private Button channel2;
-
-    @FXML
-    private Button channel3;
 
     @FXML
     private Button channel4;
@@ -97,99 +103,53 @@ public class playerScreenController implements Initializable {
     private Button channel5;
 
     @FXML
+    private Button channel7;
+
+    @FXML
+    private Button channel8;
+
+    @FXML
+    private Button channel3;
+
+    @FXML
     private Button channel6;
-    
-    @FXML
-    private Label ruletheworld;
-    
-    @FXML
-    private BorderPane rootpane;
-    
-    @FXML
-    private HBox hboxbar;
-    
-    @FXML
-    private GridPane profilechoosepane;
-    
-    @FXML
-    private ImageView profileimageview;
-    
-    @FXML
-    private Label usernameLabel;
-    
-    @FXML
-    void uploadnewprofileimage(MouseEvent event) { 
-    	profilechoosepane.setVisible(true);
-    	
-    }
 
     @FXML
-    void AnonymousClicked(MouseEvent event) {
-    	String path = new File("support/images/Anonymous.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("Anonymous.png");
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
+    private Button channel9;
 
-    @FXML
-    void CoinClicked(MouseEvent event) {
-    	String path = new File("support/images/Coins.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("Coins.png");
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
 
-    @FXML
-    void FortuneTellerClicked(MouseEvent event) {
-    	String path = new File("support/images/FortuneTeller.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("FortuneTeller.png");
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
-
-    @FXML
-    void GhostClicked(MouseEvent event) {
-    	String path = new File("support/images/Ghost.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("Ghost.png");
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
-
-    @FXML
-    void WitchClicked(MouseEvent event) {
-    	String path = new File("support/images/Witch.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("Witch.png");
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
+ 
     
-    @FXML
-    void alienClicked(MouseEvent event) {
-    	//get the alien image
-    	String path = new File("support/images/Alien.png").getAbsolutePath();
-		Image image = new Image(new File(path).toURI().toString());
-		storeImage("Alien.png"); //save image name to database
-    	profileimageview.setImage(image);	//reassign image view with new image
-    	profilechoosepane.setVisible(false); //dismiss profilechoosepane
-    }
     
-	// current screen's main method
-	public void initialize(URL location, ResourceBundle rb) {
-		System.out.println("player screen");
-		playerScreen();
+    
+    
+    //-------------------------------------------------------------------------
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		getUserdata();
+		try {
+			AnchorPane apane = FXMLLoader.load(getClass().getResource("slideMenu.fxml"));
+			drawer.setSidePane(apane);
+
+			//hamburger menu animation
+			HamburgerBasicCloseTransition burgerTask2 = new HamburgerBasicCloseTransition(hamburger);
+			burgerTask2.setRate(-1);
+			hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+				burgerTask2.setRate(burgerTask2.getRate() * -1);
+				burgerTask2.play();
+				
+				if(drawer.isShown()) {
+					drawer.close();
+				} else {
+					drawer.open();
+				}
+			});			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}			
 	}
 	
-	public void playerScreen() {
-		profilechoosepane.setVisible(false);
-		getUserdata();
-
-	}
-
+	
 	//obtain current user data from database
 	public void getUserdata(){
 
@@ -225,7 +185,7 @@ public class playerScreenController implements Initializable {
 			    		}
 					}	
 				});
-	    		ref.removeEventListener(this);
+//	    		ref.removeEventListener(this);
 		    }
 
 		    @Override
@@ -235,25 +195,7 @@ public class playerScreenController implements Initializable {
 		});
 	}// end getUserdata
 	
-	// Since profile image is given/limited, we can cheat without using cloud storage
-	// Tip: Store file locally attached with file name and obtain file path when needed
-	public void storeImage(String imageName){
-		currentUser.setimageName(imageName);
-		
-		//upload image name to database
-		imageRef.setValue(imageName, new DatabaseReference.CompletionListener() {
-		    @Override
-		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-		        if (databaseError != null) {
-		            System.out.println("Image data could not be saved " + databaseError.getMessage());
-		        } else {
-		            System.out.println("Image data saved successfully.");
-		        }
-		    }
-		});
-	} //end storeImage
-	
-	
+	//-------------------------------------------------------------------------------------
 	@FXML
     void channel1_Action(MouseEvent event) {
 		contentForChannelAction("Channel1");
@@ -320,7 +262,7 @@ public class playerScreenController implements Initializable {
 //					        	System.exit(0);
 					        	gameTableStage.close(); //only close current window
 					        	popupStage.close();     //close the loading pane
-					        	rootpane.setEffect(null);
+					        	root_anchorpane.setEffect(null);
 					        }
 						}	
 					});
@@ -338,7 +280,7 @@ public class playerScreenController implements Initializable {
 		ImageView imageView = new ImageView(image);
 		RotateTransition animation = Animattion.createAnimation(imageView);
 
-		rootpane.setEffect(new GaussianBlur());
+		root_anchorpane.setEffect(new GaussianBlur());
 		
 		VBox pauseRoot = new VBox(5);
 		pauseRoot.getChildren().add(new Label("Game in progress"));
@@ -348,7 +290,7 @@ public class playerScreenController implements Initializable {
 		pauseRoot.setAlignment(Pos.CENTER);
 		pauseRoot.setPadding(new Insets(20));
 		
-		Stage primaryStage = (Stage) rootpane.getScene().getWindow();
+		Stage primaryStage = (Stage) root_anchorpane.getScene().getWindow();
 		// only allow to initOwner once
 		if (popupStageSeen == false) {
 			popupStage.initOwner(primaryStage);
@@ -359,24 +301,4 @@ public class playerScreenController implements Initializable {
 		popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
 		popupStage.show();
     }
-    
-    
-    
-
-
-}  
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
+}

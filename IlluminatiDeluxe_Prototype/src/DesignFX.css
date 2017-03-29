@@ -72,16 +72,14 @@
   -fx-position: relative;
 }
 
- #profilechooseStackpane {
-    -fx-background-color: #2f4f4f;
-    -fx-padding: 15;
+#slideMenu_root_anchorPane {
+	-fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
+	/*-fx-background-radius: 10; */
+  	-fx-padding: 15;
     -fx-spacing: 10;
 }
 
-#profilechoosepane {
-	-fx-background-color: rgba(0, 100, 100, 0.5); 
-	-fx-background-radius: 10;
-}
+
 
 #usernameLabel{
    	-fx-background-color: #3c7fb1;
@@ -93,8 +91,20 @@
     -fx-text-fill: white;
 }
 
+#hamburger {
+ -fx-pref-width: 40px;
+ -fx-pref-height: 7px;
+ -fx-background-color : #D63333;
+ -fx-background-radius : 5px;
+}﻿
+
 /* CENTER */
 #channelGridpane {
+   	-fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+#channelPane{
    	-fx-background-color: #2f4f4f;
     -fx-padding: 15;
     -fx-spacing: 10;

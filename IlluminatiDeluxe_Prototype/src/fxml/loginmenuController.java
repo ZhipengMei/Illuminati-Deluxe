@@ -181,7 +181,8 @@ public class loginmenuController{// extends User {
     
     // bypass login screen to player lobby screen
     public void login(){
-    	BorderPane pane = null;
+//    	BorderPane pane = null;
+    	AnchorPane pane = null;
     	try {
     		pane = FXMLLoader.load(getClass().getResource("playerScreenFX.fxml"));
 		} catch (IOException e) {
