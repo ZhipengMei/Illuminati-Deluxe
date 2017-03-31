@@ -17,7 +17,7 @@ public class gridStructureController {
 
     @FXML
     void randomClicked(MouseEvent event) {
-    	System.out.println("Gigity");
+    	System.out.println("Test");
     }
 
 }
