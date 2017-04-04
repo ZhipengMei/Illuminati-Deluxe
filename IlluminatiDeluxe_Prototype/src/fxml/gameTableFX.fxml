@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,8 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="563.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
@@ -69,5 +72,29 @@
          </content>
       </ScrollPane>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="117.0" layoutY="4.0" prefHeight="17.0" prefWidth="354.0" text="Free Group" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="4.0" />
+      <BorderPane layoutY="170.0" prefHeight="418.0" prefWidth="471.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="170.0">
+         <center>
+            <ImageView fitHeight="580.0" fitWidth="1080.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../support/images/illuminatiTable.jpg" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </center>
+         <top>
+            <Pane prefHeight="0.0" prefWidth="477.0" BorderPane.alignment="CENTER" />
+         </top>
+         <left>
+            <Pane prefHeight="418.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </left>
+         <bottom>
+            <Pane prefHeight="0.0" prefWidth="477.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <right>
+            <Pane prefHeight="200.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
    </children>
 </AnchorPane>
