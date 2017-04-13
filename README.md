@@ -22,7 +22,7 @@ The following **optional** features are implemented:
 - [x] In game chat feature
 - [x] Launch screen
 - [x] Loading aniamtion
-- [ ] Log out user account
+- [x] Log out user account
 - [x] In game music
 
 
