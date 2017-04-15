@@ -1,6 +1,7 @@
 package fxml;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -22,6 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
+import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 
 import Firebase.Message;
 import Firebase.User;
@@ -37,6 +43,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
@@ -60,6 +67,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -73,296 +81,40 @@ public class gameTableController extends Message implements Initializable  {
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	
-	// messages arraylist to store individual message
-	ArrayList<Message> messages = new ArrayList<Message>();
 	
+    @FXML
+    private JFXHamburger inGamehamburger;
 
     @FXML
-    private ScrollPane drawCard_scrollpane;
+    private JFXDrawer inGamedrawer;
 
-    @FXML
-    private ScrollPane chatScrollPane;
 
-    @FXML
-    private FlowPane flowPaneInScroll;
-
-    @FXML
-    private TextField inGameChatTextField;
-
-    @FXML
-    private Button inGameChatSendBtn;
-
-    @FXML
-    private AnchorPane anchorConsole;
     
     //javaFX's main for current scene
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				receiveMessage();	
+		try {
+			AnchorPane apane = FXMLLoader.load(getClass().getResource("inGameSlideMenu.fxml"));
+			inGamedrawer.setSidePane(apane);
 
-				//config draw new card scroll pane
-//				drawCard_scrollpane.setVbarPolicy(ScrollBarPolicy.NEVER);
-//				drawCard_scrollpane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-				drawCard_scrollpane.setPannable(true);
-				drawCard_scrollpane.setFitToHeight(true);
-			}	
-		});
+			//hamburger menu animation
+			HamburgerNextArrowBasicTransition burgerTask2 = new HamburgerNextArrowBasicTransition(inGamehamburger);
+			burgerTask2.setRate(-1);
+			inGamehamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+				burgerTask2.setRate(burgerTask2.getRate() * -1);
+				burgerTask2.play();
+				System.out.println("inGamedrawer.open();");
+				if(inGamedrawer.isShown()) {
+					inGamedrawer.close();
+					System.out.println("inGamedrawer.close();");
+				} else {
+					inGamedrawer.open();
+					System.out.println("inGamedrawer.open();");
+				}
+			});			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
-    
-    // chat send button can be click or press enter
-    @FXML
-    void onEnter(ActionEvent event) {
-    	sendMessage();
-    }
-    @FXML
-    void inGameChatSend_ACTION(MouseEvent event) {	
-    	sendMessage();
-    }
-
-
-	//animation to scroll chat history to the bottom
-	static void slowScrollToBottom(ScrollPane scrollPane) {
-	    Animation animation = new Timeline(
-	        new KeyFrame(Duration.seconds(2),
-	            new KeyValue(scrollPane.vvalueProperty(), 1)));
-	    animation.play();
-	}
-	
-  //send message to database
-  public void sendMessage(){
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				if (inGameChatTextField.getText().equals("")){
-					//do nothing if textfield is empty
-				} else{
-			    	// upload new message to database
-					chatChannel(currentUser.getCurrentChannel(), inGameChatTextField.getText());
-			    	inGameChatTextField.setText("");
-				}	
-			}	
-		});
-  }
-	
-  //generate a chat channel
-  public static void chatChannel(String channelName, String textMessage) {
-		User currentUser = User.getInstance();
-	  	String name = currentUser.getName(); //get current username
-		name = name.toLowerCase(); //convert name to lowercase
-
-		//create date
-		DateFormat textTimeStamp = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-		Date dateobj = new Date();
-
-		//create map to put data into a package
-		TreeMap<String,String> messageMap = new TreeMap<String,String>();  
-		messageMap.put("name", name);
-		messageMap.put("message", textMessage);
-		messageMap.put("timeStamp", textTimeStamp.format(dateobj));
-
-		// generate a random message id
-		String messageID = UUID.randomUUID().toString();
-
-    	//create database reference for the user
-		final DatabaseReference messageRef = rootRef.child("Chat").child(channelName).child(messageID);
-		
-		messageRef.setValue(messageMap, new DatabaseReference.CompletionListener() {
-		    @Override
-		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-		        if (databaseError != null) {
-		            System.out.println("Message could not be send. " + databaseError.getMessage());
-		        } else {
-		            System.out.println("Message Sent Successfully.");
-		        }
-		    }
-		});
-	}//end chatChannel()
-  
-//  public void receiveMessage(){
-//	  messages.clear(); //reset messages arraylist to empty
-//	  
-//	  //database reference to specific "chat > channel name" node
-//	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-//	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-//	  
-//	  // Attach a listener to read the data at our posts reference
-//	  
-////	  receiveMessageRef.addListenerForSingleValueEvent(new ValueEventListener() { //only listen once
-//	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
-//
-//		    @Override
-//		    public void onDataChange(DataSnapshot dataSnapshot) {
-////		    	System.out.println(dataSnapshot);
-//
-//		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
-////		    		System.out.println(messageSnapshot);
-//
-//		    		// parse json data into local vars
-//			    	String name = (String) messageSnapshot.child("name").getValue();
-//			    	String textMessage = (String) messageSnapshot.child("message").getValue();
-//			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
-//			    	
-//			    	//convert string back to Date
-//			    	try{
-//			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-//			    	    Date parsedDate = dateFormat.parse(timeStamp);
-//			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-//				    	
-//				    	//create text object
-//			    		Message message = new Message();
-//			    		//feed setter data
-//			    		message.setDateTime(timestamp);
-//			    		message.setName(name);
-//			    		message.setMessage(textMessage);
-//			    		
-//			    		messages.add(message); // add individual message into messages arraylist
-//
-//			    	}catch(Exception e){//this generic but you can control another types of exception
-//			    		//look the origin of excption 
-//			    		e.printStackTrace();
-//			    	}
-//		    	}//end for
-//		    	
-//		    	//System.out.println(messages.size()); //display total message
-//		    	Collections.sort(messages); //sort by timeStamp
-//		    	
-//				Platform.runLater(new Runnable() {
-//					@Override
-//					public void run() {
-//						for (int i = 0; i < messages.size(); i++) {
-//							//System.out.println(messages.get(i));
-//							//display messages onto screen
-//							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
-//						}						
-//					}	
-//				});
-////	    		ref.removeEventListener(this);  //remove network listener
-//		    }
-//		    @Override
-//		    public void onCancelled(DatabaseError databaseError) {}
-//		});
-//  }// end receive message
-  
-  //receive message is officially working
-  public void receiveMessage(){
-	
-	  //database reference to specific "chat > channel name" node
-	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-	  
-	  // Attach a listener to read the data at our posts reference
-	  
-//	  receiveMessageRef.addListenerForSingleValueEvent(new ValueEventListener() { //only listen once
-	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
-
-		    @Override
-		    public void onDataChange(DataSnapshot dataSnapshot) {
-//		    	System.out.println(dataSnapshot);
-				messages.clear(); //reset messages arraylist to empty
-
-		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
-//		    		System.out.println(messageSnapshot);
-
-		    		// parse json data into local vars
-			    	String name = (String) messageSnapshot.child("name").getValue();
-			    	String textMessage = (String) messageSnapshot.child("message").getValue();
-			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
-			    	
-			    	//convert string back to Date
-			    	try{
-			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-			    	    Date parsedDate = dateFormat.parse(timeStamp);
-			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-				    	
-				    	//create text object
-			    		Message message = new Message();
-			    		//feed setter data
-			    		message.setDateTime(timestamp);
-			    		message.setName(name);
-			    		message.setMessage(textMessage);
-			    		
-			    		messages.add(message); // add individual message into messages arraylist
-
-			    	}catch(Exception e){//this generic but you can control another types of exception
-			    		//look the origin of excption 
-			    		e.printStackTrace();
-			    	}
-		    	}//end for
-		    	
-		    	//System.out.println(messages.size()); //display total message
-		    	Collections.sort(messages); //sort by timeStamp
-		    	
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						for (int i = 0; i < messages.size(); i++) {
-							//System.out.println(messages.get(i));
-							//display messages onto screen
-							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
-						}						
-					}	
-				});
-		    }
-		    @Override
-		    public void onCancelled(DatabaseError databaseError) {}
-		});
-  }// end receive message
-  
-  
-  //show message onto chat box
-  public void displayMessage(String name, String text){
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				if (text.equals("")){
-					//do nothing if textfield is empty
-				} else{
-					String message = name + ": " + text;
-			    	Label textLabel = new Label(message);
-			    	textLabel.setMinWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setMaxWidth(flowPaneInScroll.getWidth());
-			    	textLabel.setWrapText(true);	//multi line text
-			    	flowPaneInScroll.getChildren().addAll(textLabel); //addAll allow to add multiple Nodes
-			    	inGameChatTextField.setText("");
-			    	slowScrollToBottom(chatScrollPane);
-	
-				}	
-			}	
-		});
-  }
-  
-  //-----------------------------------------------------------
-  @FXML
-  private FlowPane drawCard_flowPane;
-  @FXML
-  void drawCard_action(MouseEvent event) {
-	  //using the card's name as parameter
-	  displayDrawCard("airlines.jpg");
-  }
-  
-  //show new draw card onto screen
-  public void displayDrawCard(String cardName){
-
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("inside here run cards draw");
-				ImageView freecardImage = new ImageView();
-    			//set free card image here
-    	    	String path = new File("support/images/cards/"+cardName).getAbsolutePath();
-    	    	System.out.println(path);
-    			Image image = new Image(new File(path).toURI().toString());
-    			freecardImage.setImage(image);	//reassign image view with new image
-    			freecardImage.setFitHeight(100);
-    			freecardImage.setPreserveRatio(true);
-
-    			drawCard_flowPane.getChildren().addAll(freecardImage); //addAll allow to add multiple Nodes
-    			slowScrollToBottom(drawCard_scrollpane);
-			}	
-		});
-  }
 	
 }

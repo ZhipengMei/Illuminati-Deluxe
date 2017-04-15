@@ -140,6 +140,8 @@ public class playerScreenController implements Initializable {
 				
 				if(drawer.isShown()) {
 					drawer.close();
+					System.out.println("inGamedrawer.close();");
+
 				} else {
 					drawer.open();
 				}
@@ -201,7 +203,7 @@ public class playerScreenController implements Initializable {
 		contentForChannelAction("Channel1");
     }
 
-	
+	//794,563
 	
 	
 	// all channel button action share same content
