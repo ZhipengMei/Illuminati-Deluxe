@@ -149,14 +149,16 @@
 }
 
 #uncontrolledCardsPane {
--fx-background-color: #FFEBCD;
+-fx-background-color: #87CEFA;
 }
 
 #specialCardPane {
--fx-background-color: #333333;
+-fx-background-color: #87CEFA;
 }
-#inGameSlideAnchorRoot{
--fx-background-color: #A9A9A9;
+
+#inGameSlideAnchorRoot {
+-fx-background-color: #87CEFA;
+
 }
 
 

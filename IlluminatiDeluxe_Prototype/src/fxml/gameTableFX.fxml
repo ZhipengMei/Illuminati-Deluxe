@@ -2,11 +2,23 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
    <children>
       <JFXHamburger fx:id="inGamehamburger" layoutX="739.0" layoutY="9.0" prefHeight="50.0" prefWidth="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <JFXDrawer fx:id="inGamedrawer" defaultDrawerSize="600.0" direction="RIGHT" layoutX="458.0" layoutY="36.0" prefHeight="528.0" prefWidth="561.0" AnchorPane.rightAnchor="0.0" />
+      <JFXDrawer fx:id="inGamedrawer" defaultDrawerSize="600.0" direction="RIGHT" layoutX="458.0" prefHeight="564.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane fx:id="stackPane" layoutY="488.0" onMouseEntered="#mouseEnterMenuShow" prefHeight="50.0" prefWidth="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <ImageView>
+               <image>
+                  <Image url="@../../appicon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

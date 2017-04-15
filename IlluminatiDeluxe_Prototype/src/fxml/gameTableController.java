@@ -49,6 +49,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -59,6 +60,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
@@ -67,11 +70,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import jfxtras.scene.menu.CornerMenu;
 
 public class gameTableController extends Message implements Initializable  {
 
@@ -81,7 +86,10 @@ public class gameTableController extends Message implements Initializable  {
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	
-	
+
+    @FXML
+    private StackPane stackPane;
+    
     @FXML
     private JFXHamburger inGamehamburger;
 
@@ -113,6 +121,56 @@ public class gameTableController extends Message implements Initializable  {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		
+      
 	}
+	
+  
+	Boolean attackBool = true;
+    @FXML
+    void mouseEnterMenuShow(MouseEvent event) {
+    	actionMenu();
+    }
+   
+    
+    public void actionMenu(){
+    	MenuItem control = new MenuItem("Attack to Control",
+                new ImageView(new Image("file:support/images/ingame/control.png")));
+        MenuItem neutralize = new MenuItem("Attack to Neutralize",
+                new ImageView(new Image("file:support/images/ingame/neutralize.png")));
+        MenuItem destroy = new MenuItem("Attack to Destroy",
+                new ImageView(new Image("file:support/images/ingame/destroy.png")));
+        MenuItem defense = new MenuItem("Defense an attack",
+                new ImageView(new Image("file:support/images/ingame/defense.png")));
+        MenuItem windowsMenuItem = new MenuItem("windowsMenuItem",
+                new ImageView(new Image("file:support/images/ingame/control.png")));
+        
+        control.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent t) {
+               	 if(attackBool == true){
+                   	 System.out.println("control");
+               	 }
+                }
+            });
+
+        neutralize.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+           	 
+              	 System.out.println("googleMenuItem");
+              	 attackBool = false;
+
+            }
+        });
+
+ 		// corner menu
+ 		// position a corner menu in the top left corner, that initially is not visible
+ 		CornerMenu cornerMenu = new CornerMenu(CornerMenu.Location.BOTTOM_LEFT, stackPane, true)
+ 		    .withAnimationInterpolation(null)
+ 		    .withAutoShowAndHide(true);
+ 		 
+ 		// add the menu items
+ 		cornerMenu.getItems().addAll(control, neutralize, destroy, defense, windowsMenuItem);
+    }
 	
 }

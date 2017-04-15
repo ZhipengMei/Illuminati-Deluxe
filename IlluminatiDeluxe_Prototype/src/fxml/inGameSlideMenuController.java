@@ -42,8 +42,13 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 	import javafx.util.Duration;
 	
-	public class inGameSlideMenuController implements Initializable {
+	import javafx.scene.control.Menu;
+	import javafx.scene.control.MenuItem;
 	
+	import Extension.Chat;
+
+	public class inGameSlideMenuController implements Initializable {
+		
 	    @FXML
 	    private StackPane freeStackRoot;
 	    
@@ -55,6 +60,9 @@ import javafx.stage.Stage;
 	    
 	    @FXML
 	    private AnchorPane specialCardPane;
+	    
+	    @FXML
+	    private AnchorPane chatPane;
 		
 	    @FXML
 	    private ScrollPane chatScrollPane;
@@ -73,6 +81,7 @@ import javafx.stage.Stage;
 	    
 	    @FXML
 	    private Label specialCardLabel;
+	    
 
 	
 	    @FXML
@@ -89,14 +98,26 @@ import javafx.stage.Stage;
 	    
 	    // --- Carosel Begins --- 
 	    // Width and height of image in pixels
-	    private final double IMG_WIDTH = 470;
+	    private final double IMG_WIDTH = 200;
 	    private final double IMG_HEIGHT = 150;
 
-	    private final int NUM_OF_IMGS = 3;
-	    private final int SLIDE_FREQ = 4; // in secs
+	    private final int NUM_OF_IMGS = 5;
+	    private final int SLIDE_FREQ = 3; // in secs
 	    
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+//			System.out.println("flowPaneInScroll.getWidth() " + flowPaneInScroll.getPrefWidth());
+
+	        
+	        //chat box
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+				    Chat chat = new Chat(chatScrollPane, flowPaneInScroll, inGameChatTextField, inGameChatSendBtn);
+					chat.receiveMessage();	
+				}	
+			});
+			
 			uncontrolledGroupLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
 			specialCardLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
 
@@ -117,7 +138,7 @@ import javafx.stage.Stage;
 			});
 			
 			
-		}
+		}// end intialize
 		
 		
         HBox imgContainer = new HBox();
@@ -130,12 +151,16 @@ import javafx.stage.Stage;
 //	        HBox imgContainer = new HBox();
 	        //image view	        
 	    	String path = new File("support/images/cards/"+"airlines.jpg").getAbsolutePath();
+	    	String path3 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
 	    	String path1 = new File("support/images/cards/"+"apathy.jpg").getAbsolutePath();
 	    	String path2 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
+	    	String path4 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
 
 			ImageView imgGreen = new ImageView();
 			ImageView imgBlue = new ImageView();
 			ImageView imgRose = new ImageView();
+			ImageView imgGold = new ImageView();
+			ImageView imgGold2 = new ImageView();
 
 			
   			Image image = new Image(new File(path).toURI().toString());
@@ -152,9 +177,19 @@ import javafx.stage.Stage;
   			imgRose.setImage(image2);	//reassign image view with new image
   			imgRose.setFitHeight(130);
   			imgRose.setPreserveRatio(true);
+  			
+  			Image image3 = new Image(new File(path3).toURI().toString());
+  			imgGold.setImage(image3);	//reassign image view with new image
+  			imgGold.setFitHeight(130);
+  			imgGold.setPreserveRatio(true);
+  			
+  			Image image4 = new Image(new File(path4).toURI().toString());
+  			imgGold2.setImage(image4);	//reassign image view with new image
+  			imgGold2.setFitHeight(130);
+  			imgGold2.setPreserveRatio(true);
 
 	        
-	        imgContainer.getChildren().addAll(imgGreen, imgBlue, imgRose);
+	        imgContainer.getChildren().addAll(imgGreen, imgGold, imgBlue, imgGold2, imgRose);
 	        clipPane.getChildren().add(imgContainer);
 	        freeStackRoot.getChildren().add(clipPane);
 
@@ -249,12 +284,22 @@ import javafx.stage.Stage;
 	    	uncontrolledGroupLeftArrow(imgContainer);
 	    }
 
+	    double uncontrolledGroupSlideCount = 0;
 	    public void uncontrolledGroupRightArrow(final HBox hbox){
-	    	hbox.setTranslateX(-140);
+	    	if ((hbox.getChildren().size()-1) * -140 <=  uncontrolledGroupSlideCount){
+	    		uncontrolledGroupSlideCount -= 190;
+		    	hbox.setTranslateX(uncontrolledGroupSlideCount);
+	    	}
+	    	
 	    }
 	    public void uncontrolledGroupLeftArrow(final HBox hbox){
-	    	hbox.setTranslateX(+140);
+	    	if (uncontrolledGroupSlideCount != 0) {
+	    		uncontrolledGroupSlideCount += 190;
+		    	hbox.setTranslateX(uncontrolledGroupSlideCount);
+	    	}	    	
 	    }
+	    
+	    
 	        
 	
 	}
