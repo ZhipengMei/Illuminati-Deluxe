@@ -147,6 +147,20 @@
 -fx-background-color: #555555;
 
 }
+
+#uncontrolledCardsPane {
+-fx-background-color: #FFEBCD;
+}
+
+#specialCardPane {
+-fx-background-color: #333333;
+}
+#inGameSlideAnchorRoot{
+-fx-background-color: #A9A9A9;
+}
+
+
+
  /******* GAME TABLE SCREEN END *******/
 
 

@@ -11,16 +11,20 @@
 
 <AnchorPane fx:id="inGameSlideAnchorRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.inGameSlideMenuController">
    <children>
-      <Label layoutX="202.0" layoutY="14.0" text="Uncontroller Group Cards" AnchorPane.topAnchor="14.0" />
-      <AnchorPane layoutX="-8.0" layoutY="33.0" prefHeight="139.0" prefWidth="566.0">
+      <Label fx:id="uncontrolledGroupLabel" layoutX="203.0" layoutY="14.0" text="Uncontroller Group Cards" />
+      <AnchorPane fx:id="uncontrolledCardsPane" layoutX="2.0" layoutY="31.0" prefHeight="139.0" prefWidth="561.0">
          <children>
-            <StackPane fx:id="freeStackRoot" layoutX="5.0" layoutY="-8.0" prefHeight="108.0" prefWidth="561.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.topAnchor="-8.0" />
+            <StackPane fx:id="freeStackRoot" layoutX="48.0" layoutY="-7.0" prefHeight="152.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="&lt;-" AnchorPane.leftAnchor="5.0" />
+            <Button layoutX="507.0" layoutY="55.0" mnemonicParsing="false" text="-&gt;" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="239.0" layoutY="185.0" text="Special Cards" />
+      <Label fx:id="specialCardLabel" layoutX="239.0" layoutY="185.0" text="Special Cards" />
       <AnchorPane layoutY="202.0" prefHeight="126.0" prefWidth="561.0">
          <children>
-            <StackPane fx:id="specialCardStack" layoutY="14.0" prefHeight="173.0" prefWidth="561.0" />
+            <StackPane fx:id="specialCardStack" layoutX="46.0" prefHeight="173.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button layoutX="16.0" layoutY="46.0" mnemonicParsing="false" text="&lt;-" AnchorPane.leftAnchor="5.0" />
+            <Button layoutX="508.0" layoutY="51.0" mnemonicParsing="false" text="-&gt;" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="138.0" prefWidth="561.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">

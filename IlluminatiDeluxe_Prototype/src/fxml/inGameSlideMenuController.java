@@ -37,7 +37,9 @@ import javafx.scene.image.ImageView;
 	import javafx.scene.layout.Pane;
 	import javafx.scene.layout.StackPane;
 	import javafx.scene.shape.Rectangle;
-	import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 	import javafx.util.Duration;
 	
 	public class inGameSlideMenuController implements Initializable {
@@ -48,7 +50,11 @@ import javafx.scene.image.ImageView;
 	    @FXML
 	    private StackPane specialCardStack;
 	
-
+	    @FXML
+	    private AnchorPane uncontrolledCardsPane;
+	    
+	    @FXML
+	    private AnchorPane specialCardPane;
 		
 	    @FXML
 	    private ScrollPane chatScrollPane;
@@ -61,6 +67,9 @@ import javafx.scene.image.ImageView;
 	
 	    @FXML
 	    private Button inGameChatSendBtn;
+	    
+	    @FXML
+	    private Label uncontrolledGroupLabel;
 	    
 	    @FXML
 	    private Label specialCardLabel;
@@ -80,7 +89,7 @@ import javafx.scene.image.ImageView;
 	    
 	    // --- Carosel Begins --- 
 	    // Width and height of image in pixels
-	    private final double IMG_WIDTH = 560;
+	    private final double IMG_WIDTH = 470;
 	    private final double IMG_HEIGHT = 150;
 
 	    private final int NUM_OF_IMGS = 3;
@@ -88,7 +97,9 @@ import javafx.scene.image.ImageView;
 	    
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			
+			uncontrolledGroupLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
+			specialCardLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
+
 			
 			Platform.runLater(new Runnable() {
 				@Override
@@ -127,17 +138,17 @@ import javafx.scene.image.ImageView;
 			
   			Image image = new Image(new File(path).toURI().toString());
   			imgGreen.setImage(image);	//reassign image view with new image
-  			imgGreen.setFitHeight(100);
+  			imgGreen.setFitHeight(130);
   			imgGreen.setPreserveRatio(true);
   			
   			Image image1 = new Image(new File(path1).toURI().toString());
   			imgBlue.setImage(image1);	//reassign image view with new image
-  			imgBlue.setFitHeight(100);
+  			imgBlue.setFitHeight(130);
   			imgBlue.setPreserveRatio(true);
   			
   			Image image2 = new Image(new File(path2).toURI().toString());
   			imgRose.setImage(image2);	//reassign image view with new image
-  			imgRose.setFitHeight(100);
+  			imgRose.setFitHeight(130);
   			imgRose.setPreserveRatio(true);
 
 	        
@@ -167,17 +178,17 @@ import javafx.scene.image.ImageView;
 			
   			Image image = new Image(new File(path).toURI().toString());
   			imgGreen.setImage(image);	//reassign image view with new image
-  			imgGreen.setFitHeight(100);
+  			imgGreen.setFitHeight(130);
   			imgGreen.setPreserveRatio(true);
   			
   			Image image1 = new Image(new File(path1).toURI().toString());
   			imgBlue.setImage(image1);	//reassign image view with new image
-  			imgBlue.setFitHeight(100);
+  			imgBlue.setFitHeight(130);
   			imgBlue.setPreserveRatio(true);
   			
   			Image image2 = new Image(new File(path2).toURI().toString());
   			imgRose.setImage(image2);	//reassign image view with new image
-  			imgRose.setFitHeight(100);
+  			imgRose.setFitHeight(130);
   			imgRose.setPreserveRatio(true);
 
 	        
@@ -193,15 +204,18 @@ import javafx.scene.image.ImageView;
 	        //error occured on (ActionEvent t) line
 	        //slide action
 	        EventHandler<ActionEvent> slideAction = (ActionEvent t) -> {
-	            TranslateTransition trans = new TranslateTransition(Duration.seconds(1.5), hbox);
-	            trans.setByX(-IMG_WIDTH);
+//	            TranslateTransition trans = new TranslateTransition(Duration.seconds(1.5), hbox);
+	            TranslateTransition trans = new TranslateTransition(Duration.seconds(0.5), hbox);
+//	            trans.setByX(-IMG_WIDTH);
+	            trans.setByX(-140);
 	            trans.setInterpolator(Interpolator.EASE_BOTH);
 	            trans.play();
 	        };
 	        //eventHandler
 	        EventHandler<ActionEvent> resetAction = (ActionEvent t) -> {
 	            TranslateTransition trans = new TranslateTransition(Duration.seconds(1), hbox);
-	            trans.setByX((NUM_OF_IMGS - 1) * IMG_WIDTH);
+//	            trans.setByX((NUM_OF_IMGS - 1) * IMG_WIDTH);
+	            trans.setByX((NUM_OF_IMGS - 1) * 140);
 	            trans.setInterpolator(Interpolator.EASE_BOTH);
 	            trans.play();
 	        };
