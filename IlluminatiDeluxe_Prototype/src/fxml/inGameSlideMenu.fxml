@@ -15,8 +15,8 @@
       <AnchorPane fx:id="uncontrolledCardsPane" layoutX="2.0" layoutY="31.0" prefHeight="139.0" prefWidth="561.0">
          <children>
             <StackPane fx:id="freeStackRoot" layoutX="48.0" layoutY="-7.0" prefHeight="152.0" prefWidth="470.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="&lt;-" AnchorPane.leftAnchor="5.0" />
-            <Button layoutX="507.0" layoutY="55.0" mnemonicParsing="false" text="-&gt;" AnchorPane.rightAnchor="5.0" />
+            <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupLeftArrow" text="&lt;-" AnchorPane.leftAnchor="5.0" />
+            <Button layoutX="507.0" layoutY="55.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupRightArrow" text="-&gt;" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
       <Label fx:id="specialCardLabel" layoutX="239.0" layoutY="185.0" text="Special Cards" />

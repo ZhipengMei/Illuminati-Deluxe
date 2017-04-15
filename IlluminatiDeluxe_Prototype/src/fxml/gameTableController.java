@@ -106,10 +106,8 @@ public class gameTableController extends Message implements Initializable  {
 				System.out.println("inGamedrawer.open();");
 				if(inGamedrawer.isShown()) {
 					inGamedrawer.close();
-					System.out.println("inGamedrawer.close();");
 				} else {
 					inGamedrawer.open();
-					System.out.println("inGamedrawer.open();");
 				}
 			});			
 		} catch (IOException e1) {

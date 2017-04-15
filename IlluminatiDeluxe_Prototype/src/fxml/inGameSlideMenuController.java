@@ -119,13 +119,15 @@ import javafx.stage.Stage;
 			
 		}
 		
+		
+        HBox imgContainer = new HBox();
 		public void loadUncontrolledGroup() {
 			Pane clipPane = new Pane();
 	        // To center the slide show incase maximized
 	        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
 	        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
 
-	        HBox imgContainer = new HBox();
+//	        HBox imgContainer = new HBox();
 	        //image view	        
 	    	String path = new File("support/images/cards/"+"airlines.jpg").getAbsolutePath();
 	    	String path1 = new File("support/images/cards/"+"apathy.jpg").getAbsolutePath();
@@ -156,7 +158,7 @@ import javafx.stage.Stage;
 	        clipPane.getChildren().add(imgContainer);
 	        freeStackRoot.getChildren().add(clipPane);
 
-	        startAnimation(imgContainer);
+//	        startAnimation(imgContainer);
 		}
 		
 		public void loadSpecialCard() {
@@ -165,7 +167,7 @@ import javafx.stage.Stage;
 	        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
 	        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
 
-	        HBox imgContainer = new HBox();
+	        HBox imgContainer2 = new HBox();
 	        //image view	        
 	    	String path = new File("support/images/cards/"+"barcodes.jpg").getAbsolutePath();
 	    	String path1 = new File("support/images/cards/"+"bigmedia.jpg").getAbsolutePath();
@@ -192,11 +194,11 @@ import javafx.stage.Stage;
   			imgRose.setPreserveRatio(true);
 
 	        
-	        imgContainer.getChildren().addAll(imgGreen, imgBlue, imgRose);
-	        clipPane.getChildren().add(imgContainer);
+	        imgContainer2.getChildren().addAll(imgGreen, imgBlue, imgRose);
+	        clipPane.getChildren().add(imgContainer2);
 	        specialCardStack.getChildren().add(clipPane);
 
-	        startAnimation(imgContainer);
+	        startAnimation(imgContainer2);
 		}
 		
 		//start animation
@@ -234,7 +236,25 @@ import javafx.stage.Stage;
 	        anim.setCycleCount(Timeline.INDEFINITE);
 	        anim.playFromStart();
 		}
+	    
+	    
+	    // moving the card in untrolled group
+	    @FXML
+	    void uncontrolledGroupRightArrow(MouseEvent event) {	    	
+	    	uncontrolledGroupRightArrow(imgContainer);
+	    }
+	    
+	    @FXML
+	    void uncontrolledGroupLeftArrow(MouseEvent event) {
+	    	uncontrolledGroupLeftArrow(imgContainer);
+	    }
 
+	    public void uncontrolledGroupRightArrow(final HBox hbox){
+	    	hbox.setTranslateX(-140);
+	    }
+	    public void uncontrolledGroupLeftArrow(final HBox hbox){
+	    	hbox.setTranslateX(+140);
+	    }
 	        
 	
 	}
