@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import org.json.JSONObject;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -91,6 +93,10 @@ public class gameTableController extends Message implements Initializable  {
 //	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
 //	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
 	
+	//array of object to store player info on this channel
+	ArrayList<Object> players = new ArrayList<Object>();
+
+	
 	//---in game profile ----
 	 @FXML
 	 private ImageView player1Image;
@@ -140,8 +146,8 @@ public class gameTableController extends Message implements Initializable  {
 		loadConsoleMenu();
 		loadDicePane();	
 
-
-		
+		//display players profile
+		getPlayersData();
 		
 		//rotate imageview
         RotateTransition animation = Animattion.createAnimation(diceImageview);
@@ -166,12 +172,8 @@ public class gameTableController extends Message implements Initializable  {
 			});			
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
-		
-		
-		//display players profile
-		getPlayersDate();
-	}
+		}		
+	}//loadDicePane
 	
 	//console menu
 	public void loadConsoleMenu(){
@@ -246,7 +248,7 @@ public class gameTableController extends Message implements Initializable  {
  		cornerMenu.getItems().addAll(control, neutralize, destroy, defense, windowsMenuItem);
     }
     
-    public void getPlayersDate(){
+    public void getPlayersData(){
 		//set current user's profile image here
     	String path = new File("support/images/"+currentUser.getimageName()).getAbsolutePath();
 		Image image = new Image(new File(path).toURI().toString());
@@ -264,7 +266,76 @@ public class gameTableController extends Message implements Initializable  {
 //		    @Override
 //		    public void onCancelled(DatabaseError databaseError) {}
 //		});
+		
+		//database reference to specific "chat > channel name" node
+		  final DatabaseReference playerRef = rootRef.child(currentUser.getCurrentChannel());
+		  
+		  // Attach a listener to read the data at our posts reference
+		  playerRef.addValueEventListener(new ValueEventListener() {
+	
+			    @Override
+			    public void onDataChange(DataSnapshot dataSnapshot) {
+	
+			    	for (DataSnapshot playerSnapshot:dataSnapshot.getChildren()){	
+			    		if(playerSnapshot.child("id").getValue().equals(currentUser.getUID())){
+			    			//do nothing
+			    		} else {
+//			    			players.add(playerSnapshot);
+		
+							Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+					    			if(player2Name.getText().equals(" ")){
+					    				player2Name.setText((String)playerSnapshot.getKey());
+					    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
+					    				Image image = new Image(new File(path).toURI().toString());
+					    				player2Image.setImage(image);	
+					    			}//end if
+								}	
+							});
+			    		
+			    			Platform.runLater(new Runnable() {
+								@Override
+								public void run() {
+					    			if(player2Name.getText().equals(" ") == false && player2Name.getText().equals((String)playerSnapshot.getKey()) == false){
+					    				player1Name.setText((String)playerSnapshot.getKey());
+					    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
+					    				Image image = new Image(new File(path).toURI().toString());
+					    				player1Image.setImage(image);						    			
+					    			}				    				
+								}	
+							});
+
+			    		}//end else
+			    		
+			    	}//end for
+//			    	System.out.println(players.size() + " siez is");
+//			    	System.out.println(players.get(0));
+//			    	
+//			    	JSONObject json = new JSONObject(players.get(0));
+//					String loudScreaming = json.getString("DataSnapshot");
+//					System.out.println(players.get(0).getClass().getName()
+//);
+			    	
+
+//			    	player2Name.setText(key);
+
+
+			    	
+//			    	for(int i=0; i< players.size();i++){
+//			    		player2Name.setText((String)players.get(0).getKey());
+//	    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
+//	    				Image image = new Image(new File(path).toURI().toString());
+//	    				player2Image.setImage(image);	
+//			    	}
+			    	
+			    }
+			    @Override
+			    public void onCancelled(DatabaseError databaseError) {}
+			});
     }
+    
+
     
 
 	

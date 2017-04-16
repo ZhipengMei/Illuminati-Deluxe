@@ -80,7 +80,7 @@
                               <Image url="@../../../../../../Downloads/CECS-343-mw-GroupD-master/IlluminatiDeluxe_Prototype/support/images/profileimage.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="player1Name" text="  Player 1" />
+                        <Label fx:id="player1Name" prefHeight="17.0" prefWidth="63.0" />
                      </children>
                   </VBox>
                   <StackPane fx:id="stackPane2" onMouseEntered="#mouseEnterMenuShow" prefHeight="52.0" prefWidth="50.0">
@@ -99,7 +99,7 @@
                               <Image url="@../../../../../../Downloads/CECS-343-mw-GroupD-master/IlluminatiDeluxe_Prototype/support/images/profileimage.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="player2Name" text="  Player 2" />
+                        <Label fx:id="player2Name" prefHeight="17.0" prefWidth="62.0" text=" " />
                      </children>
                   </VBox>
                   <StackPane fx:id="stackPane1" onMouseEntered="#mouseEnterMenuShow" prefHeight="31.0" prefWidth="50.0">
