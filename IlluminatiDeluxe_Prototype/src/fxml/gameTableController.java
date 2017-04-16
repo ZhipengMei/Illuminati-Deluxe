@@ -64,6 +64,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -90,11 +91,6 @@ public class gameTableController extends Message implements Initializable  {
 	
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-//	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
-//	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
-	
-	//array of object to store player info on this channel
-	ArrayList<Object> players = new ArrayList<Object>();
 
 	
 	//---in game profile ----
@@ -118,7 +114,6 @@ public class gameTableController extends Message implements Initializable  {
 	
 	//------
 	
-	
     @FXML
     private AnchorPane gameTableMainMenu;
     
@@ -139,6 +134,14 @@ public class gameTableController extends Message implements Initializable  {
 
 	Boolean attackBool = true;
 	Boolean diceRolled = false;
+	
+	// create an array list
+    ArrayList players = new ArrayList();
+    ArrayList images = new ArrayList();
+    ArrayList names = new ArrayList();
+
+
+
     
     //javaFX's main for current scene
 	@Override
@@ -148,11 +151,15 @@ public class gameTableController extends Message implements Initializable  {
 
 		//display players profile
 		getPlayersData();
+		//store player imageview into arraylist
+		images.add(player1Image);
+		images.add(player2Image);
+		names.add(player1Name);
+		names.add(player2Name);
 		
 		//rotate imageview
         RotateTransition animation = Animattion.createAnimation(diceImageview);
 		
-      
 	}
 	
 	public void loadDicePane(){
@@ -248,25 +255,15 @@ public class gameTableController extends Message implements Initializable  {
  		cornerMenu.getItems().addAll(control, neutralize, destroy, defense, windowsMenuItem);
     }
     
+    //not dynamic to display players icon hard code to 3, possible to display multiple players dynamically but requires more time
     public void getPlayersData(){
-		//set current user's profile image here
+		//set current user's profile image here, player3 (self)
     	String path = new File("support/images/"+currentUser.getimageName()).getAbsolutePath();
 		Image image = new Image(new File(path).toURI().toString());
 		player3Image.setImage(image);	//reassign image view with new image
 		player3Name.setText(currentUser.getName());
 		
-//		//get other players profile
-//		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//		    @Override
-//		    public void onDataChange(DataSnapshot dataSnapshot) {
-//		        long numChildren = dataSnapshot.getChildrenCount();
-//		        System.out.println(count.get() + " == " + numChildren);
-//		    }
-//
-//		    @Override
-//		    public void onCancelled(DatabaseError databaseError) {}
-//		});
-		
+		//get player 1 and 2
 		//database reference to specific "chat > channel name" node
 		  final DatabaseReference playerRef = rootRef.child(currentUser.getCurrentChannel());
 		  
@@ -275,63 +272,43 @@ public class gameTableController extends Message implements Initializable  {
 	
 			    @Override
 			    public void onDataChange(DataSnapshot dataSnapshot) {
-	
+			    	players.clear();
 			    	for (DataSnapshot playerSnapshot:dataSnapshot.getChildren()){	
 			    		if(playerSnapshot.child("id").getValue().equals(currentUser.getUID())){
 			    			//do nothing
-			    		} else {
-//			    			players.add(playerSnapshot);
-		
-							Platform.runLater(new Runnable() {
-								@Override
-								public void run() {
-					    			if(player2Name.getText().equals(" ")){
-					    				player2Name.setText((String)playerSnapshot.getKey());
-					    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
-					    				Image image = new Image(new File(path).toURI().toString());
-					    				player2Image.setImage(image);	
-					    			}//end if
-								}	
-							});
-			    		
-			    			Platform.runLater(new Runnable() {
-								@Override
-								public void run() {
-					    			if(player2Name.getText().equals(" ") == false && player2Name.getText().equals((String)playerSnapshot.getKey()) == false){
-					    				player1Name.setText((String)playerSnapshot.getKey());
-					    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
-					    				Image image = new Image(new File(path).toURI().toString());
-					    				player1Image.setImage(image);						    			
-					    			}				    				
-								}	
-							});
-
+			    		} else {		
+			    			ArrayList player = new ArrayList();
+			    			player.add((String) playerSnapshot.getKey());
+			    			player.add((String) playerSnapshot.child("imageName").getValue());
+			    			players.add(player);
 			    		}//end else
 			    		
 			    	}//end for
-//			    	System.out.println(players.size() + " siez is");
-//			    	System.out.println(players.get(0));
-//			    	
-//			    	JSONObject json = new JSONObject(players.get(0));
-//					String loudScreaming = json.getString("DataSnapshot");
-//					System.out.println(players.get(0).getClass().getName()
-//);
 			    	
-
-//			    	player2Name.setText(key);
-
-
-			    	
-//			    	for(int i=0; i< players.size();i++){
-//			    		player2Name.setText((String)players.get(0).getKey());
-//	    				String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
-//	    				Image image = new Image(new File(path).toURI().toString());
-//	    				player2Image.setImage(image);	
-//			    	}
-			    	
+	    			Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+					    	for(int i=0; i<players.size(); i++){
+					    		ArrayList player = (ArrayList) players.get(i);			    		
+					    		
+			    				((Label) names.get(i)).setText((String)player.get(0));
+			    				String path = new File("support/images/"+(String) player.get(1)).getAbsolutePath();
+			    				Image image = new Image(new File(path).toURI().toString());
+			    				((ImageView) images.get(i)).setImage(image);
+					    	}//end for
+					    	//removeing legacy data when player size shrinks
+					    	if(players.size() == 1) {
+					    		System.out.println("sie is one 1");
+			    				((Label) names.get(1)).setText(" ");
+			    				((ImageView) images.get(1)).setImage(null);
+					    	}
+						}	
+					});
 			    }
 			    @Override
-			    public void onCancelled(DatabaseError databaseError) {}
+			    public void onCancelled(DatabaseError databaseError) {
+			    	players.clear();
+			    }
 			});
     }
     
@@ -340,3 +317,28 @@ public class gameTableController extends Message implements Initializable  {
 
 	
 }
+
+
+//Platform.runLater(new Runnable() {
+//@Override
+//public void run() {
+//	if(player2Name.getText().equals(" ")){
+//		player2Name.setText((String)playerSnapshot.getKey());
+//		String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
+//		Image image = new Image(new File(path).toURI().toString());
+//		player2Image.setImage(image);	
+//	}//end if
+//}	
+//});
+//
+//Platform.runLater(new Runnable() {
+//@Override
+//public void run() {
+//	if(player2Name.getText().equals(" ") == false && player2Name.getText().equals((String)playerSnapshot.getKey()) == false){
+//		player1Name.setText((String)playerSnapshot.getKey());
+//		String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
+//		Image image = new Image(new File(path).toURI().toString());
+//		player1Image.setImage(image);						    			
+//	}				    				
+//}	
+//});

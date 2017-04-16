@@ -75,40 +75,24 @@
                <children>
                   <VBox prefHeight="69.0" prefWidth="62.0">
                      <children>
-                        <ImageView fx:id="player1Image" fitHeight="52.0" fitWidth="62.0">
-                           <image>
-                              <Image url="@../../../../../../Downloads/CECS-343-mw-GroupD-master/IlluminatiDeluxe_Prototype/support/images/profileimage.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="player1Name" prefHeight="17.0" prefWidth="63.0" />
+                        <ImageView fx:id="player1Image" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="player1Name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="63.0" textAlignment="CENTER" />
                      </children>
                   </VBox>
                   <StackPane fx:id="stackPane2" onMouseEntered="#mouseEnterMenuShow" prefHeight="52.0" prefWidth="50.0">
                      <children>
-                        <ImageView fx:id="diceImageview2">
-                           <image>
-                              <Image url="@../../appicon.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="diceImageview2" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
                   <VBox prefHeight="52.0" prefWidth="62.0">
                      <children>
-                        <ImageView fx:id="player2Image" fitHeight="52.0" fitWidth="62.0">
-                           <image>
-                              <Image url="@../../../../../../Downloads/CECS-343-mw-GroupD-master/IlluminatiDeluxe_Prototype/support/images/profileimage.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="player2Name" prefHeight="17.0" prefWidth="62.0" text=" " />
+                        <ImageView fx:id="player2Image" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="player2Name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="62.0" text=" " textAlignment="CENTER" />
                      </children>
                   </VBox>
                   <StackPane fx:id="stackPane1" onMouseEntered="#mouseEnterMenuShow" prefHeight="31.0" prefWidth="50.0">
                      <children>
-                        <ImageView fx:id="diceImageview1">
-                           <image>
-                              <Image url="@../../appicon.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="diceImageview1" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
                   <VBox prefHeight="52.0" prefWidth="62.0">

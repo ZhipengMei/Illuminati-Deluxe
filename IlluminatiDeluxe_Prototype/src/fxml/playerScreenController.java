@@ -299,7 +299,6 @@ public class playerScreenController implements Initializable {
 					    		    		rootRef.child("Chat").child(channelName).removeValue();
 					    		    	}
 					    		    }
-
 					    		    @Override
 					    		    public void onCancelled(DatabaseError databaseError) {}
 					    		});
