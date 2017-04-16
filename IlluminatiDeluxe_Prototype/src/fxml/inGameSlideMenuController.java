@@ -7,7 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-	import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 	import javafx.scene.input.MouseEvent;
 	import javafx.scene.layout.AnchorPane;
 	import javafx.scene.layout.FlowPane;
@@ -86,12 +87,14 @@ import javafx.stage.Stage;
 	
 	    @FXML
 	    void inGameChatSend_ACTION(MouseEvent event) {
-	
+		    Chat chat = new Chat(chatScrollPane, flowPaneInScroll, inGameChatTextField, inGameChatSendBtn);
+		    chat.sendMessage();
 	    }
 	
 	    @FXML
 	    void onEnter(ActionEvent event) {
-	
+		    Chat chat = new Chat(chatScrollPane, flowPaneInScroll, inGameChatTextField, inGameChatSendBtn);
+		    chat.sendMessage();
 	    }
 	    
 	    
@@ -106,9 +109,9 @@ import javafx.stage.Stage;
 	    
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-//			System.out.println("flowPaneInScroll.getWidth() " + flowPaneInScroll.getPrefWidth());
+			// disable chatbox horizontal scroll bar 
+			chatScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 
-	        
 	        //chat box
 			Platform.runLater(new Runnable() {
 				@Override

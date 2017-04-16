@@ -117,7 +117,8 @@
 /******* GAME TABLE SCREEN BEGIN*******/
 
 #inGameChatTextField {
-    -fx-background-color: rgba(0,0,0,0.1);
+    /*-fx-background-color: rgba(0,0,0,0.1);*/
+    -fx-background-color: #fff;
     -fx-border-color: rgba(0,0,0,0.1);
     -fx-background-radius: 0;
     -fx-border-radius: 0;
@@ -133,32 +134,15 @@
     -fx-alignment: center-left;
 }
 
-#anchorConsole {
--fx-background-color: #333333;
 
+#inGamedrawer {
+    
 }
 
-#drawCard_scrollpane {
--fx-background-color: #333333;
 
-}
-
-#drawCard_flowPane {
--fx-background-color: #555555;
-
-}
-
-#uncontrolledCardsPane {
--fx-background-color: #87CEFA;
-}
-
-#specialCardPane {
--fx-background-color: #87CEFA;
-}
 
 #inGameSlideAnchorRoot {
--fx-background-color: #87CEFA;
-
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
 
