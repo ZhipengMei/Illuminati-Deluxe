@@ -29,11 +29,13 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 
+import Animation.Animattion;
 import Firebase.Message;
 import Firebase.User;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -78,6 +80,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import jfxtras.scene.menu.CornerMenu;
 
+
 public class gameTableController extends Message implements Initializable  {
 
 	 // User singleton contains data from login menu
@@ -85,8 +88,40 @@ public class gameTableController extends Message implements Initializable  {
 	
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//	final DatabaseReference ref = rootRef.child("profile").child(currentUser.getUID());
+//	final DatabaseReference imageRef = rootRef.child("profile").child(currentUser.getUID()).child("imageName");
 	
+	//---in game profile ----
+	 @FXML
+	 private ImageView player1Image;
 
+    @FXML
+    private Label player1Name;
+    
+    @FXML
+    private ImageView player2Image;
+
+    @FXML
+    private Label player2Name;
+    
+    @FXML
+    private ImageView player3Image;
+
+    @FXML
+    private Label player3Name;
+	
+	//------
+	
+	
+    @FXML
+    private AnchorPane gameTableMainMenu;
+    
+    @FXML
+    private JFXDrawer diceDrawer;
+    
+    @FXML
+    private ImageView diceImageview;
+    
     @FXML
     private StackPane stackPane;
     
@@ -96,11 +131,50 @@ public class gameTableController extends Message implements Initializable  {
     @FXML
     private JFXDrawer inGamedrawer;
 
-
+	Boolean attackBool = true;
+	Boolean diceRolled = false;
     
     //javaFX's main for current scene
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		loadConsoleMenu();
+		loadDicePane();	
+
+
+		
+		
+		//rotate imageview
+        RotateTransition animation = Animattion.createAnimation(diceImageview);
+		
+      
+	}
+	
+	public void loadDicePane(){
+		try {
+			AnchorPane apane = FXMLLoader.load(getClass().getResource("rollDiceFXMl.fxml"));
+			diceDrawer.setSidePane(apane);
+
+			diceImageview.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+//				if(diceRolled == false) {
+					if(diceDrawer.isShown()) {
+						diceDrawer.close();
+					} else {
+						diceDrawer.open();
+					}
+//				}
+
+			});			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		//display players profile
+		getPlayersDate();
+	}
+	
+	//console menu
+	public void loadConsoleMenu(){
 		try {
 			AnchorPane apane = FXMLLoader.load(getClass().getResource("inGameSlideMenu.fxml"));
 			inGamedrawer.setSidePane(apane);
@@ -111,7 +185,6 @@ public class gameTableController extends Message implements Initializable  {
 			inGamehamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
 				burgerTask2.setRate(burgerTask2.getRate() * -1);
 				burgerTask2.play();
-				System.out.println("inGamedrawer.open();");
 				if(inGamedrawer.isShown()) {
 					inGamedrawer.close();
 				} else {
@@ -121,17 +194,17 @@ public class gameTableController extends Message implements Initializable  {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		
-      
 	}
 	
   
-	Boolean attackBool = true;
+
     @FXML
     void mouseEnterMenuShow(MouseEvent event) {
-    	actionMenu();
+    	if(diceRolled == true){
+    		actionMenu();	
+    	}    	
     }
+    
    
     
     public void actionMenu(){
@@ -172,5 +245,27 @@ public class gameTableController extends Message implements Initializable  {
  		// add the menu items
  		cornerMenu.getItems().addAll(control, neutralize, destroy, defense, windowsMenuItem);
     }
+    
+    public void getPlayersDate(){
+		//set current user's profile image here
+    	String path = new File("support/images/"+currentUser.getimageName()).getAbsolutePath();
+		Image image = new Image(new File(path).toURI().toString());
+		player3Image.setImage(image);	//reassign image view with new image
+		player3Name.setText(currentUser.getName());
+		
+//		//get other players profile
+//		ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//		    @Override
+//		    public void onDataChange(DataSnapshot dataSnapshot) {
+//		        long numChildren = dataSnapshot.getChildrenCount();
+//		        System.out.println(count.get() + " == " + numChildren);
+//		    }
+//
+//		    @Override
+//		    public void onCancelled(DatabaseError databaseError) {}
+//		});
+    }
+    
+
 	
 }

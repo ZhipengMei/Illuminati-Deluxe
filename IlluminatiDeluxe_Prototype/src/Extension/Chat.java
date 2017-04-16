@@ -89,7 +89,9 @@ public class Chat {
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 	
 	// messages arraylist to store individual message
-	ArrayList<Message> messages = new ArrayList<Message>();
+//	ArrayList<Message> messages = new ArrayList<Message>();
+	//create message object
+	Message message = new Message();
 	
 	//animation to scroll chat history to the bottom
 	static void slowScrollToBottom(ScrollPane scrollPane) {
@@ -117,6 +119,7 @@ public class Chat {
 		
 	  //generate a chat channel
 	  public static void chatChannel(String channelName, String textMessage) {
+		  
 			User currentUser = User.getInstance();
 		  	String name = currentUser.getName(); //get current username
 			name = name.toLowerCase(); //convert name to lowercase
@@ -154,67 +157,115 @@ public class Chat {
 	  
 	  
 	  //-----------------------------------------------------------------------------------------------------------------------
-  //receive message is officially working
-  public void receiveMessage(){
-	
-	  //database reference to specific "chat > channel name" node
-	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
-	  
-	  // Attach a listener to read the data at our posts reference
-	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
+	  //receive message is officially working, one message at a t
+	  public void receiveMessage(){
+		  
+		  //database reference to specific "chat > channel name" node
+		  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+		  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+		  
+		  // Attach a listener to read the data at our posts reference
+		  receiveMessageRef.orderByChild("timeStamp").addChildEventListener(new ChildEventListener() {
+			    @Override
+			    public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
 
-		    @Override
-		    public void onDataChange(DataSnapshot dataSnapshot) {
-				messages.clear(); //reset messages arraylist to empty
-
-		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
-		    		// parse json data into local vars
-			    	String name = (String) messageSnapshot.child("name").getValue();
-			    	String textMessage = (String) messageSnapshot.child("message").getValue();
-			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
+			    	String name = (String) dataSnapshot.child("name").getValue();
+			    	String textMessage = (String) dataSnapshot.child("message").getValue();
 			    	
-			    	//convert string back to Date
-			    	try{
-			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-			    	    Date parsedDate = dateFormat.parse(timeStamp);
-			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-				    	
-				    	//create text object
-			    		Message message = new Message();
-			    		//feed setter data
-			    		message.setDateTime(timestamp);
-			    		message.setName(name);
-			    		message.setMessage(textMessage);
-			    		
-			    		messages.add(message); // add individual message into messages arraylist
+			    	System.out.println(name + " : " + textMessage);
+			    	
+//		    		message.setName(name);
+//		    		message.setMessage(textMessage);
 
-			    	}catch(Exception e){//this generic but you can control another types of exception
-			    		//look the origin of excption 
-			    		e.printStackTrace();
-			    	}
-		    	}//end for
-		    	
-		    	Collections.sort(messages); //sort by timeStamp
-		    	
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						for (int i = 0; i < messages.size(); i++) {
-							//System.out.println(messages.get(i));
-							//display messages onto screen
-//							System.out.println(messages.get(i).getName() + ": " + messages.get(i).getMessage());
-//							System.out.println("flowPaneInScroll.getWidth() " + flowPaneInScroll.getLayoutBounds().getWidth());
-							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+//							displayMessage(message.getName(), message.getMessage());
+							displayMessage(name, textMessage);					
 
-						}						
-					}	
-				});
-		    }
-		    @Override
-		    public void onCancelled(DatabaseError databaseError) {}
-		});
-  }// end receive message
+						}	
+					});
+
+			    }
+
+			    @Override
+			    public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+			    @Override
+			    public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+			    @Override
+			    public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+			    @Override
+			    public void onCancelled(DatabaseError databaseError) {}
+			});
+	  }// end receive message
+	  
+	  
+	  
+//  //receive message is officially working, load multiple messages at once
+//  public void receiveMessage(){
+//	  
+//	  //database reference to specific "chat > channel name" node
+//	  final DatabaseReference ref = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+//	  final DatabaseReference receiveMessageRef = rootRef.child("Chat").child(currentUser.getCurrentChannel());
+//	  
+//	  // Attach a listener to read the data at our posts reference
+//	  receiveMessageRef.addValueEventListener(new ValueEventListener() {
+//
+//		    @Override
+//		    public void onDataChange(DataSnapshot dataSnapshot) {
+//				messages.clear(); //reset messages arraylist to empty
+//
+//		    	for (DataSnapshot messageSnapshot:dataSnapshot.getChildren()){	
+//		    		// parse json data into local vars
+//			    	String name = (String) messageSnapshot.child("name").getValue();
+//			    	String textMessage = (String) messageSnapshot.child("message").getValue();
+//			    	String timeStamp = (String) messageSnapshot.child("timeStamp").getValue();
+//			    	
+//			    	//convert string back to Date
+//			    	try{
+//			    	    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+//			    	    Date parsedDate = dateFormat.parse(timeStamp);
+//			    	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+//				    	
+//				    	//create text object
+//			    		Message message = new Message();
+//			    		//feed setter data
+//			    		message.setDateTime(timestamp);
+//			    		message.setName(name);
+//			    		message.setMessage(textMessage);
+//			    		
+//			    		messages.add(message); // add individual message into messages arraylist
+//
+//			    	}catch(Exception e){//this generic but you can control another types of exception
+//			    		//look the origin of excption 
+//			    		e.printStackTrace();
+//			    	}
+//		    	}//end for
+//		    	
+//		    	Collections.sort(messages); //sort by timeStamp
+//		    	
+//				Platform.runLater(new Runnable() {
+//					@Override
+//					public void run() {
+//						for (int i = 0; i < messages.size(); i++) {
+//							System.out.println(i);
+//							//System.out.println(messages.get(i));
+//							//display messages onto screen
+////							System.out.println(messages.get(i).getName() + ": " + messages.get(i).getMessage());
+////							System.out.println("flowPaneInScroll.getWidth() " + flowPaneInScroll.getLayoutBounds().getWidth());
+//							displayMessage(messages.get(i).getName(), messages.get(i).getMessage());
+//
+//						}						
+//					}	
+//				});
+//		    }
+//		    @Override
+//		    public void onCancelled(DatabaseError databaseError) {}
+//		});
+//  }// end receive message
   
   
   //show message onto chat box

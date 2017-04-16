@@ -19,11 +19,13 @@ import java.net.URL;
 	import java.util.ArrayList;
 	import java.util.List;
 	import java.util.ResourceBundle;
-	
-	import fxml.splashController.SplashScreen;
+
+import Animation.Animattion;
+import fxml.splashController.SplashScreen;
 	import javafx.animation.Interpolator;
 	import javafx.animation.KeyFrame;
-	import javafx.animation.Timeline;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 	import javafx.animation.TranslateTransition;
 	import javafx.application.Application;
 import javafx.application.Platform;
@@ -111,6 +113,8 @@ import javafx.stage.Stage;
 		public void initialize(URL location, ResourceBundle resources) {
 			// disable chatbox horizontal scroll bar 
 			chatScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+
+
 
 	        //chat box
 			Platform.runLater(new Runnable() {

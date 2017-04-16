@@ -135,18 +135,36 @@
 }
 
 
-#inGamedrawer {
+#gameTableMainMenu {
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
-
-
-#inGameSlideAnchorRoot {
+#rollingDiceMenu {
     -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
 
 
+
  /******* GAME TABLE SCREEN END *******/
 
+
+
+
+
+/******* In GAME SCREEN BEING *******/
+
+#inGameSlideAnchorRoot {
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
+}
+
+#player3Name {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+/******* In GAME SCREEN END *******/
 
 
