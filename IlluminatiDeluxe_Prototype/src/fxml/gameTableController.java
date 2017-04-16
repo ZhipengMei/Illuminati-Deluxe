@@ -75,6 +75,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -117,11 +118,22 @@ public class gameTableController extends Message implements Initializable  {
     @FXML
     private AnchorPane gameTableMainMenu;
     
+
     @FXML
-    private JFXDrawer diceDrawer;
+    private ImageView diceImageview;    
+    @FXML
+    private ImageView diceImageview1;
+    @FXML
+    private ImageView diceImageview2;
+    @FXML
+    private ImageView diceImageview3;
     
+
     @FXML
-    private ImageView diceImageview;
+    private AnchorPane anouncementPane;
+
+    @FXML
+    private Label anouncementLabel;
     
     @FXML
     private StackPane stackPane;
@@ -131,6 +143,9 @@ public class gameTableController extends Message implements Initializable  {
 
     @FXML
     private JFXDrawer inGamedrawer;
+    
+    @FXML
+    private GridPane powerStructureGrid;
 
 	Boolean attackBool = true;
 	Boolean diceRolled = false;
@@ -147,7 +162,6 @@ public class gameTableController extends Message implements Initializable  {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadConsoleMenu();
-		loadDicePane();	
 
 		//display players profile
 		getPlayersData();
@@ -159,29 +173,11 @@ public class gameTableController extends Message implements Initializable  {
 		
 		//rotate imageview
         RotateTransition animation = Animattion.createAnimation(diceImageview);
+        resizePowerStructureGrid();
+       
 		
 	}
-	
-	public void loadDicePane(){
-		try {
-			AnchorPane apane = FXMLLoader.load(getClass().getResource("rollDiceFXMl.fxml"));
-			diceDrawer.setSidePane(apane);
-
-			diceImageview.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-//				if(diceRolled == false) {
-					if(diceDrawer.isShown()) {
-						diceDrawer.close();
-					} else {
-						diceDrawer.open();
-					}
-//				}
-
-			});			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}		
-	}//loadDicePane
-	
+		
 	//console menu
 	public void loadConsoleMenu(){
 		try {
@@ -298,7 +294,6 @@ public class gameTableController extends Message implements Initializable  {
 					    	}//end for
 					    	//removeing legacy data when player size shrinks
 					    	if(players.size() == 1) {
-					    		System.out.println("sie is one 1");
 			    				((Label) names.get(1)).setText(" ");
 			    				((ImageView) images.get(1)).setImage(null);
 					    	}
@@ -312,8 +307,39 @@ public class gameTableController extends Message implements Initializable  {
 			});
     }
     
+//    //rolling dice 
+//    public void rollDice(){
+//    	
+//    }
 
+    @FXML
+    void rollDiceAction(MouseEvent event) {
+    	if(diceRolled == false) {
+			System.out.println("Rolling dice");
+			String path = new File("dice.png").getAbsolutePath();
+			Image image = new Image(new File(path).toURI().toString());
+			diceImageview3.setImage(image);
+			diceRolled = true;
+		}
+    }
     
+    public void resizePowerStructureGrid(){
+//    	powerStructureGrid
+    	
+    	Platform.runLater(new Runnable() {
+    		@Override
+    		public void run() {
+    			Stage stage = (Stage) powerStructureGrid.getScene().getWindow();
+    	        System.out.println("after stageH " + stage.getWidth());
+    	        System.out.println("after stageH " + stage.getHeight());
+    	        powerStructureGrid.setMinSize(stage.getWidth(), stage.getHeight()- 200);
+    		}	
+		});
+
+    	
+
+    }
+   
 
 	
 }

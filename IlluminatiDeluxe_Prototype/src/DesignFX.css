@@ -135,7 +135,7 @@
 }
 
 
-#gameTableMainMenu {
+#gameTableMainMenu, #anouncementPane, #powerStructureGrid {
     -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
@@ -152,18 +152,20 @@
 
 
 
-/******* In GAME SCREEN BEING *******/
+/******* In GAME SCREEN BEGING *******/
 
 #inGameSlideAnchorRoot {
     -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
-#player3Name, #player1Name, #player2Name {
+#player3Name, #player1Name, #player2Name, #anouncementLabel {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
+
+
 
 /******* In GAME SCREEN END *******/
 
