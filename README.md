@@ -10,7 +10,7 @@ Time spent: **20** hours spent in total
 The following **required** functionality is complete:
 
 - [x] Card class
-- [ ] Gameplay interface
+- [x] Gameplay interface
 - [ ] Match making system
 - [ ] Rule enforcement during game play
 
