@@ -117,7 +117,8 @@
 /******* GAME TABLE SCREEN BEGIN*******/
 
 #inGameChatTextField {
-    -fx-background-color: rgba(0,0,0,0.1);
+    /*-fx-background-color: rgba(0,0,0,0.1);*/
+    -fx-background-color: #fff;
     -fx-border-color: rgba(0,0,0,0.1);
     -fx-background-radius: 0;
     -fx-border-radius: 0;
@@ -133,21 +134,39 @@
     -fx-alignment: center-left;
 }
 
-#anchorConsole {
--fx-background-color: #333333;
 
+#gameTableMainMenu, #anouncementPane, #powerStructureGrid {
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
-#drawCard_scrollpane {
--fx-background-color: #333333;
-
+#rollingDiceMenu {
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 
-#drawCard_flowPane {
--fx-background-color: #555555;
 
-}
+
+
  /******* GAME TABLE SCREEN END *******/
 
+
+
+
+
+/******* In GAME SCREEN BEGING *******/
+
+#inGameSlideAnchorRoot {
+    -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
+}
+
+#player3Name, #player1Name, #player2Name, #anouncementLabel {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+
+
+/******* In GAME SCREEN END *******/
 
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="inGameSlideAnchorRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.inGameSlideMenuController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="33.0" prefWidth="300.0">
+               <children>
+                  <Label fx:id="uncontrolledGroupLabel" text="Uncontrolled Group" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="33.0" text="10" textAlignment="RIGHT" />
+               </children>
+            </HBox>
+            <AnchorPane fx:id="uncontrolledCardsPane" prefHeight="140.0" prefWidth="300.0">
+               <children>
+                  <StackPane fx:id="freeStackRoot" layoutX="40.0" prefHeight="126.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupLeftArrow" text="&lt;-" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                  <Button layoutX="507.0" layoutY="55.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupRightArrow" text="-&gt;" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+               </children>
+            </AnchorPane>
+            <HBox prefHeight="19.0" prefWidth="300.0">
+               <children>
+                  <Label fx:id="specialCardLabel" text="Special Cards" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="33.0" text="10" textAlignment="RIGHT" />
+               </children>
+            </HBox>
+            <AnchorPane fx:id="specialCardPane" prefHeight="140.0" prefWidth="300.0">
+               <children>
+                  <StackPane fx:id="specialCardStack" layoutX="40.0" layoutY="2.0" prefHeight="126.0" prefWidth="220.0" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <Button layoutX="16.0" layoutY="46.0" mnemonicParsing="false" text="&lt;-" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                  <Button layoutX="508.0" layoutY="51.0" mnemonicParsing="false" text="-&gt;" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="specialCardLabel1" text="Chat" />
+            <AnchorPane fx:id="chatPane" prefHeight="217.0" prefWidth="300.0">
+               <children>
+                  <ScrollPane fx:id="chatScrollPane" layoutX="295.0" layoutY="-6.0" prefHeight="190.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <FlowPane fx:id="flowPaneInScroll" prefHeight="187.0" prefWidth="287.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox layoutY="146.0" prefHeight="27.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <TextField fx:id="inGameChatTextField" onAction="#onEnter" prefHeight="27.0" prefWidth="246.0" />
+                        <Button fx:id="inGameChatSendBtn" mnemonicParsing="false" onMousePressed="#inGameChatSend_ACTION" prefHeight="21.0" prefWidth="54.0" text="Send" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

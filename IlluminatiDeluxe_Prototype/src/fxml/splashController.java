@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -35,6 +36,9 @@ public class splashController implements Initializable {
 
 	@FXML
 	private StackPane rootPane;
+	
+    @FXML
+    private AnchorPane inGameSlideAnchorRoot;
 		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,9 +51,9 @@ public class splashController implements Initializable {
 		@Override
 		public void run() {
 			try {
-				Thread.sleep(1500); //1.5 second
-//				Thread.sleep(100); //skip login 
-//				//DO NOT DELETE, ORIGINAL CODE
+//				Thread.sleep(1500); //1.5 second
+				Thread.sleep(100); //skip login 
+				//DO NOT DELETE, ORIGINAL CODE
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -104,6 +108,8 @@ public class splashController implements Initializable {
 //						Parent root = null;
 //						try {
 //							root = FXMLLoader.load(getClass().getResource("gameTableFX.fxml"));
+////							root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//
 //						} catch (IOException e) {
 //							e.printStackTrace();
 //						}

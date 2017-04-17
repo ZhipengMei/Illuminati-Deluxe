@@ -1,89 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="563.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.gameTableController">
    <children>
-      <VBox layoutX="471.0" prefHeight="563.0" prefWidth="278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="gameTableMainMenu" prefHeight="69.0" prefWidth="788.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fx:id="chatScrollPane" prefHeight="173.0" prefWidth="81.0">
-               <content>
-                  <FlowPane fx:id="flowPaneInScroll" prefHeight="129.0" prefWidth="200.0" />
-               </content>
-            </ScrollPane>
-            <HBox prefHeight="27.0" prefWidth="219.0">
+            <HBox prefHeight="54.0" prefWidth="788.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField fx:id="inGameChatTextField" onAction="#onEnter" prefHeight="27.0" prefWidth="228.0" />
-                  <Button fx:id="inGameChatSendBtn" mnemonicParsing="false" onMousePressed="#inGameChatSend_ACTION" prefHeight="25.0" prefWidth="51.0" text="Send" />
+                  <JFXHamburger fx:id="inGamehamburger" prefHeight="50.0" prefWidth="44.0" />
+                  <Pane prefHeight="69.0" prefWidth="98.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="69.0" prefWidth="62.0">
+                           <children>
+                              <ImageView fx:id="player1Image" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="player1Name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="63.0" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <StackPane onMouseEntered="#mouseEnterMenuShow" prefHeight="52.0" prefWidth="50.0">
+                           <children>
+                              <ImageView fx:id="diceImageview1" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="69.0" prefWidth="98.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="52.0" prefWidth="62.0">
+                           <children>
+                              <ImageView fx:id="player2Image" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="player2Name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="62.0" text=" " textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <StackPane onMouseEntered="#mouseEnterMenuShow" prefHeight="31.0" prefWidth="50.0">
+                           <children>
+                              <ImageView fx:id="diceImageview2" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="69.0" prefWidth="98.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="52.0" prefWidth="62.0">
+                           <children>
+                              <ImageView fx:id="player3Image" fitHeight="52.0" fitWidth="62.0">
+                                 <image>
+                                    <Image url="@../../../../../../Downloads/CECS-343-mw-GroupD-master/IlluminatiDeluxe_Prototype/support/images/profileimage.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="player3Name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="63.0" text="  Player 3" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <StackPane onMouseEntered="#mouseEnterMenuShow" prefHeight="31.0" prefWidth="50.0">
+                           <children>
+                              <ImageView fx:id="diceImageview3" fitHeight="52.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <AnchorPane fx:id="anchorConsole" prefHeight="171.0" prefWidth="278.0">
-               <children>
-                  <Label layoutX="57.0" layoutY="56.0" text="This is game console pane" />
-                  <Button layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onMousePressed="#drawCard_action" text="Draw card" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="102.0" layoutY="82.0" text="this is for special cards pane" />
-               </children>
-            </AnchorPane>
          </children>
-      </VBox>
-      <VBox prefHeight="170.0" prefWidth="69.0">
+      </AnchorPane>
+      <AnchorPane fx:id="anouncementPane" layoutX="52.0" layoutY="511.0" prefHeight="43.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="5.0" prefHeight="46.0" prefWidth="688.0" text="Please Roll Dice to Start" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <StackPane fx:id="stackPane" onMouseEntered="#mouseEnterMenuShow" prefHeight="50.0" prefWidth="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <ImageView fitHeight="52.0" fitWidth="62.0">
+                  <Button mnemonicParsing="false" onMousePressed="#rollDiceAction" prefHeight="51.0" prefWidth="50.0" />
+                  <ImageView fx:id="diceImageview">
                      <image>
-                        <Image url="@../../support/images/profileimage.png" />
+                        <Image url="@../../appicon.png" />
                      </image>
                   </ImageView>
-                  <Label text="Player 1" />
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitHeight="52.0" fitWidth="62.0">
-                     <image>
-                        <Image url="@../../support/images/profileimage.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Player 2" />
-               </children>
-            </VBox>
+            </StackPane>
          </children>
-      </VBox>
-      <ScrollPane fx:id="drawCard_scrollpane" layoutX="117.0" layoutY="21.0" prefHeight="145.0" prefWidth="342.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="21.0">
-         <content>
-            <FlowPane fx:id="drawCard_flowPane" prefHeight="122.0" prefWidth="1016.0" />
-         </content>
-      </ScrollPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="117.0" layoutY="4.0" prefHeight="17.0" prefWidth="354.0" text="Free Group" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="4.0" />
-      <BorderPane layoutY="170.0" prefHeight="418.0" prefWidth="471.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="170.0">
-         <top>
-            <Pane prefHeight="0.0" prefWidth="477.0" BorderPane.alignment="CENTER" />
-         </top>
-         <left>
-            <Pane prefHeight="418.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
-         </left>
-         <bottom>
-            <Pane prefHeight="0.0" prefWidth="477.0" BorderPane.alignment="CENTER" />
-         </bottom>
-         <right>
-            <Pane prefHeight="200.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
+      </AnchorPane>
+      <JFXDrawer fx:id="inGamedrawer" defaultDrawerSize="600.0" direction="RIGHT" layoutX="458.0" layoutY="92.0" prefHeight="430.0" prefWidth="266.0" AnchorPane.rightAnchor="0.0" />
+      <GridPane fx:id="powerStructureGrid" layoutX="14.0" layoutY="89.0" prefHeight="401.0" prefWidth="770.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="71.0">
+                     <image>
+                        <Image url="@../../support/images/cards/airlines.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

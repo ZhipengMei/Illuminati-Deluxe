@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 
@@ -140,6 +141,8 @@ public class playerScreenController implements Initializable {
 				
 				if(drawer.isShown()) {
 					drawer.close();
+					System.out.println("inGamedrawer.close();");
+
 				} else {
 					drawer.open();
 				}
@@ -203,12 +206,29 @@ public class playerScreenController implements Initializable {
 
 	
 	
-	
 	// all channel button action share same content
 	private void contentForChannelAction(String channelName){
 		currentUser.setCurrentChannel(channelName);
 		System.out.println(currentUser.getCurrentChannel());
 		System.out.println(currentUser.getimageName());
+		
+		//upload current user basic info to the game channel
+		TreeMap<String,String> profileMap = new TreeMap<String,String>();  
+		profileMap.put("id", currentUser.getUID());
+		profileMap.put("imageName", currentUser.getimageName());
+		
+    	//create database reference for the user
+		final DatabaseReference channelRef = rootRef.child(channelName).child(currentUser.getName());
+		channelRef.setValue(profileMap, new DatabaseReference.CompletionListener() {
+		    @Override
+		    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+		        if (databaseError != null) {
+		            System.out.println("Channel could not be create. " + databaseError.getMessage());
+		        } else {
+		            System.out.println("Channel Created Successfully.");
+		        }
+		    }
+		});
 		
 		inGame(); //loading animation
 		
@@ -257,12 +277,34 @@ public class playerScreenController implements Initializable {
 					        alert.initOwner(gameTableStage);
 
 					        Optional<ButtonType> result = alert.showAndWait();
+					        //when game table closed
 					        if (result.get() == ButtonType.OK){
 //					            Platform.exit();
 //					        	System.exit(0);
 					        	gameTableStage.close(); //only close current window
 					        	popupStage.close();     //close the loading pane
 					        	root_anchorpane.setEffect(null);
+					        	
+					        	//remove player from the database channel
+					    		rootRef.child(channelName).child(currentUser.getName()).removeValue();
+					    		
+					    		// check if anyone inside the channel,  yes then keep messages, no then erase all messages
+					    		final DatabaseReference currentChannelRef = rootRef.child(channelName);
+					    		//get other players profile
+					    		currentChannelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+					    		    @Override
+					    		    public void onDataChange(DataSnapshot dataSnapshot) {
+					    		    	if(dataSnapshot.getValue() == null){
+					    		    		System.out.println(channelName + " is empty.");
+					    		    		rootRef.child("Chat").child(channelName).removeValue();
+					    		    	}
+					    		    }
+					    		    @Override
+					    		    public void onCancelled(DatabaseError databaseError) {}
+					    		});
+					    		
+					    		
+
 					        }
 						}	
 					});

@@ -212,10 +212,10 @@ public class loginmenuController{// extends User {
     //loading animation
     private void loading(){
     	
-  	String path = new File("appicon.png").getAbsolutePath();
+    	String path = new File("appicon.png").getAbsolutePath();
 		Image image = new Image(new File(path).toURI().toString());
       
-		ImageView imageView = new ImageView(image);
+	  ImageView imageView = new ImageView(image);
       RotateTransition animation = Animattion.createAnimation(imageView);
 
       Pane pane = new Pane(imageView);
