@@ -151,10 +151,16 @@ public class gameTableController extends Message implements Initializable  {
 	Boolean diceRolled = false;
 	
 	// create an array list
-    ArrayList players = new ArrayList();
-    ArrayList profileImages = new ArrayList();
-    ArrayList names = new ArrayList();
-    ArrayList diceImages = new ArrayList();
+    ArrayList<ArrayList<String>> players = new ArrayList<ArrayList<String>>();
+    ArrayList<ImageView> profileImages = new ArrayList<ImageView>();
+    ArrayList<Label> names = new ArrayList<Label>();
+    ArrayList<ImageView> diceImages = new ArrayList<ImageView>();
+    ArrayList<Long> diceVal = new ArrayList<Long>();
+	TreeMap<Long, String> diceValMap = new TreeMap<Long, String>(); 
+    ArrayList<String> playersOrder = new ArrayList<String>();
+
+
+
     
     //corner menu 
     CornerMenu cornerMenu;
@@ -180,8 +186,13 @@ public class gameTableController extends Message implements Initializable  {
 		diceImages.add(diceImageview3);
 		
 		//rotate imageview
-        RotateTransition animation = Animattion.createAnimation(diceImageview);
+		Animattion.createAnimation(diceImageview);
         resizePowerStructureGrid();
+        
+        //hide all dice roll image view at first
+        diceImageview1.setVisible(false);
+        diceImageview2.setVisible(false);
+        diceImageview3.setVisible(false);
        
 		
 	}
@@ -213,15 +224,9 @@ public class gameTableController extends Message implements Initializable  {
 
     @FXML
     void mouseEnterMenuShow(MouseEvent event) {
-//    	if(diceRolled == true){
     		actionMenu();	
-//    	}
     }
     
-    
-//    @FXML
-//    void closeCornerMenu(MouseEvent event) {
-        //    }
    
     
     public void actionMenu(){
@@ -306,18 +311,40 @@ public class gameTableController extends Message implements Initializable  {
 			    	players.clear();
 			    	for (DataSnapshot playerSnapshot:dataSnapshot.getChildren()){	
 			    		if(playerSnapshot.child("id").getValue().equals(currentUser.getUID())){
+			    			playersOrder.add(currentUser.getName());
+			    			
 			    			//display current user's dice
 			    		    if (playerSnapshot.hasChild("dice")) {
 			    		    	parseImageView((String) playerSnapshot.child("dice").getValue(), (ImageView)diceImageview3);
+				    		    if (playerSnapshot.hasChild("diceVal")) {
+//				    		    	System.out.println((long) playerSnapshot.child("diceVal").getValue());
+				    		    	diceValMap.put((long) playerSnapshot.child("diceVal").getValue(),currentUser.getName());		 	    		    	
+				    		    	diceVal.add((long) playerSnapshot.child("diceVal").getValue()); //add dice value into arraylist for compa	
+				    		    }				    		    
 			    		    }
+			    		    if (playerSnapshot.hasChild("announcement")) {
+			    		    	Platform.runLater(new Runnable() {
+			    		    		@Override
+			    		    		public void run() {
+				    	    			anouncementLabel.setText((String) playerSnapshot.child("announcement").getValue());
+			    		    		}	
+			    				});
+//		    	    			anouncementLabel.setText((String) playerSnapshot.child("announcement").getValue());
+			    		    }
+			    		    
 			    		} else {		
-			    			ArrayList player = new ArrayList();
+			    			ArrayList<String> player = new ArrayList<String>();
 			    			player.add((String) playerSnapshot.getKey());
 			    			player.add((String) playerSnapshot.child("imageName").getValue());
+		    				playersOrder.add((String) playerSnapshot.getKey());
+			    			
 			    			//check if the "dice" child exist
 			    		    if (playerSnapshot.hasChild("dice")) {
 				    			player.add((String) playerSnapshot.child("dice").getValue());
-				    			System.out.println("dice name is:" + player.get(1));
+				    		    if (playerSnapshot.hasChild("diceVal")) {
+				    		    	diceValMap.put((long) playerSnapshot.child("diceVal").getValue(),(String) playerSnapshot.getKey());			    		    	
+				    		    	diceVal.add((long) playerSnapshot.child("diceVal").getValue()); //add dice value into arraylist	
+				    		    }			    		    	
 			    		    }
 			    			players.add(player);
 			    		}//end else			    		
@@ -327,7 +354,7 @@ public class gameTableController extends Message implements Initializable  {
 						@Override
 						public void run() {
 					    	for(int i=0; i<players.size(); i++){
-					    		ArrayList player = (ArrayList) players.get(i);			    		
+					    		ArrayList<?> player = (ArrayList<?>) players.get(i);			    		
 					    		
 			    				((Label) names.get(i)).setText((String)player.get(0)); //display username into a label
 			    				
@@ -335,7 +362,6 @@ public class gameTableController extends Message implements Initializable  {
 			    				String path = new File("support/images/"+(String) player.get(1)).getAbsolutePath();
 			    				Image image = new Image(new File(path).toURI().toString());
 			    				((ImageView) profileImages.get(i)).setImage(image);
-//			    		    	parseImageView((String) player.get(1), (ImageView)profileImages.get(i));
 			    				
 			    				//display dice image
 			    				if (player.size() > 2 ) {
@@ -348,19 +374,44 @@ public class gameTableController extends Message implements Initializable  {
 			    				((Label) names.get(1)).setText(" ");
 			    				((ImageView) diceImages.get(1)).setImage(null);
 					    	}
+					    	
+					    	//determining the highest dice roll
+					    	if(diceImageview3.isVisible() != false && diceImageview2.isVisible() != false && diceImageview1.isVisible() != false) {
+					    		if(diceVal.size() > 1){
+						    		//cannot detect highest dice roll
+						    		if(diceVal.get(0) == diceVal.get(1) || diceVal.get(0) == diceVal.get(2) || diceVal.get(2) == diceVal.get(1)){
+						    			
+							        	//remove dice value from database
+						    			for(int i=0; i<playersOrder.size();i++){
+								    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("diceVal").removeValue();
+								    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("announcement").setValue("Re-Roll Dice again to start the game !!!");
+						    			}
+
+						    		} else {
+						    			//detect highest dice roll value
+							    		long largest = Collections.max(diceVal);
+							    		String name = diceValMap.get(largest);
+							    		String anouncementText = "\name please draw a card !!!";
+//				    	    			anouncementLabel.setText(anouncementText);
+				    	    			
+				    	    			//first draw announcement
+						    			for(int i=0; i<playersOrder.size();i++){
+								    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("announcement").setValue(anouncementText);
+						    			}
+						    		}//end else
+					    		}
+					    	} //end if
+					    						    	
 						}	
 					});
-	    			
-	    		    //this block will listen to any changes and display dice roll throughout the entire game
-	    			
-
+	    
 			    }
 			    @Override
 			    public void onCancelled(DatabaseError databaseError) {
 			    	players.clear();
 			    }
 			});
-    }
+    }// end get player data
     
     public void rollingDice(){
     	if(diceRolled == false) {
@@ -369,12 +420,8 @@ public class gameTableController extends Message implements Initializable  {
         	    		
 			System.out.println("Rolling dice");
 			String diceImageName = String.format("%s-%s.gif",dice[0],dice[1]);
-//			String path = String.format("support/images/dice/%s",diceImageName);
-//			String absolutePath = new File(path).getAbsolutePath();
-//			Image image = new Image(new File(absolutePath).toURI().toString());
-//			diceImageview3.setImage(image); //display the image
-			
-			diceRolled = true; //play only roll dice once each turn
+
+//			diceRolled = true; //play only roll dice once each turn
 		
 			//upload the dice roll to firebase
     		final DatabaseReference ref = rootRef.child(currentUser.getCurrentChannel()).child(currentUser.getName()).child("dice");
@@ -388,67 +435,19 @@ public class gameTableController extends Message implements Initializable  {
     		        }
     		    }
     		}); //end upload dice data to database
-    		
+    		rootRef.child(currentUser.getCurrentChannel()).child(currentUser.getName()).child("diceVal").setValue(dice[0] + dice[1]);
+			anouncementLabel.setText("Waiting for other players !!!");
 		}//end if
     }
     
-//    @FXML
-//    void rollDiceAction(MouseEvent event) {
-    	
-    	
-//    }
-    
-//    this method will listen to any changes and display dice roll throughout the entire game
-//    public void diceRollListener(){
-//    	//database reference to specific "chat > channel name" node
-//		  final DatabaseReference d = rootRef.child(currentUser.getCurrentChannel());
-//		  
-//		  // Attach a listener to read the data at our posts reference
-//		  playerRef.addValueEventListener(new ValueEventListener() {
-//	
-//			    @Override
-//			    public void onDataChange(DataSnapshot dataSnapshot) {
-//			    	players.clear();
-//			    	for (DataSnapshot playerSnapshot:dataSnapshot.getChildren()){	
-////			    		if(playerSnapshot.child("id").getValue().equals(currentUser.getUID())){
-////			    			//do nothing
-////			    		} else {		
-////			    			ArrayList player = new ArrayList();
-////			    			player.add((String) playerSnapshot.getKey());
-////			    			player.add((String) playerSnapshot.child("imageName").getValue());
-////			    			players.add(player);
-////			    		}//end else
-//			    		
-//			    	}//end for
-//			    	
-//	    			Platform.runLater(new Runnable() {
-//						@Override
-//						public void run() {
-//					
-//						}	
-//					});
-//			    }
-//			    @Override
-//			    public void onCancelled(DatabaseError databaseError) {
-//
-//			    }
-//			});//end listener
-//    }
-    
     public void resizePowerStructureGrid(){
-//    	powerStructureGrid
-    	
     	Platform.runLater(new Runnable() {
     		@Override
     		public void run() {
     			Stage stage = (Stage) powerStructureGrid.getScene().getWindow();
-    	        System.out.println("after stageH " + stage.getWidth());
-    	        System.out.println("after stageH " + stage.getHeight());
     	        powerStructureGrid.setMinSize(stage.getWidth(), stage.getHeight()- 200);
     		}	
 		});
-
-    	
 
     }
     
@@ -457,36 +456,20 @@ public class gameTableController extends Message implements Initializable  {
     public void parseImageView(String imageName, ImageView imageview) {
 		//parsing dice image name into path	
 		String path = String.format("support/images/dice/%s",imageName);
+		System.out.println("image is:  "+ path);
 		String absolutePath = new File(path).getAbsolutePath();
 		Image image = new Image(new File(absolutePath).toURI().toString());
-		imageview.setImage(image); //display the image
+		imageview.setImage(image); //display the image  
+		imageview.setVisible(true);
+//    	Platform.runLater(new Runnable() {
+//    		@Override
+//    		public void run() {
+//  		
+//    		}	
+//		});
     }
    
 
 	
 }
 
-
-//Platform.runLater(new Runnable() {
-//@Override
-//public void run() {
-//	if(player2Name.getText().equals(" ")){
-//		player2Name.setText((String)playerSnapshot.getKey());
-//		String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
-//		Image image = new Image(new File(path).toURI().toString());
-//		player2Image.setImage(image);	
-//	}//end if
-//}	
-//});
-//
-//Platform.runLater(new Runnable() {
-//@Override
-//public void run() {
-//	if(player2Name.getText().equals(" ") == false && player2Name.getText().equals((String)playerSnapshot.getKey()) == false){
-//		player1Name.setText((String)playerSnapshot.getKey());
-//		String path = new File("support/images/"+(String) playerSnapshot.child("imageName").getValue()).getAbsolutePath();
-//		Image image = new Image(new File(path).toURI().toString());
-//		player1Image.setImage(image);						    			
-//	}				    				
-//}	
-//});

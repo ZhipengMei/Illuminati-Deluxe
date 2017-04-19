@@ -1,4 +1,6 @@
 
+
+
 import java.io.File;
 
 import Extension.ConfirmBox;
@@ -120,7 +122,28 @@ public class Main extends Application {
 //}
 
 
-
-
-
-
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.Collections;
+//import java.util.TreeMap;
+//public class Main {
+//	public static void main(String[] args) {
+//		
+//	    ArrayList<Integer> diceVal = new ArrayList<Integer>();
+//		TreeMap<Integer, String> diceValMap = new TreeMap<Integer, String>();  
+//
+//	    diceVal.add(11);
+//	    diceVal.add(14);
+//	    diceVal.add(5);
+//	    
+//	    diceValMap.put( 11, "AA");
+//	    diceValMap.put(5,"BB");
+//	    diceValMap.put(14,"CC");
+//	    
+//		int largest = Collections.max(diceVal);
+//		System.out.println(largest);
+//		
+//		String name = diceValMap.get(largest);
+//		System.out.println(name);
+//	}
+//}
