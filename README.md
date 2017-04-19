@@ -11,8 +11,9 @@ The following **required** functionality is complete:
 
 - [x] Card class
 - [x] Gameplay interface
-- [ ] Match making system
+- [x] Match making system
 - [ ] Rule enforcement during game play
+- [x] Actions Menu
 
 
 The following **optional** features are implemented:
