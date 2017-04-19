@@ -135,7 +135,7 @@
 }
 
 
-#gameTableMainMenu, #anouncementPane, #powerStructureGrid {
+#gameTableMainMenu, #anouncementPane {
     -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }
 

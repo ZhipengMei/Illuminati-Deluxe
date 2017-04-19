@@ -213,30 +213,41 @@ public class gameTableController extends Message implements Initializable  {
 
     @FXML
     void mouseEnterMenuShow(MouseEvent event) {
-    	if(diceRolled == true){
+//    	if(diceRolled == true){
     		actionMenu();	
-    	}    	
+//    	}
     }
     
-    @FXML
-    void mouseLeaveMenu(MouseEvent event) {
-        if(cornerMenu != null){
-    		cornerMenu.hide();	
-         }
-    }
+    
+//    @FXML
+//    void closeCornerMenu(MouseEvent event) {
+        //    }
    
     
     public void actionMenu(){
+        MenuItem rollDice = new MenuItem("Roll Dice",
+                new ImageView(new Image("file:support/images/ingameMenu/dice.png")));
     	MenuItem control = new MenuItem("Attack to Control",
-                new ImageView(new Image("file:support/images/ingame/control.png")));
+                new ImageView(new Image("file:support/images/ingameMenu/control.png")));
         MenuItem neutralize = new MenuItem("Attack to Neutralize",
-                new ImageView(new Image("file:support/images/ingame/neutralize.png")));
+                new ImageView(new Image("file:support/images/ingameMenu/neutralize.png")));
         MenuItem destroy = new MenuItem("Attack to Destroy",
-                new ImageView(new Image("file:support/images/ingame/destroy.png")));
-        MenuItem defense = new MenuItem("Defense an attack",
-                new ImageView(new Image("file:support/images/ingame/defense.png")));
-        MenuItem windowsMenuItem = new MenuItem("windowsMenuItem",
-                new ImageView(new Image("file:support/images/ingame/control.png")));
+                new ImageView(new Image("file:support/images/ingameMenu/destroy.png")));
+        MenuItem cancel = new MenuItem("Cancel",
+                new ImageView(new Image("file:support/images/ingameMenu/cancel.png")));
+        MenuItem moveMoney = new MenuItem("Transfer Money",
+                new ImageView(new Image("file:support/images/ingameMenu/money.png")));
+        MenuItem pass = new MenuItem("Pass",
+                new ImageView(new Image("file:support/images/ingameMenu/pass.png")));        
+        MenuItem draw = new MenuItem("Draw a card",
+                new ImageView(new Image("file:support/images/ingameMenu/draw.png")));        
+        
+        rollDice.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+            	rollingDice();
+            }
+        });
+        
         
         control.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
@@ -254,6 +265,15 @@ public class gameTableController extends Message implements Initializable  {
 
             }
         });
+        
+        cancel.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+            	if(cornerMenu != null){
+            		cornerMenu.hide();	
+                 }
+            }
+        });
+
 
  		// corner menu
  		// position a corner menu in the top left corner, that initially is not visible
@@ -263,7 +283,7 @@ public class gameTableController extends Message implements Initializable  {
  		    .withAutoShowAndHide(true);
  		 
  		// add the menu items
- 		cornerMenu.getItems().addAll(control, neutralize, destroy, defense, windowsMenuItem);
+ 		cornerMenu.getItems().addAll(rollDice, draw, control, neutralize, destroy, moveMoney, pass, cancel);
     }
     
     //not dynamic to display players icon hard code to 3, possible to display multiple players dynamically but requires more time
@@ -289,7 +309,7 @@ public class gameTableController extends Message implements Initializable  {
 			    			//display current user's dice
 			    		    if (playerSnapshot.hasChild("dice")) {
 			    		    	parseImageView((String) playerSnapshot.child("dice").getValue(), (ImageView)diceImageview3);
-			    		      }
+			    		    }
 			    		} else {		
 			    			ArrayList player = new ArrayList();
 			    			player.add((String) playerSnapshot.getKey());
@@ -317,6 +337,11 @@ public class gameTableController extends Message implements Initializable  {
 			    				((ImageView) profileImages.get(i)).setImage(image);
 //			    		    	parseImageView((String) player.get(1), (ImageView)profileImages.get(i));
 			    				
+			    				//display dice image
+			    				if (player.size() > 2 ) {
+				    		    	parseImageView((String) player.get(2), (ImageView)diceImages.get(i));
+				    		    }
+			    				
 					    	}//end for
 					    	//removing legacy data when player size shrinks
 					    	if(players.size() == 1) {
@@ -337,10 +362,7 @@ public class gameTableController extends Message implements Initializable  {
 			});
     }
     
-
-    @FXML
-    void rollDiceAction(MouseEvent event) {
-    	
+    public void rollingDice(){
     	if(diceRolled == false) {
     		//generate 2 random numbers between 1-6
         	final int[] dice = new Random().ints(1, 7).distinct().limit(2).toArray();
@@ -369,6 +391,12 @@ public class gameTableController extends Message implements Initializable  {
     		
 		}//end if
     }
+    
+//    @FXML
+//    void rollDiceAction(MouseEvent event) {
+    	
+    	
+//    }
     
 //    this method will listen to any changes and display dice roll throughout the entire game
 //    public void diceRollListener(){
