@@ -81,7 +81,7 @@
       <AnchorPane fx:id="anouncementPane" layoutX="52.0" layoutY="511.0" prefHeight="43.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="5.0" prefHeight="46.0" prefWidth="688.0" text="Please Roll Dice to Start" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <StackPane fx:id="stackPane" onMouseEntered="#mouseEnterMenuShow" prefHeight="50.0" prefWidth="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <StackPane fx:id="stackPane" onMouseEntered="#mouseEnterMenuShow" onMouseExited="#mouseLeaveMenu" prefHeight="50.0" prefWidth="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <Button mnemonicParsing="false" onMousePressed="#rollDiceAction" prefHeight="51.0" prefWidth="50.0" />
                   <ImageView fx:id="diceImageview">
