@@ -13,6 +13,8 @@ The following **required** functionality is complete:
 - [x] Gameplay interface
 - [x] Match making system
 - [ ] Rule enforcement during game play
+ * Roll Dice
+ * Draw Card
 - [x] Actions Menu
 
 
