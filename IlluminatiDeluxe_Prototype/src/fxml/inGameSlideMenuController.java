@@ -109,6 +109,11 @@ import javafx.stage.Stage;
 	    private final int NUM_OF_IMGS = 5;
 	    private final int SLIDE_FREQ = 3; // in secs
 	    
+	    
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			// disable chatbox horizontal scroll bar 
@@ -129,12 +134,12 @@ import javafx.stage.Stage;
 			specialCardLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
 
 			
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					loadUncontrolledGroup();					
-				}
-			});
+//			Platform.runLater(new Runnable() {
+//				@Override
+//				public void run() {
+//					loadUncontrolledGroup();					
+//				}
+//			});
 			
 			Platform.runLater(new Runnable() {
 
@@ -147,62 +152,121 @@ import javafx.stage.Stage;
 			
 		}// end intialize
 		
-		
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+	
+	  //show new draw card onto screen
+	  public void displayDrawCard(String cardName){
+		  	Pane clipPane = new Pane();
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("inside here run cards draw");
+				ImageView freecardImage = new ImageView();
+				
+    			//set free card image here
+    	    	String path = new File("support/images/cards/"+cardName).getAbsolutePath();
+    	    	System.out.println(path);
+    			Image image = new Image(new File(path).toURI().toString());
+    			freecardImage.setImage(image);	//reassign image view with new image
+    			freecardImage.setFitHeight(130);
+    			freecardImage.setPreserveRatio(true);
+
+    	        imgContainer.getChildren().add(freecardImage);
+    	        clipPane.getChildren().add(imgContainer);
+    	        freeStackRoot.getChildren().add(clipPane);
+			}	
+		});
+	  }
+	  
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+ 
         HBox imgContainer = new HBox();
-		public void loadUncontrolledGroup() {
-			Pane clipPane = new Pane();
-	        // To center the slide show incase maximized
-	        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
-	        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
-
-//	        HBox imgContainer = new HBox();
-	        //image view	        
-	    	String path = new File("support/images/cards/"+"airlines.jpg").getAbsolutePath();
-	    	String path3 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
-	    	String path1 = new File("support/images/cards/"+"apathy.jpg").getAbsolutePath();
-	    	String path2 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
-	    	String path4 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
-
-			ImageView imgGreen = new ImageView();
-			ImageView imgBlue = new ImageView();
-			ImageView imgRose = new ImageView();
-			ImageView imgGold = new ImageView();
-			ImageView imgGold2 = new ImageView();
-
+		public void loadUncontrolledGroup(String cardName) {
+//			displayDrawCard(cardName);
 			
-  			Image image = new Image(new File(path).toURI().toString());
-  			imgGreen.setImage(image);	//reassign image view with new image
-  			imgGreen.setFitHeight(130);
-  			imgGreen.setPreserveRatio(true);
-  			
-  			Image image1 = new Image(new File(path1).toURI().toString());
-  			imgBlue.setImage(image1);	//reassign image view with new image
-  			imgBlue.setFitHeight(130);
-  			imgBlue.setPreserveRatio(true);
-  			
-  			Image image2 = new Image(new File(path2).toURI().toString());
-  			imgRose.setImage(image2);	//reassign image view with new image
-  			imgRose.setFitHeight(130);
-  			imgRose.setPreserveRatio(true);
-  			
-  			Image image3 = new Image(new File(path3).toURI().toString());
-  			imgGold.setImage(image3);	//reassign image view with new image
-  			imgGold.setFitHeight(130);
-  			imgGold.setPreserveRatio(true);
-  			
-  			Image image4 = new Image(new File(path4).toURI().toString());
-  			imgGold2.setImage(image4);	//reassign image view with new image
-  			imgGold2.setFitHeight(130);
-  			imgGold2.setPreserveRatio(true);
+			
+		  	Pane clipPane = new Pane();
 
-	        
-	        imgContainer.getChildren().addAll(imgGreen, imgGold, imgBlue, imgGold2, imgRose);
+			System.out.println("inside here run cards draw");
+			ImageView freecardImage = new ImageView();
+			
+			//set free card image here
+	    	String path = new File("support/images/cards/"+cardName).getAbsolutePath();
+	    	System.out.println(path);
+			Image image = new Image(new File(path).toURI().toString());
+			freecardImage.setImage(image);	//reassign image view with new image
+			freecardImage.setFitHeight(130);
+			freecardImage.setPreserveRatio(true);
+
+	        imgContainer.getChildren().add(freecardImage);
 	        clipPane.getChildren().add(imgContainer);
 	        freeStackRoot.getChildren().add(clipPane);
+			
+			
+			
+			
+			
+			
+			
+//			Pane clipPane = new Pane();
+	        // To center the slide show incase maximized
+//	        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
+//	        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
+//	        
+//	  	  displayDrawCard("airlines.jpg", clipPane);
+
+
+////	        HBox imgContainer = new HBox();
+//	        //image view	        
+//	    	String path = new File("support/images/cards/"+"airlines.jpg").getAbsolutePath();
+//	    	String path3 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
+//	    	String path1 = new File("support/images/cards/"+"apathy.jpg").getAbsolutePath();
+//	    	String path2 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
+//	    	String path4 = new File("support/images/cards/"+"assassination.jpg").getAbsolutePath();
+//
+//			ImageView imgGreen = new ImageView();
+//			ImageView imgBlue = new ImageView();
+//			ImageView imgRose = new ImageView();
+//			ImageView imgGold = new ImageView();
+//			ImageView imgGold2 = new ImageView();
+//
+//			
+//  			Image image = new Image(new File(path).toURI().toString());
+//  			imgGreen.setImage(image);	//reassign image view with new image
+//  			imgGreen.setFitHeight(130);
+//  			imgGreen.setPreserveRatio(true);
+//  			
+//  			Image image1 = new Image(new File(path1).toURI().toString());
+//  			imgBlue.setImage(image1);	//reassign image view with new image
+//  			imgBlue.setFitHeight(130);
+//  			imgBlue.setPreserveRatio(true);
+//  			
+//  			Image image2 = new Image(new File(path2).toURI().toString());
+//  			imgRose.setImage(image2);	//reassign image view with new image
+//  			imgRose.setFitHeight(130);
+//  			imgRose.setPreserveRatio(true);
+//  			
+//  			Image image3 = new Image(new File(path3).toURI().toString());
+//  			imgGold.setImage(image3);	//reassign image view with new image
+//  			imgGold.setFitHeight(130);
+//  			imgGold.setPreserveRatio(true);
+//  			
+//  			Image image4 = new Image(new File(path4).toURI().toString());
+//  			imgGold2.setImage(image4);	//reassign image view with new image
+//  			imgGold2.setFitHeight(130);
+//  			imgGold2.setPreserveRatio(true);
+//
+//	        
+//	        imgContainer.getChildren().addAll(imgGreen, imgGold, imgBlue, imgGold2, imgRose);
+//	        clipPane.getChildren().add(imgContainer);
+//	        freeStackRoot.getChildren().add(clipPane);
 
 //	        startAnimation(imgContainer);
 		}
-		
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 		public void loadSpecialCard() {
 			Pane clipPane = new Pane();
 	        // To center the slide show incase maximized
@@ -243,6 +307,8 @@ import javafx.stage.Stage;
 	        startAnimation(imgContainer2);
 		}
 		
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 		//start animation
 	    private void startAnimation(final HBox hbox) {
 	        //error occured on (ActionEvent t) line
@@ -279,17 +345,21 @@ import javafx.stage.Stage;
 	        anim.playFromStart();
 		}
 	    
-	    
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 	    // moving the card in untrolled group
 	    @FXML
 	    void uncontrolledGroupRightArrow(MouseEvent event) {	    	
 	    	uncontrolledGroupRightArrow(imgContainer);
 	    }
-	    
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 	    @FXML
 	    void uncontrolledGroupLeftArrow(MouseEvent event) {
 	    	uncontrolledGroupLeftArrow(imgContainer);
 	    }
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
 
 	    double uncontrolledGroupSlideCount = 0;
 	    public void uncontrolledGroupRightArrow(final HBox hbox){
@@ -299,6 +369,9 @@ import javafx.stage.Stage;
 	    	}
 	    	
 	    }
+	    
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
 	    public void uncontrolledGroupLeftArrow(final HBox hbox){
 	    	if (uncontrolledGroupSlideCount != 0) {
 	    		uncontrolledGroupSlideCount += 190;
@@ -307,8 +380,11 @@ import javafx.stage.Stage;
 	    }
 	    
 	    
-	        
-	
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+	    
+	    
+	    
 	}
 	
 	

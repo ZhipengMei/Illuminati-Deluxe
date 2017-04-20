@@ -9,18 +9,8 @@ public class Player implements Comparable<Player> {
 	private String turn;   
 	private String imageName;
 	private String announcement;
-	
-//	private static Player instance = null;
-	
+		
 	public Player(){}
-
-	//important singleton function
-//	public static Player getInstance(){
-//		if(instance == null){
-//			instance = new Player();
-//		}
-//		return instance;
-//	}
 	
 	public void setTurn(String turn){
 		this.turn = turn;

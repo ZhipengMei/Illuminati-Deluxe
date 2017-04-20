@@ -1,5 +1,6 @@
 package fxml;
 
+import fxml.inGameSlideMenuController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -266,6 +267,19 @@ public class gameTableController extends Message implements Initializable  {
             }
         });
         
+        draw.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+            	
+            	inGameSlideMenuController drawCard = new inGameSlideMenuController();
+            	drawCard.loadUncontrolledGroup("airlines.jpg");
+//            	//action enable only if player's turn
+//            	if(players.get(0).getTurn() == currentUser.getName()){
+//            		System.out.println("\nDraw a card");
+//            		//TODO
+//            		
+//            	}
+            }
+        });
         
         control.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent t) {
@@ -295,7 +309,6 @@ public class gameTableController extends Message implements Initializable  {
 
  		// corner menu
  		// position a corner menu in the top left corner, that initially is not visible
-// 		CornerMenu cornerMenu = new CornerMenu(CornerMenu.Location.BOTTOM_LEFT, stackPane, true)
  		cornerMenu = new CornerMenu(CornerMenu.Location.BOTTOM_LEFT, stackPane, true)
             .withAnimationInterpolation(null)
  		    .withAutoShowAndHide(true);
@@ -347,7 +360,10 @@ public class gameTableController extends Message implements Initializable  {
 		    		    }
 		    		    if (playerSnapshot.hasChild("announcement")) {
 		    		    	player.setAnnouncement((String) playerSnapshot.child("announcement").getValue());
-		    		    }	
+		    		    }
+		    		    if (playerSnapshot.hasChild("turn")) {
+		    		    	player.setTurn((String) playerSnapshot.child("turn").getValue());
+		    		    }
 		    			players.add(player);
 			    	}//end for
 			    	
@@ -432,6 +448,7 @@ public class gameTableController extends Message implements Initializable  {
     	    			//first draw announcement
     	    			for(int i=0; i<playersOrder.size();i++){
     			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("announcement").setValue(anouncementText);
+    			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("turn").setValue(name);
     	    			}
     	    		}//end if
         	} //end if
