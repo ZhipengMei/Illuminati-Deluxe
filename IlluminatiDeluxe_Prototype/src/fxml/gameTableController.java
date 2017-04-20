@@ -153,24 +153,16 @@ public class gameTableController extends Message implements Initializable  {
 	Boolean attackBool = true;
 	Boolean diceRolled = false;
 	
-	// create an array list
-//    ArrayList<ArrayList<String>> players = new ArrayList<ArrayList<String>>();
-    ArrayList<Player> players = new ArrayList<Player>();
-
-    ArrayList<ImageView> profileImages = new ArrayList<ImageView>();
+    ArrayList<Player> players = new ArrayList<Player>(); //store all players' info
+    ArrayList<ImageView> profileImages = new ArrayList<ImageView>(); 
     ArrayList<Label> names = new ArrayList<Label>();
     ArrayList<ImageView> diceImages = new ArrayList<ImageView>();
     ArrayList<Integer> diceVal = new ArrayList<Integer>();
-	TreeMap<Integer, String> diceValMap = new TreeMap<Integer, String>(); 
-//	TreeSet diceValSet = new TreeSet(); 
     ArrayList<String> playersOrder = new ArrayList<String>();
 
 
-
-    
     //corner menu 
     CornerMenu cornerMenu;
-
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -191,11 +183,7 @@ public class gameTableController extends Message implements Initializable  {
 		diceImages.add(diceImageview2);
 		diceImages.add(diceImageview3);    
         
-        setProfileDataNull();
-//        //hide all dice roll image view at first
-//        diceImageview1.setVisible(false);
-//        diceImageview2.setVisible(false);
-//        diceImageview3.setVisible(false);
+        setProfileDataNull(); //hide profile image at the very beginning
         
 		//rotate imageview
 		Animattion.createAnimation(diceImageview);
@@ -333,7 +321,6 @@ public class gameTableController extends Message implements Initializable  {
 			    	//clear out reusable tools
 			    	players.clear();
 			    	diceVal.clear();
-			    	diceValMap.clear();
 			    	playersOrder.clear();
 			    	setProfileDataNull();
 			    	
@@ -351,13 +338,11 @@ public class gameTableController extends Message implements Initializable  {
 		    		    	
 		    		    	String path = new File("support/images/"+ player.getDice()).getAbsolutePath();
 	        				Image image = new Image(new File(path).toURI().toString());
-//	        				((ImageView)diceImages.get(i)).setImage(image); //display the image
 	        				diceImageview1.setImage(image); //display the image  
 		    		    }
 		    		    if (playerSnapshot.hasChild("diceVal")) {
 		    		    	Integer result = (int) (long) playerSnapshot.child("diceVal").getValue();
 		    		    	player.setDiceVal(result);
-//		    		    	diceValMap.put(result,currentUser.getName());	
 		    		    	diceVal.add(result); //add dice value into arraylist for compa
 		    		    }
 		    		    if (playerSnapshot.hasChild("announcement")) {
@@ -374,7 +359,6 @@ public class gameTableController extends Message implements Initializable  {
 			    public void onCancelled(DatabaseError databaseError) {
 			    	players.clear();
 			    	diceVal.clear();
-			    	diceValMap.clear();
 			    	playersOrder.clear();
 			    }
 			});
@@ -387,7 +371,6 @@ public class gameTableController extends Message implements Initializable  {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-//				System.out.println("players size is:" + players.size());
 				
 		    	for(int i=0; i<players.size(); i++){
 		    		//getting the appropriate player's info
@@ -411,35 +394,34 @@ public class gameTableController extends Message implements Initializable  {
 			}	
 		});
     }
+    
+    
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
     
     public void compareDiceValue(){
     	Boolean repeatedDiceRoll = false;
     	//making sure there is enough player for the game to begin
     	if(players.size() > 2){
-        		if(diceVal.size() > 2){        			
+        		if(diceVal.size() > 2){    
+        			//make sure no repeated dice roll 
         			for(int i:diceVal){
         				if(moreThanOnce(diceVal, i) == true){
         					repeatedDiceRoll = true;
         					diceVal.clear(); //erase dice value array
-//        					System.out.println("playersOrder " +playersOrder.size());
-//        					System.out.println("\n repeated dice roll \n ");
+
         					//remove dice value from database
         	    			for(int j=0; j<playersOrder.size();j++){	
-//            					System.out.println("\n repeated dice rolllllllllllllllll2 \n ");
-
-        			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("diceVal").removeValue();
+        	    				rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("diceVal").removeValue();
         			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("dice").removeValue();
         			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("announcement").setValue("Re-Roll Dice again to start the game !!!");
-        	    			}
+        	    			}        	    			
+        	    			diceRolled = true; //enable to roll dice again
         	    			break;
         				}
         			}//end for
 
         			if(repeatedDiceRoll == false){
-        				
-//    					System.out.println("\n goooddd dice rolllllllllllllllll2 \n ");
-
     	    			//detect highest dice roll value
     		    		int largest = Collections.max(diceVal);
     		    		Player maxPlayer = Collections.max(players);
@@ -452,12 +434,13 @@ public class gameTableController extends Message implements Initializable  {
     			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("announcement").setValue(anouncementText);
     	    			}
     	    		}//end if
-
         	} //end if
-
-    	}
-    	
+    	}    
     }
+    
+    
+    
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
     public void rollingDice(){
     	if(diceRolled == false) {
@@ -467,7 +450,7 @@ public class gameTableController extends Message implements Initializable  {
 			System.out.println("Rolling dice");
 			String diceImageName = String.format("%s-%s.gif",dice[0],dice[1]);
 
-//			diceRolled = true; //play only roll dice once each turn
+			diceRolled = true; //play only roll dice once each turn
 		
 			//upload the dice roll to firebase
     		final DatabaseReference ref = rootRef.child(currentUser.getCurrentChannel()).child(currentUser.getName()).child("dice");
@@ -497,6 +480,9 @@ public class gameTableController extends Message implements Initializable  {
 		});
 
     }
+    
+    
+    
     
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
     //this method will parse imageView with a image name
