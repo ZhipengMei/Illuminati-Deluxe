@@ -1,6 +1,3 @@
-
-
-
 import java.io.File;
 
 import Extension.ConfirmBox;
@@ -129,21 +126,49 @@ public class Main extends Application {
 //public class Main {
 //	public static void main(String[] args) {
 //		
-//	    ArrayList<Integer> diceVal = new ArrayList<Integer>();
-//		TreeMap<Integer, String> diceValMap = new TreeMap<Integer, String>();  
-//
-//	    diceVal.add(11);
-//	    diceVal.add(14);
-//	    diceVal.add(5);
-//	    
-//	    diceValMap.put( 11, "AA");
-//	    diceValMap.put(5,"BB");
-//	    diceValMap.put(14,"CC");
-//	    
-//		int largest = Collections.max(diceVal);
-//		System.out.println(largest);
+////	    ArrayList<Integer> diceVal = new ArrayList<Integer>();
+////		TreeMap<Integer, String> diceValMap = new TreeMap<Integer, String>();  
+////
+////	    diceVal.add(11);
+////	    diceVal.add(14);
+////	    diceVal.add(5);
+////	    
+////	    diceValMap.put( 11, "AA");
+////	    diceValMap.put(5,"BB");
+////	    diceValMap.put(14,"CC");
+////	    
+////		int largest = Collections.max(diceVal);
+////		System.out.println(largest);
+////		
+////		String name = diceValMap.get(largest);
+////		System.out.println(name);
 //		
-//		String name = diceValMap.get(largest);
-//		System.out.println(name);
+//		
+//		ArrayList<Integer> list = new ArrayList<Integer>();
+//		list.add(3);
+//		list.add(7);
+//		list.add(3);
+//		list.add(9);
+//		list.add(3);
+//		
+//		
+//		for(int i:list){
+////			System.out.println(i + " is repeated: " + moreThanOnce(list, i));
+//			if(moreThanOnce(list, i) == true){
+//				System.out.println("my love wil not go in bro");
+//				break;
+//			}
+//		}
+//	}
+//	
+//	public static boolean moreThanOnce(ArrayList<Integer> list, int searched) 
+//	{
+//	    int numCount = 0;
+//
+//	    for (int thisNum : list) {
+//	        if (thisNum == searched) numCount++;
+//	    }
+//
+//	    return numCount > 1;
 //	}
 //}
