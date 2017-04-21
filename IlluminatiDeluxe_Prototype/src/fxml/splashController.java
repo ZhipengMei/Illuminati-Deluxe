@@ -51,8 +51,8 @@ public class splashController implements Initializable {
 		@Override
 		public void run() {
 			try {
-//				Thread.sleep(1500); //1.5 second
-				Thread.sleep(100); //skip login 
+				Thread.sleep(1000); //1.5 second
+//				Thread.sleep(100); //skip login 
 				//DO NOT DELETE, ORIGINAL CODE
 				Platform.runLater(new Runnable() {
 

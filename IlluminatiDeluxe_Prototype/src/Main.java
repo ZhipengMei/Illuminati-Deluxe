@@ -29,6 +29,7 @@ public class Main extends Application {
 				
 		Parent root = FXMLLoader.load(getClass().getResource("fxml/splashFX.fxml"));
 		primaryStage.getIcons().add(new Image("file:appicon.png"));
+//		primaryStage.getIcons().add(new Image(ResourceLoader.load("file:support/images/appicon.png")));
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);

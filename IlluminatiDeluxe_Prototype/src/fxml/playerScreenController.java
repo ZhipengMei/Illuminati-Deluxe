@@ -316,7 +316,7 @@ public class playerScreenController implements Initializable {
 	// in game progress loading animation
     private void inGame(){
     	
-    	String path = new File("appicon.png").getAbsolutePath();
+    	String path = new File("support/images/appicon.png").getAbsolutePath();
 		Image image = new Image(new File(path).toURI().toString());
       
 		ImageView imageView = new ImageView(image);
