@@ -102,78 +102,87 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="71.0">
-                     <image>
-                        <Image url="@../../support/images/cards/airlines.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
+            <StackPane fx:id="stack00" prefHeight="150.0" prefWidth="200.0" />
+            <StackPane fx:id="stack01" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack02" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack03" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack04" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack05" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack06" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack07" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack08" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack10" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <StackPane fx:id="stack11" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack12" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack13" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack14" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack15" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack16" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack17" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack18" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack20" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <StackPane fx:id="stack21" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack22" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack23" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack24" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack25" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack26" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack27" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack28" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack23" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" />
+            <StackPane fx:id="stack31" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack32" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack33" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack34" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack35" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack36" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack37" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack38" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack40" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" />
+            <StackPane fx:id="stack41" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack42" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack43" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack44" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack45" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack46" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack47" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack48" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack50" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" />
+            <StackPane fx:id="stack51" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack52" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack53" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack54" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack55" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack56" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack57" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack58" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack60" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" />
+            <StackPane fx:id="stack61" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack62" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack63" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack64" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack65" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack66" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack67" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack68" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack70" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" />
+            <StackPane fx:id="stack71" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack72" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack73" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack74" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack75" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack76" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack77" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack78" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+            <StackPane fx:id="stack80" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" />
+            <StackPane fx:id="stack81" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <StackPane fx:id="stack82" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <StackPane fx:id="stack83" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+            <StackPane fx:id="stack84" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+            <StackPane fx:id="stack85" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+            <StackPane fx:id="stack86" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+            <StackPane fx:id="stack87" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+            <StackPane fx:id="stack88" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
          </children>
       </GridPane>
       <AnchorPane fx:id="anouncementPane" layoutX="52.0" layoutY="511.0" prefHeight="43.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -96,8 +97,18 @@ public class gameTableController extends Message implements Initializable  {
 	
 	// Get a reference to the database
 	final static DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-
 	
+    ArrayList<String> IlluminatiCards = new ArrayList<String>(
+    		Arrays.asList("The Bavarian Illuminati.png",
+    				"The Discordian Society.png",
+    				"The Servants of Cthulhu.png",
+    				"The Bermuda Triangle.png",
+    				"The Gnomes of Zürich.png",
+    				"Society of Assassins.png",
+    				"The Network.png",
+    				"The UFOs.png"));
+  
+
 	//---in game profile ----
 	 @FXML
 	 private ImageView player1Image;
@@ -148,8 +159,252 @@ public class gameTableController extends Message implements Initializable  {
     @FXML
     private JFXDrawer inGamedrawer;
     
+    
+    //----------------------------------------------------------------
     @FXML
     private GridPane powerStructureGrid;
+    
+    @FXML
+    private StackPane stack00;
+
+    @FXML
+    private StackPane stack01;
+
+    @FXML
+    private StackPane stack02;
+
+    @FXML
+    private StackPane stack03;
+
+    @FXML
+    private StackPane stack04;
+
+    @FXML
+    private StackPane stack05;
+
+    @FXML
+    private StackPane stack06;
+
+    @FXML
+    private StackPane stack07;
+
+    @FXML
+    private StackPane stack08;
+
+    @FXML
+    private StackPane stack10;
+
+    @FXML
+    private StackPane stack11;
+
+    @FXML
+    private StackPane stack12;
+
+    @FXML
+    private StackPane stack13;
+
+    @FXML
+    private StackPane stack14;
+
+    @FXML
+    private StackPane stack15;
+
+    @FXML
+    private StackPane stack16;
+
+    @FXML
+    private StackPane stack17;
+
+    @FXML
+    private StackPane stack18;
+
+    @FXML
+    private StackPane stack20;
+
+    @FXML
+    private StackPane stack21;
+
+    @FXML
+    private StackPane stack22;
+
+    @FXML
+    private StackPane stack23;
+
+    @FXML
+    private StackPane stack24;
+
+    @FXML
+    private StackPane stack25;
+
+    @FXML
+    private StackPane stack26;
+
+    @FXML
+    private StackPane stack27;
+
+    @FXML
+    private StackPane stack28;
+
+    @FXML
+    private StackPane stack31;
+
+    @FXML
+    private StackPane stack32;
+
+    @FXML
+    private StackPane stack33;
+
+    @FXML
+    private StackPane stack34;
+
+    @FXML
+    private StackPane stack35;
+
+    @FXML
+    private StackPane stack36;
+
+    @FXML
+    private StackPane stack37;
+
+    @FXML
+    private StackPane stack38;
+
+    @FXML
+    private StackPane stack40;
+
+    @FXML
+    private StackPane stack41;
+
+    @FXML
+    private StackPane stack42;
+
+    @FXML
+    private StackPane stack43;
+
+    @FXML
+    private StackPane stack44;
+
+    @FXML
+    private StackPane stack45;
+
+    @FXML
+    private StackPane stack46;
+
+    @FXML
+    private StackPane stack47;
+
+    @FXML
+    private StackPane stack48;
+
+    @FXML
+    private StackPane stack50;
+
+    @FXML
+    private StackPane stack51;
+
+    @FXML
+    private StackPane stack52;
+
+    @FXML
+    private StackPane stack53;
+
+    @FXML
+    private StackPane stack54;
+
+    @FXML
+    private StackPane stack55;
+
+    @FXML
+    private StackPane stack56;
+
+    @FXML
+    private StackPane stack57;
+
+    @FXML
+    private StackPane stack58;
+
+    @FXML
+    private StackPane stack60;
+
+    @FXML
+    private StackPane stack61;
+
+    @FXML
+    private StackPane stack62;
+
+    @FXML
+    private StackPane stack63;
+
+    @FXML
+    private StackPane stack64;
+
+    @FXML
+    private StackPane stack65;
+
+    @FXML
+    private StackPane stack66;
+
+    @FXML
+    private StackPane stack67;
+
+    @FXML
+    private StackPane stack68;
+
+    @FXML
+    private StackPane stack70;
+
+    @FXML
+    private StackPane stack71;
+
+    @FXML
+    private StackPane stack72;
+
+    @FXML
+    private StackPane stack73;
+
+    @FXML
+    private StackPane stack74;
+
+    @FXML
+    private StackPane stack75;
+
+    @FXML
+    private StackPane stack76;
+
+    @FXML
+    private StackPane stack77;
+
+    @FXML
+    private StackPane stack78;
+
+    @FXML
+    private StackPane stack80;
+
+    @FXML
+    private StackPane stack81;
+
+    @FXML
+    private StackPane stack82;
+
+    @FXML
+    private StackPane stack83;
+
+    @FXML
+    private StackPane stack84;
+
+    @FXML
+    private StackPane stack85;
+
+    @FXML
+    private StackPane stack86;
+
+    @FXML
+    private StackPane stack87;
+
+    @FXML
+    private StackPane stack88;
+
+    //----------------------------------------------------------------
 
 	Boolean attackBool = true;
 	Boolean diceRolled = false;
@@ -271,7 +526,16 @@ public class gameTableController extends Message implements Initializable  {
             public void handle(ActionEvent t) {
             	
             	inGameSlideMenuController drawCard = new inGameSlideMenuController();
-            	drawCard.loadUncontrolledGroup("airlines.jpg");
+//            	drawCard.loadUncontrolledGroup("The UFOs.png");
+//            	
+            	
+//    			Platform.runLater(new Runnable() {
+//    				@Override
+//    				public void run() {
+//    					drawIlluminatiCard("ninjas.jpg");    					
+//    				}
+//    			});
+            	
 //            	//action enable only if player's turn
 //            	if(players.get(0).getTurn() == currentUser.getName()){
 //            		System.out.println("\nDraw a card");
@@ -367,7 +631,8 @@ public class gameTableController extends Message implements Initializable  {
 		    			players.add(player);
 			    	}//end for
 			    	
-			    	
+
+								    
 			    	assignProfileData();
 			    	compareDiceValue();
 			    }
@@ -432,7 +697,7 @@ public class gameTableController extends Message implements Initializable  {
         			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("dice").removeValue();
         			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(j)).child("announcement").setValue("Re-Roll Dice again to start the game !!!");
         	    			}        	    			
-        	    			diceRolled = true; //enable to roll dice again
+        	    			diceRolled = false; //enable to roll dice again
         	    			break;
         				}
         			}//end for
@@ -444,12 +709,51 @@ public class gameTableController extends Message implements Initializable  {
     		    		String name = maxPlayer.getName();
     		    		System.out.println(name+" has the highest dice roll");
     		    		String anouncementText = name+" has the highest dice roll, " +name+" please draw a card !!!";
-    	    			
+    		    		
+    		    		//swap the turn order once dice rolled
+    		    		
     	    			//first draw announcement
     	    			for(int i=0; i<playersOrder.size();i++){
     			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("announcement").setValue(anouncementText);
     			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("turn").setValue(name);
+    			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("orders").setValue(playersOrder);
     	    			}
+    	    			
+    	    			//highest dice roll player choose illumincati card 
+    	    			if(currentUser.getName() == name){
+        			    	Platform.runLater(new Runnable() {
+        			    		@Override
+        			    		public void run() {    			    			
+        			    			for(int i=0; i<playersOrder.size();i++){
+        				    			long seed = System.nanoTime();            			    			
+            			    			Collections.shuffle(IlluminatiCards, new Random(seed));
+            		    				String randomIllCard = IlluminatiCards.get(0);               			    			
+                			    		rootRef.child(currentUser.getCurrentChannel()).child(playersOrder.get(i)).child("illuminati").setValue(randomIllCard);
+            			    			IlluminatiCards.remove(0);            			    			
+                	    			}
+        			    		}	
+        					});
+    	    			}
+
+    	    			final DatabaseReference illCardRef = rootRef.child(currentUser.getCurrentChannel()).child(currentUser.getName()).child("illuminati");
+    	    			illCardRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    	    			    @Override
+    	    			    public void onDataChange(DataSnapshot dataSnapshot) {
+    	    	    			//getting illuminati card
+    	    			    	String illCard = (String) dataSnapshot.getValue();
+    	    	    			Platform.runLater(new Runnable() {
+    	    	    				@Override
+    	    	    				public void run() {
+    	    	    					drawIlluminatiCard(illCard);
+    	    	    				}
+    	    	    			});
+
+    	    			    }
+
+    	    			    @Override
+    	    			    public void onCancelled(DatabaseError databaseError) {}
+    	    			});
+    	    			
     	    		}//end if
         	} //end if
     	}    
@@ -528,6 +832,21 @@ public class gameTableController extends Message implements Initializable  {
 //    		}	
 //		});
     }
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    
+    public void drawIlluminatiCard(String cardName){
+		ImageView freecardImage = new ImageView();				
+		//set free card image here
+    	String path = new File("support/images/cards/Illuminati/"+cardName).getAbsolutePath();
+		Image image = new Image(new File(path).toURI().toString());
+		freecardImage.setImage(image);	//reassign image view with new image
+		freecardImage.setFitHeight(110);
+		freecardImage.setPreserveRatio(true);	
+		stack44.getChildren().add(freecardImage);
+
+    }
+    
    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//check if number appeared in arraylist more than once
