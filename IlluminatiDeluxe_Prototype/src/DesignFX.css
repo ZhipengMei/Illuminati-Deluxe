@@ -152,8 +152,10 @@
 
 
 
-/******* In GAME SCREEN BEGING *******/
-
+/******* In GAME SCREEN BEGIN *******/
+#freeStackRoot {
+    -fx-background-color: #fff;
+}
 #inGameSlideAnchorRoot {
     -fx-background-color: rgba(0, 100, 100, 0.5); /*transparent color*/
 }

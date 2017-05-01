@@ -39,17 +39,20 @@ import javafx.util.Duration;
 
 	public class inGameSlideMenuController implements Initializable {
 		
+
+	    @FXML
+	    private Button uncontrolledLeftBtn;
 	    @FXML
 	    private StackPane freeStackRoot;
 	    
 	    @FXML
 	    private StackPane specialCardStack;
 	
-	    @FXML
-	    private AnchorPane uncontrolledCardsPane;
-	    
-	    @FXML
-	    private AnchorPane specialCardPane;
+//	    @FXML
+//	    private AnchorPane uncontrolledCardsPane;
+//	    
+//	    @FXML
+//	    private AnchorPane specialCardPane;
 	    
 	    @FXML
 	    private AnchorPane chatPane;
@@ -84,6 +87,30 @@ import javafx.util.Duration;
 	    void onEnter(ActionEvent event) {
 		    Chat chat = new Chat(chatScrollPane, flowPaneInScroll, inGameChatTextField, inGameChatSendBtn);
 		    chat.sendMessage();
+	    }
+	    
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+	    // moving the card in untrolled group
+	    @FXML
+	    void uncontrolledGroupRightArrow(MouseEvent event) {
+	    	System.out.println("left arrow clicked");
+
+//	    	uncontrolledGroupRightArrow(groupImgContainer);
+	    }
+	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+
+	    @FXML
+	    void uncontrolledGroupLeftArrow(MouseEvent event) {
+//	    	uncontrolledGroupLeftArrow(specialImgContainer);
+	    	
+	    	System.out.println("left arrow clicked");
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					displayDrawCard("The UFOs.png");    					
+				}
+			});
 	    }
 	    
 	    
@@ -124,7 +151,7 @@ import javafx.util.Duration;
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					displayDrawCard("apathy.jpg");					
+//					displayDrawCard("The UFOs.png");					
 				}
 			});
 			
@@ -140,40 +167,42 @@ import javafx.util.Duration;
 		}// end intialize
 		
 	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-
+		
 		HBox groupImgContainer = new HBox(); //for uncontrolled group
 		HBox specialImgContainer = new HBox(); //for special cards
 
-	  //show new draw card free onto screen
-	  public void displayDrawCard(String cardName){
-		  Pane clipPane = new Pane();
-		// To center the slide show incase maximized
-	        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
+		//show new draw card free onto screen
+		public void displayDrawCard(String cardName){
+			Pane clipPane = new Pane();
+			clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
 	        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
 
-		  
-		  
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("inside here run cards draw");
-				ImageView freecardImage = new ImageView();				
-    			//set free card image here
-    	    	String path = new File("support/images/cards/group/"+cardName).getAbsolutePath();
-    	    	System.out.println(path);
-    			Image image = new Image(new File(path).toURI().toString());
-    			freecardImage.setImage(image);	//reassign image view with new image
-    			freecardImage.setFitHeight(130);
-    			freecardImage.setPreserveRatio(true);
+    		System.out.println("inside here run cards draw");
+    		ImageView freecardImage = new ImageView();				
+			//set free card image here
+	    	String path = new File("support/images/cards/Illuminati/"+cardName).getAbsolutePath();
+	    	System.out.println(path);
+			Image image = new Image(new File(path).toURI().toString());
+			freecardImage.setImage(image);	//reassign image view with new image
+			freecardImage.setFitHeight(130);
+			freecardImage.setPreserveRatio(true);
 
-    			groupImgContainer.getChildren().add(freecardImage);
-    			System.out.println("groupImg size: - > " + groupImgContainer.getChildren().size());
+			groupImgContainer.getChildren().add(freecardImage);
+			System.out.println("groupImg size: - > " + groupImgContainer.getChildren().size());
     			
-    	        clipPane.getChildren().add(groupImgContainer);
-    	        freeStackRoot.getChildren().add(clipPane);
-    	        startAnimation(groupImgContainer);
-				
-				
+	        clipPane.getChildren().add(groupImgContainer);
+	    	        
+	        Platform.runLater(new Runnable() {
+	        	@Override
+        		public void run() {
+	        		if(freeStackRoot == null){
+	        			System.out.println("freeStackRoot -> "+ freeStackRoot.getChildren());
+	        			freeStackRoot = new StackPane();
+	        		}else{
+	        			freeStackRoot.getChildren().add(clipPane);
+	        		}
+	        	}	
+			});
 				
 //		        //image view	        
 //		    	String path = new File("support/images/cards/group/"+"airlines.jpg").getAbsolutePath();
@@ -218,8 +247,7 @@ import javafx.util.Duration;
 //	  			groupImgContainer.getChildren().addAll(imgGreen, imgGold, imgBlue, imgGold2, imgRose);
 //		        clipPane.getChildren().add(groupImgContainer);
 //		        freeStackRoot.getChildren().add(clipPane);
-			}	
-		});
+
 	  }
 	  
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
@@ -234,7 +262,7 @@ import javafx.util.Duration;
 			ImageView freecardImage = new ImageView();
 			
 			//set free card image here
-	    	String path = new File("support/images/cards/group/"+cardName).getAbsolutePath();
+	    	String path = new File("support/images/cards/Illuminati/"+cardName).getAbsolutePath();
 	    	System.out.println(path);
 			Image image = new Image(new File(path).toURI().toString());
 			freecardImage.setImage(image);	//reassign image view with new image
@@ -243,7 +271,7 @@ import javafx.util.Duration;
 
 			specialImgContainer.getChildren().add(freecardImage);
 	        clipPane.getChildren().add(specialImgContainer);
-	        freeStackRoot.getChildren().add(clipPane);
+//	        freeStackRoot.getChildren().add(clipPane);
 			
 			
 			
@@ -387,19 +415,8 @@ import javafx.util.Duration;
 		}
 	    
 	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
 
-	    // moving the card in untrolled group
-	    @FXML
-	    void uncontrolledGroupRightArrow(MouseEvent event) {	    	
-	    	uncontrolledGroupRightArrow(groupImgContainer);
-	    }
-	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-
-	    @FXML
-	    void uncontrolledGroupLeftArrow(MouseEvent event) {
-	    	uncontrolledGroupLeftArrow(specialImgContainer);
-	    }
+	   
 	    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
 
 	    double uncontrolledGroupSlideCount = 0;

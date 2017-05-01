@@ -426,6 +426,7 @@ public class gameTableController extends Message implements Initializable  {
     //javaFX's main for current scene
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		loadConsoleMenu();
 
 		//store player imageview into arraylist
@@ -468,6 +469,7 @@ public class gameTableController extends Message implements Initializable  {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
 	//console menu
 	public void loadConsoleMenu(){
+		inGamedrawer.open();
 		try {
 			AnchorPane apane = FXMLLoader.load(getClass().getResource("inGameSlideMenu.fxml"));
 			inGamedrawer.setSidePane(apane);
@@ -507,7 +509,7 @@ public class gameTableController extends Message implements Initializable  {
                 new ImageView(new Image("file:support/images/ingameMenu/neutralize.png")));
         MenuItem destroy = new MenuItem("Attack to Destroy",
                 new ImageView(new Image("file:support/images/ingameMenu/destroy.png")));
-        MenuItem cancel = new MenuItem("Cancel",
+        MenuItem cancel = new MenuItem("Dismiss Menu",
                 new ImageView(new Image("file:support/images/ingameMenu/cancel.png")));
         MenuItem moveMoney = new MenuItem("Transfer Money",
                 new ImageView(new Image("file:support/images/ingameMenu/money.png")));
@@ -526,15 +528,13 @@ public class gameTableController extends Message implements Initializable  {
             public void handle(ActionEvent t) {
             	
             	inGameSlideMenuController drawCard = new inGameSlideMenuController();
-//            	drawCard.loadUncontrolledGroup("The UFOs.png");
-//            	
-            	
-//    			Platform.runLater(new Runnable() {
-//    				@Override
-//    				public void run() {
-//    					drawIlluminatiCard("ninjas.jpg");    					
-//    				}
-//    			});
+
+    			Platform.runLater(new Runnable() {
+    				@Override
+    				public void run() {
+    					drawCard.displayDrawCard("The UFOs.png");    					
+    				}
+    			});
             	
 //            	//action enable only if player's turn
 //            	if(players.get(0).getTurn() == currentUser.getName()){
