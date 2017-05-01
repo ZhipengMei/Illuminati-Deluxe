@@ -529,12 +529,12 @@ public class gameTableController extends Message implements Initializable  {
             	
             	inGameSlideMenuController drawCard = new inGameSlideMenuController();
 
-    			Platform.runLater(new Runnable() {
-    				@Override
-    				public void run() {
-    					drawCard.displayDrawCard("The UFOs.png");    					
-    				}
-    			});
+//    			Platform.runLater(new Runnable() {
+//    				@Override
+//    				public void run() {
+//    					drawCard.displayDrawCard("The UFOs.png");    					
+//    				}
+//    			});
             	
 //            	//action enable only if player's turn
 //            	if(players.get(0).getTurn() == currentUser.getName()){
