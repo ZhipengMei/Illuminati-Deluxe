@@ -52,7 +52,7 @@ Describe any challenges encountered while building the app.
 ## Rulebook
 [Illuminati game rule](http://www.sjgames.com/illuminati/img/illuminati_rules.pdf)
 
-## Contribution Effort Chart
+## Team Contribution Effort Chart
 
 |  Document |  Zhipeng Mei | Patrapee Pongtana   | Darrian Bezayiff  |   |
 |---|---|---|---|---|
