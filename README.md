@@ -3,7 +3,7 @@ Digital Illuminati Game by CECS 343 Group D
 
 **Illuminati Deluxe** is a desktop application developed using Java.
 
-Time spent: **50** hours spent in total
+Time spent: **70+** hours spent in total
 
 ## User Stories
 
@@ -51,6 +51,20 @@ Describe any challenges encountered while building the app.
 
 ## Rulebook
 [Illuminati game rule](http://www.sjgames.com/illuminati/img/illuminati_rules.pdf)
+
+## Contribution Effort Chart
+
+|  Document |  Zhipeng Mei | Patrapee Pongtana   | Darrian Bezayiff  |   |
+|---|---|---|---|---|
+|  Vision Doc   |  33% | 33% | 33% |   |
+|  Project Plan |  33% | 33% | 33% |   |
+|  FlowChart    | 100% | x   | x   |   |
+|  UML          | x    |100% | x   |   |
+|  Use Case     | x    |100% | x   |   |
+|  Test Case    | x    |100% | x   |   |
+|  User Manual  | 100% | x   | x   |   |
+
+[//]: <> (|  Coding Part  | 90%  |10%  | x   |   |)
 
 
 ## License
