@@ -63,7 +63,7 @@ Describe any challenges encountered while building the app.
 |  Use Case     | x    |100% | x   |   |
 |  Test Case    | x    |100% | x   |   |
 |  User Manual  | 100% | x   | x   |   |
-
+|  Coding Part  | 90%  |10%  | x   |   |
 [//]: <> (|  Coding Part  | 90%  |10%  | x   |   |)
 
 
