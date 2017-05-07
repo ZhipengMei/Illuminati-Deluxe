@@ -46,6 +46,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/). -->
 ## Notes
 
 Describe any challenges encountered while building the app.
+- Poor team communication. 
 - Lack of knowledge to install Firebase Server Java SDk
 - Unfamiliar with graphics and animation creation in Java
 
