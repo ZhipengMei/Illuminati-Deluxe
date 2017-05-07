@@ -12,9 +12,8 @@ The following **required** functionality is complete:
 - [x] Card class
 - [x] Gameplay interface
 - [x] Match making system
-- [ ] Rule enforcement during game play
- * Roll Dice
- * Draw Card
+- [x] Roll Dice
+- [x] Draw Illuminnati Card
 - [x] Actions Menu
 
 
@@ -31,7 +30,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 - [x] data persistence
-- [ ] virtually sharing same deck of cards
+- [x] virtually sharing same deck of cards
 
 
 
