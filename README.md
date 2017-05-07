@@ -8,7 +8,6 @@ Time spent: **70+** hours spent in total
 ## User Stories
 
 The following **required** functionality is complete:
-
 - [x] Card class
 - [x] Gameplay interface
 - [x] Match making system
@@ -16,21 +15,20 @@ The following **required** functionality is complete:
 - [x] Draw Illuminnati Card
 - [x] Actions Menu
 - [x] virtually sharing same deck of cards
+- [x] data persistence
+
 
 The following **optional** features are implemented:
-
 - [x] User can create account
-- [x] Customize personal profile
 - [x] In game chat feature
 - [x] Launch screen
-- [x] Loading aniamtion
 - [x] Log out user account
-- [x] In game music
 
 
 The following **additional** features are implemented:
-- [x] data persistence
-
+- [x] In game music
+- [x] Customize personal profile
+- [x] Loading aniamtion
 
 ## Video Walkthrough 
 
