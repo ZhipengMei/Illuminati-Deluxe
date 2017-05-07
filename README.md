@@ -15,7 +15,7 @@ The following **required** functionality is complete:
 - [x] Roll Dice
 - [x] Draw Illuminnati Card
 - [x] Actions Menu
-
+- [x] virtually sharing same deck of cards
 
 The following **optional** features are implemented:
 
@@ -30,8 +30,6 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 - [x] data persistence
-- [x] virtually sharing same deck of cards
-
 
 
 ## Video Walkthrough 
