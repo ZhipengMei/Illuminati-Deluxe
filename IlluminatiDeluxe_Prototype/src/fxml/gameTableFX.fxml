@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -20,7 +22,6 @@
          <children>
             <HBox prefHeight="54.0" prefWidth="788.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <JFXHamburger fx:id="inGamehamburger" prefHeight="50.0" prefWidth="44.0" />
                   <Pane prefHeight="69.0" prefWidth="98.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -77,8 +78,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="inGamedrawer" defaultDrawerSize="600.0" direction="RIGHT" layoutX="458.0" layoutY="92.0" prefHeight="430.0" prefWidth="266.0" AnchorPane.rightAnchor="0.0" />
-      <GridPane fx:id="powerStructureGrid" layoutX="14.0" layoutY="89.0" prefHeight="401.0" prefWidth="770.0">
+      <GridPane fx:id="powerStructureGrid" layoutX="14.0" layoutY="93.0" prefHeight="401.0" prefWidth="613.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -197,6 +197,56 @@
                   </ImageView>
                </children>
             </StackPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="inGameSlideAnchorRoot" layoutX="498.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" AnchorPane.rightAnchor="-4.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox prefHeight="33.0" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="uncontrolledGroupLabel" text="Uncontrolled Group" />
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="33.0" textAlignment="RIGHT" />
+                     </children>
+                  </HBox>
+                  <AnchorPane fx:id="uncontrolledCardsPane" prefHeight="140.0" prefWidth="300.0">
+                     <children>
+                        <StackPane fx:id="freeStackRoot" layoutX="40.0" prefHeight="126.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupLeftArrow" text="&lt;-" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                        <Button layoutX="507.0" layoutY="55.0" mnemonicParsing="false" onMousePressed="#uncontrolledGroupRightArrow" text="-&gt;" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                     </children>
+                  </AnchorPane>
+                  <HBox prefHeight="19.0" prefWidth="300.0">
+                     <children>
+                        <Label fx:id="specialCardLabel" text="Special Cards" />
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="33.0" textAlignment="RIGHT" />
+                     </children>
+                  </HBox>
+                  <AnchorPane fx:id="specialCardPane" prefHeight="140.0" prefWidth="300.0">
+                     <children>
+                        <StackPane fx:id="specialCardStack" layoutX="40.0" layoutY="2.0" prefHeight="126.0" prefWidth="220.0" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                        <Button layoutX="16.0" layoutY="46.0" mnemonicParsing="false" text="&lt;-" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                        <Button layoutX="508.0" layoutY="51.0" mnemonicParsing="false" text="-&gt;" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="specialCardLabel1" text="Chat" />
+                  <AnchorPane fx:id="chatPane" prefHeight="148.0" prefWidth="296.0">
+                     <children>
+                        <ScrollPane fx:id="chatScrollPane" layoutX="33.0" layoutY="-3.0" prefHeight="97.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
+                           <content>
+                              <FlowPane fx:id="flowPaneInScroll" prefHeight="95.0" prefWidth="282.0" />
+                           </content>
+                        </ScrollPane>
+                        <HBox layoutY="146.0" prefHeight="27.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <TextField fx:id="inGameChatTextField" onAction="#onEnter" prefHeight="27.0" prefWidth="246.0" />
+                              <Button fx:id="inGameChatSendBtn" mnemonicParsing="false" onMousePressed="#inGameChatSend_ACTION" prefHeight="21.0" prefWidth="54.0" text="Send" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

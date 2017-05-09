@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="inGameSlideAnchorRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.inGameSlideMenuController">
+<AnchorPane fx:id="inGameSlideAnchorRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.inGameSlideMenuController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,11 +41,11 @@
                </children>
             </AnchorPane>
             <Label fx:id="specialCardLabel1" text="Chat" />
-            <AnchorPane fx:id="chatPane" prefHeight="217.0" prefWidth="300.0">
+            <AnchorPane fx:id="chatPane" prefHeight="148.0" prefWidth="296.0">
                <children>
-                  <ScrollPane fx:id="chatScrollPane" layoutX="295.0" layoutY="-6.0" prefHeight="190.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane fx:id="chatScrollPane" layoutX="33.0" layoutY="-3.0" prefHeight="64.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
                      <content>
-                        <FlowPane fx:id="flowPaneInScroll" prefHeight="187.0" prefWidth="287.0" />
+                        <FlowPane fx:id="flowPaneInScroll" prefHeight="59.0" prefWidth="282.0" />
                      </content>
                   </ScrollPane>
                   <HBox layoutY="146.0" prefHeight="27.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
