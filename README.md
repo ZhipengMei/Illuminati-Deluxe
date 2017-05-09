@@ -85,6 +85,12 @@ Describe any challenges encountered while building the app.
 
 [//]: <> (|  Coding Part  | 90%  |10%  | x   |   |)
 
+## Tools
+
+- Eclipse Neon.3 (4.6.3)
+- Scene Builder - Gluon 8.2.0
+- Firebase 
+
 
 ## License
 
