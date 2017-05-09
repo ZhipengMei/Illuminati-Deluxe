@@ -34,9 +34,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
- <img src='http://i.imgur.com/HuaBCvM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+ <img src='https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Video%20Walkthrough/Walkthrough1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
- <img src='http://i.imgur.com/VqOfBnQ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+ <img src='https://raw.githubusercontent.com/AnimeMei/CECS-343-mw-GroupD/master/Video%20Walkthrough/Walkthrough2.gif?token=ASmABcqxLutuYg7mhQk2QgY2qVzI6tpsks5ZGlFOwA%3D%3D' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/). 
 
