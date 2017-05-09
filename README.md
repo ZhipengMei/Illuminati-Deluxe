@@ -5,6 +5,26 @@ Digital Illuminati Game by CECS 343 Group D
 
 Time spent: **70+** hours spent in total
 
+## Documentations
+
+- [x] [1. Illuminati Deluxe - Vision](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/1.%20Illuminati%20Deluxe%20-%20Vision.pdf)
+- [x] [2. Illuminati Deluxe - Project Plan](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/2.%20Illuminati%20Deluxe%20-%20Project%20Plan.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 1](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%201.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 2](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%202.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 3](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%203.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 4](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%204.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 5](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%205.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 6](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%206.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 7](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%207.pdf)
+- [x] [3. Illuminati Deluxe - Flowchart - Part 8](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/3.%20Illuminati%20Deluxe%20-%20Flowchart%20-%20Part%208.pdf)
+- [x] [4. Illuminati Deluxe - UML](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/4.%20Illuminati%20Deluxe%20-%20UML.pdf)
+- [x] [5. Illuminati Deluxe - Use Case](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/5.%20Illuminati%20Deluxe%20-%20Use%20Case.pdf)
+- [x] [6. Illuminati Deluxe - Test Case - Part 1](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/6.%20Illuminati%20Deluxe%20-%20Test%20Case%20-%20Part%201.pdf)
+- [x] [6. Illuminati Deluxe - Test Case - Part 2](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/6.%20Illuminati%20Deluxe%20-%20Test%20Case%20-%20Part%202.pdf)
+- [x] [6. Illuminati Deluxe - Test Case - Part 3](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/6.%20Illuminati%20Deluxe%20-%20Test%20Case%20-%20Part%203.pdf)
+- [x] [7. Illuminati Deluxe - User Manual](https://github.com/AnimeMei/CECS-343-mw-GroupD/blob/master/Documentations/7.%20Illuminati%20Deluxe%20-%20User%20Manual.pdf)
+
+
 ## User Stories
 
 The following **required** functionality is complete:
