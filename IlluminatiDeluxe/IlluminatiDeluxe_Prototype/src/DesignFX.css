@@ -1,0 +1,131 @@
+/*** SIGN IN ***/
+ #signinrightpane {
+ 	-fx-background-color: #333333;
+ }
+
+  #signinleftpane {
+ 	-fx-background-color: #333333;
+	-fx-background-image: url("../support/images/loading.gif"); 
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center top;
+ }
+ 
+ .button {
+    -fx-background-color : #29B6F6;
+    -fx-text-fill        : #E1F5FE;
+    -fx-font-weight      : 900;
+    }
+    
+.button:hover {
+    -fx-background-color : #01579B;
+    }
+
+
+
+.text-field {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-background-radius:30;
+    -fx-border-radius:30;
+    -fx-min-height:45;
+    -fx-text-fill: #fff;
+    -fx-prompt-text-fill: #fff;
+    -fx-border-width:0px;
+    -fx-alignment: center;
+    -fx-font-size: 1.2em;
+    -fx-effect: null;
+}
+
+.text-field:hover,
+.text-field:focused,
+.text-field:selected {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-background-radius:30;
+    -fx-border-radius:30;
+    -fx-min-height:45;
+    -fx-text-fill: #fff;
+    -fx-prompt-text-fill: #fff;
+    -fx-border-width:0px;
+    -fx-alignment: center;
+    -fx-font-size: 1.2em;
+    -fx-effect: null;
+}
+ 
+ /**** SIGN IN END ****/
+ 
+ 
+ 
+ 
+ 
+ 
+ /******* PLAYER SCREEN *******/
+
+/* TOP */ 
+ #hboxbar {
+  	-fx-background-color: #323232;
+ }
+ 
+ #ruletheworld {
+  -fx-font-size: 15px;
+  -fx-text-fill: white;
+  -fx-position: relative;
+}
+
+ #profilechooseStackpane {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+#profilechoosepane {
+	-fx-background-color: rgba(0, 100, 100, 0.5); 
+	-fx-background-radius: 10;
+}
+
+#usernameLabel{
+   	-fx-background-color: #3c7fb1;
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+/* CENTER */
+#channelGridpane {
+   	-fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+
+ /******* PLAYER SCREEN END *******/
+
+
+/******* GAME TABLE SCREEN BEGIN*******/
+
+#inGameChatTextField {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-min-height: 0;
+    -fx-max-height: 27;
+    -fx-text-fill: #fff;
+    -fx-prompt-text-fill: #fff;
+    -fx-border-width:0px;
+    -fx-alignment: center;
+    -fx-font-size: 1.2em;
+    -fx-effect: null;
+    -fx-text-fill: #000;
+    -fx-alignment: center-left;
+}
+
+
+
+ /******* GAME TABLE SCREEN END *******/
+
+
+
