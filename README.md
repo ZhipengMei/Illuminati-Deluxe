@@ -74,8 +74,6 @@ Describe any challenges encountered while building the app.
 |  User Manual  | 100% | x   | x   |   |
 |  Coding Part  | 90%  |10%  | x   |   |
 
-[//]: <> (|  Coding Part  | 90%  |10%  | x   |   |)
-
 ## Tools
 
 - Eclipse Neon.3 (4.6.3)
